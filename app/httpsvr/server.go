@@ -34,33 +34,20 @@ func initRoutes(r *mux.Router) {
 	// normal router
 	r.HandleFunc("/index", handler.IndexHandle)
 
-	// dynamic router
-	// ajax router
-	ajax := r.PathPrefix("/ajax").Subrouter()
-	// ajax root router
-	// ajax.HandleFunc("/", notFoundHandler)
-	// ajax autocomplete subrouter
-	ajax.HandleFunc("/autocomplete/{func}", handler.AutocompleteHandler)
-	// ajax data subrouter
-	ajax.HandleFunc("/data/{func}", handler.DataHandler)
-	// ajax table subrouter
-	ajax.HandleFunc("/table/{func}", handler.TableHandler)
-
 	// html router
 	h := r.PathPrefix("/html").Subrouter()
 	h.HandleFunc("/", handler.NotFoundHandler)
 	h.HandleFunc("/{key}", handler.NotFoundHandler)
 	h.HandleFunc("/{group}/{module}", handler.HTMLHandler)
 
-	// test
+	// test router
 	r.HandleFunc("/test/{page}", handler.TestHandle)
 
-	// static resource
+	// static resource router
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	// other root subrouter
 	root := r.PathPrefix("/").Subrouter()
-	// root.HandleFunc("/", handler.NotFoundHandler)
 	root.HandleFunc("/{key}", handler.NotFoundHandler)
 
 	// http.HandleFunc("/", notFoundHandler)
