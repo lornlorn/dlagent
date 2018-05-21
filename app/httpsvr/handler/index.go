@@ -9,7 +9,7 @@ import (
 // IndexHandle func(res http.ResponseWriter, req *http.Request)
 func IndexHandle(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route Index : %v\n", req.URL)
-	tmpl, err := template.ParseFiles("views/index.html")
+	tmpl, err := template.ParseFiles("views/html/index.html")
 	if err != nil {
 		log.Printf("Parse Error : %v\n", err)
 		return

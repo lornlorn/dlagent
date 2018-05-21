@@ -53,15 +53,14 @@ func initRoutes(r *mux.Router) {
 	h.HandleFunc("/{group}/{module}", handler.HTMLHandler)
 
 	// test
-	r.HandleFunc("/redis", handler.RedisHandler)
 	r.HandleFunc("/test/{page}", handler.TestHandle)
 
 	// static resource
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	// subrouter
+	// other root subrouter
 	root := r.PathPrefix("/").Subrouter()
-	root.HandleFunc("/", handler.NotFoundHandler)
+	// root.HandleFunc("/", handler.NotFoundHandler)
 	root.HandleFunc("/{key}", handler.NotFoundHandler)
 
 	// http.HandleFunc("/", notFoundHandler)
