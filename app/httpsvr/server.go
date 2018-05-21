@@ -48,6 +48,7 @@ func initRoutes(r *mux.Router) {
 
 	// other root subrouter
 	root := r.PathPrefix("/").Subrouter()
+	root.HandleFunc("/", handler.NotFoundHandler)
 	root.HandleFunc("/{key}", handler.NotFoundHandler)
 
 	// http.HandleFunc("/", notFoundHandler)
