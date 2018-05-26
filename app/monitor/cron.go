@@ -9,12 +9,24 @@ import (
 )
 
 /*
-StartCron func()
+C *cron.Cron
 */
-func StartCron() error {
+var C *cron.Cron
+
+func startCron() error {
 	log.Println("Start Monitor...")
 	log.Println("-> Initialize Cron...")
-	c := cron.New()
+	C = cron.New()
+	err := loadJobs(C)
+	if err != nil {
+		log.Printf("Load Jobs Fail : %v\n", err)
+		return err
+	}
+	C.Start()
+	return nil
+}
+
+func loadJobs(c *cron.Cron) error {
 	c.AddFunc("0 30 * * * *", func() { fmt.Println("Every hour on the half hour") })
 	c.AddFunc("@hourly", func() { fmt.Println("Every hour") })
 	c.AddFunc("@every 5s", func() {
@@ -22,6 +34,5 @@ func StartCron() error {
 		fmt.Println(time.Now())
 		time.Sleep(time.Second * 8)
 	})
-	c.Start()
 	return nil
 }
