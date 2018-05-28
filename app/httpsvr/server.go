@@ -19,14 +19,14 @@ func StartHTTP() error {
 	r := mux.NewRouter()
 	initRoutes(r)
 	log.Println("-> Listen HTTP Port And Serve...")
-	srv := &http.Server{
+	svr := &http.Server{
 		Handler:      r,
 		Addr:         ":5678",
 		WriteTimeout: 5 * time.Second,
 		ReadTimeout:  5 * time.Second,
 	}
 	// err := http.ListenAndServe(":8888", r)
-	err := srv.ListenAndServe()
+	err := svr.ListenAndServe()
 	return err
 }
 

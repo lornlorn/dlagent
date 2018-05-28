@@ -15,13 +15,14 @@ var C *cron.Cron
 
 func startCron() error {
 	log.Println("Start Monitor...")
-	log.Println("-> Initialize Cron...")
 	C = cron.New()
+	log.Println("-> Initialize Cron...")
 	err := loadJobs(C)
 	if err != nil {
 		log.Printf("Load Jobs Fail : %v\n", err)
 		return err
 	}
+	log.Println("-> Begin Run Jobs...")
 	C.Start()
 	return nil
 }

@@ -1,9 +1,12 @@
 package monitor
 
+import "log"
+
 /*
 Start func() error
 */
 func Start() error {
+	log.Println("Monitor Start...")
 	err := startCron()
 	return err
 }
@@ -12,6 +15,7 @@ func Start() error {
 Stop func() error
 */
 func Stop() {
+	log.Println("Monitor Stop...")
 	C.Stop()
 }
 

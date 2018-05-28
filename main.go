@@ -1,25 +1,29 @@
 package main
 
 import (
+	"app/db"
 	"app/httpsvr"
 	"app/monitor"
 	"log"
-	"time"
 )
 
 func main() {
-	err := monitor.Start()
+	var err error
+
+	// Init DB
+	err = db.InitDB()
+	if err != nil {
+		log.Printf("DB Initialize Fail : %v\n", err)
+		return
+	}
+
+	// Start Monitor
+	err = monitor.Start()
 	if err != nil {
 		log.Printf("Monitor Start Fail : %v\n", err)
 		return
 	}
-	log.Println("Cron start")
-	time.Sleep(time.Second * 5)
-	monitor.Stop()
-	log.Println("Cron stop")
-	time.Sleep(time.Second * 5)
-	monitor.Start()
-	log.Println("Cron start")
-	time.Sleep(time.Second * 5)
+
+	// Start HTTP Server
 	log.Fatalln(httpsvr.StartHTTP())
 }

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"app/monitor"
 	"fmt"
 	"html/template"
 	"log"
@@ -11,6 +12,8 @@ import (
 
 // TestHandle func(res http.ResponseWriter, req *http.Request)
 func TestHandle(res http.ResponseWriter, req *http.Request) {
+	monitor.Stop()
+
 	log.Printf("Route Test : %v\n", req.URL)
 	vars := mux.Vars(req)
 	subroute := vars["page"]
