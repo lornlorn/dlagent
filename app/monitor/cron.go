@@ -48,13 +48,12 @@ func loadJobs(c *cron.Cron) error {
 
 		cr := v
 
-		// c.AddFunc(v.CronExpression, runjob)
 		switch cr.CronType {
-		case "collect":
+		case "default":
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 			})
-		case "自定义":
+		case "user-defined":
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 			})
