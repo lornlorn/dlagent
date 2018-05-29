@@ -9,18 +9,18 @@ import (
 /*
 Conf *config.Config
 */
-var Conf *config.Config
+var conf *config.Config
 
 /*
 ReadConf func(string,string) (string,error)
 */
 func ReadConf(section string, option string) (string, error) {
-	Conf, err := config.ReadDefault("conf/app.conf")
+	conf, err := config.ReadDefault("conf/app.conf")
 	if err != nil {
 		log.Printf("Read Config File Fail : %v\n", err)
 		return "", err
 	}
-	return Conf.String(section, option)
+	return conf.String(section, option)
 	// result is string "http://www.example.com/some/path"
 
 	// c.Int("service-1", "maxclients")
