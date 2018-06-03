@@ -2,9 +2,9 @@ package monitor
 
 import (
 	"app/models"
-	"fmt"
+	"errors"
 	"log"
-	"time"
+	"os/exec"
 
 	"github.com/robfig/cron"
 )
@@ -48,23 +48,61 @@ func loadJobs(c *cron.Cron) error {
 
 		cr := v
 
-		switch cr.CronType {
-		case "default":
+		if cr.CronType == "default" {
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 			})
-		case "user-defined":
+
+			// switch cr.CronCmd {
+			// case "cpu":
+
+			// case "mem":
+
+			// default:
+			// }
+
+		} else if cr.CronType == "user-defined" {
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
+				ret, err := runCmd(cr.CronCmd)
+				if err != nil {
+					log.Printf("Run Command Fail : %v\n", err)
+					// return err
+				}
+				log.Println(string(ret))
 			})
-		default:
-			log.Println(cr.CronType)
+		} else {
+			log.Println("Error CronType")
+			return errors.New("Error CronType")
 		}
 	}
-
 	return nil
 }
 
-func runjob() {
-	fmt.Println(time.Now())
+func runCmd(croncmd string) ([]byte, error) {
+	cmd := exec.Command(croncmd)
+	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		return nil, err
+	}
+
+	if err = cmd.Start(); err != nil {
+		return nil, err
+	}
+
+	var out = make([]byte, 0, 1024)
+	for {
+		tmp := make([]byte, 128)
+		n, err := stdout.Read(tmp)
+		out = append(out, tmp[:n]...)
+		if err != nil {
+			break
+		}
+	}
+
+	if err = cmd.Wait(); err != nil {
+		return nil, err
+	}
+
+	return out, nil
 }

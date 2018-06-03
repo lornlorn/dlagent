@@ -16,6 +16,7 @@ func main() {
 		log.Printf("DB Initialize Fail : %v\n", err)
 		return
 	}
+	defer db.Engine.Close()
 
 	// Start Monitor
 	err = monitor.Start()
