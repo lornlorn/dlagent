@@ -5,6 +5,8 @@ import (
 	"errors"
 	"log"
 	"os/exec"
+	"path/filepath"
+	"strings"
 
 	"github.com/robfig/cron"
 )
@@ -64,7 +66,8 @@ func loadJobs(c *cron.Cron) error {
 		} else if cr.CronType == "user-defined" {
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
-				ret, err := runCmd(cr.CronCmd)
+				// cronargs := strings.Split(cr.CronArgs, " ")
+				ret, err := runCmd(cr.CronCmd, cr.CronArgs)
 				if err != nil {
 					log.Printf("Run Command Fail : %v\n", err)
 					// return err
@@ -79,8 +82,13 @@ func loadJobs(c *cron.Cron) error {
 	return nil
 }
 
-func runCmd(croncmd string) ([]byte, error) {
-	cmd := exec.Command(croncmd)
+func runCmd(croncmd string, cronargs string) ([]byte, error) {
+	// 转换为可变长数组
+	args := strings.Split(cronargs, " ")
+	cmd := exec.Command(croncmd, args...)
+	t, _ := exec.LookPath(croncmd)
+	log.Println(t)
+	log.Println(filepath.Base(croncmd))
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		return nil, err

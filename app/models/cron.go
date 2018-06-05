@@ -12,6 +12,7 @@ type Cron struct {
 	CronType       string `xorm:"not null VARCHAR(16)"`
 	CronExpression string `xorm:"not null VARCHAR(128)"`
 	CronCmd        string `xorm:"not null VARCHAR(256)"`
+	CronArgs       string `xorm:"VARCHAR(256)"`
 	CronStatus     string `xorm:"not null VARCHAR(16)"`
 	CronRemark     string `xorm:"VARCHAR(512)"`
 }
