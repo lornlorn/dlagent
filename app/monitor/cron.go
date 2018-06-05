@@ -50,7 +50,7 @@ func loadJobs(c *cron.Cron) error {
 
 		cr := v
 
-		if cr.CronType == "default" {
+		if cr.CronType == "default" { // 默认采集待完善
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 			})
@@ -63,14 +63,12 @@ func loadJobs(c *cron.Cron) error {
 			// default:
 			// }
 
-		} else if cr.CronType == "user-defined" {
+		} else if cr.CronType == "user-defined" { // 自定义调用外部命令
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
-				// cronargs := strings.Split(cr.CronArgs, " ")
 				ret, err := runCmd(cr.CronCmd, cr.CronArgs)
 				if err != nil {
 					log.Printf("Run Command Fail : %v\n", err)
-					// return err
 				}
 				log.Println(string(ret))
 			})
@@ -86,9 +84,17 @@ func runCmd(croncmd string, cronargs string) ([]byte, error) {
 	// 转换为可变长数组
 	args := strings.Split(cronargs, " ")
 	cmd := exec.Command(croncmd, args...)
+
+	/*
+		测试start
+	*/
 	t, _ := exec.LookPath(croncmd)
 	log.Println(t)
 	log.Println(filepath.Base(croncmd))
+	/*
+		测试end
+	*/
+
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		return nil, err
