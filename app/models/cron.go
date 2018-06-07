@@ -11,10 +11,15 @@ type Cron struct {
 	CronName       string `xorm:"not null VARCHAR(64)"`
 	CronType       string `xorm:"not null VARCHAR(16)"`
 	CronExpression string `xorm:"not null VARCHAR(128)"`
+	CronSh         string `xorm:"VARCHAR(32)"`
 	CronCmd        string `xorm:"not null VARCHAR(256)"`
-	CronArgs       string `xorm:"VARCHAR(256)"`
+	// CronArgs       string `xorm:"VARCHAR(256)"`
 	CronStatus     string `xorm:"not null VARCHAR(16)"`
 	CronRemark     string `xorm:"VARCHAR(512)"`
+	CronCreate     string `xorm:"VARCHAR(32)"`
+	CronCreatetime string `xorm:"VARCHAR(15)"`
+	CronModify     string `xorm:"VARCHAR(32)"`
+	CronModifytime string `xorm:"VARCHAR(15)"`
 }
 
 // Save insert method

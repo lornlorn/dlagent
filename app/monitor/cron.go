@@ -66,7 +66,7 @@ func loadJobs(c *cron.Cron) error {
 		} else if cr.CronType == "user-defined" { // 自定义调用外部命令
 			c.AddFunc(cr.CronExpression, func() {
 				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
-				ret, err := runCmd(cr.CronCmd, cr.CronArgs)
+				ret, err := runCmd(cr.CronSh, cr.CronCmd)
 				if err != nil {
 					log.Printf("Run Command Fail : %v\n", err)
 				}
@@ -80,11 +80,12 @@ func loadJobs(c *cron.Cron) error {
 	return nil
 }
 
-func runCmd(croncmd string, cronargs string) ([]byte, error) {
+func runCmd(cronsh string, croncmd string) ([]byte, error) {
+	cmdargs := strings.Split(croncmd, " ")
 	// 转换为可变长数组
-	args := strings.Split(cronargs, " ")
-	cmd := exec.Command(croncmd, args...)
-
+	// args := strings.Split(cronargs, " ")
+	// cmd := exec.Command(cronsh, croncmd, args...)
+	cmd := exec.Command(cronsh, croncmd)
 	/*
 		测试start
 	*/
