@@ -34,9 +34,9 @@ func loadJobs(c *cron.Cron) error {
 	// c.AddFunc("0 30 * * * *", func() { fmt.Println("Every hour on the half hour") })
 	// c.AddFunc("@hourly", func() { fmt.Println("Every hour") })
 	// c.AddFunc("@every 5s", func() {
-	// 	fmt.Println("Every 5s")
-	// 	fmt.Println(time.Now())
-	// 	time.Sleep(time.Second * 8)
+	//  fmt.Println("Every 5s")
+	//  fmt.Println(time.Now())
+	//  time.Sleep(time.Second * 8)
 	// })
 
 	crons, err := models.GetCronList()
@@ -52,7 +52,7 @@ func loadJobs(c *cron.Cron) error {
 
 		if cr.CronType == "default" { // 默认采集待完善
 			c.AddFunc(cr.CronExpression, func() {
-				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
+				// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 			})
 
 			// switch cr.CronCmd {
@@ -65,7 +65,7 @@ func loadJobs(c *cron.Cron) error {
 
 		} else if cr.CronType == "user-defined" { // 自定义调用外部命令
 			c.AddFunc(cr.CronExpression, func() {
-				log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
+				// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 				ret, err := runCmd(cr.CronSh, cr.CronCmd)
 				if err != nil {
 					log.Printf("Run Command Fail : %v\n", err)
@@ -81,19 +81,28 @@ func loadJobs(c *cron.Cron) error {
 }
 
 func runCmd(cronsh string, croncmd string) ([]byte, error) {
-	cmdargs := strings.Split(croncmd, " ")
-	// 转换为可变长数组
-	// args := strings.Split(cronargs, " ")
-	// cmd := exec.Command(cronsh, croncmd, args...)
-	cmd := exec.Command(cronsh, croncmd)
+	var command string
+	var args []string
+
+	if cronsh == "" {
+		cmdargs := strings.Split(croncmd, " ")
+		command = cmdargs[0]
+		args = cmdargs[1:]
+	} else {
+		command = cronsh
+		cmdargs := "-c " + croncmd
+		// 转换为可变长数组
+		args = strings.Split(cmdargs, " ")
+	}
+	cmd := exec.Command(command, args...)
 	/*
-		测试start
+	   测试start
 	*/
-	t, _ := exec.LookPath(croncmd)
+	t, _ := exec.LookPath(command)
 	log.Println(t)
-	log.Println(filepath.Base(croncmd))
+	log.Println(filepath.Base(command))
 	/*
-		测试end
+	   测试end
 	*/
 
 	stdout, err := cmd.StdoutPipe()

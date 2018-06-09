@@ -9,7 +9,7 @@ import (
 /*
 Conf *config.Config
 */
-var conf *config.Config
+// var conf *config.Config
 
 /*
 ReadConf func(string,string) (string,error)
