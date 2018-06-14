@@ -90,9 +90,10 @@ func runCmd(cronsh string, croncmd string) ([]byte, error) {
 		args = cmdargs[1:]
 	} else {
 		command = cronsh
-		cmdargs := "-c " + croncmd
+		// cmdargs := "-c " + croncmd
 		// 转换为可变长数组
-		args = strings.Split(cmdargs, " ")
+		// args = strings.Split(cmdargs, " ")
+		args = []string{"-c", croncmd}
 	}
 	cmd := exec.Command(command, args...)
 	/*
