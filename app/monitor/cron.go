@@ -5,7 +5,6 @@ import (
 	"errors"
 	"log"
 	"os/exec"
-	"path/filepath"
 	"strings"
 
 	"github.com/robfig/cron"
@@ -99,9 +98,9 @@ func runCmd(cronsh string, croncmd string) ([]byte, error) {
 	/*
 	   测试start
 	*/
-	t, _ := exec.LookPath(command)
-	log.Println(t)
-	log.Println(filepath.Base(command))
+	// t, _ := exec.LookPath(command)
+	// log.Println(t)
+	// log.Println(filepath.Base(command))
 	/*
 	   测试end
 	*/
