@@ -4,14 +4,19 @@ import (
 	"app/db"
 	"app/httpsvr"
 	"app/monitor"
+	"app/utils"
 	"log"
 )
 
 func main() {
 	var err error
 
+	// Read Configuration
+	dbtype, _ := utils.ReadConf("db", "dbtype")
+	dbstr, _ := utils.ReadConf("db", "dbstr")
+
 	// Init DB
-	err = db.InitDB()
+	err = db.InitDB(dbtype, dbstr)
 	if err != nil {
 		log.Printf("DB Initialize Fail : %v\n", err)
 		return

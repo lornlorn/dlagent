@@ -1,7 +1,6 @@
 package db
 
 import (
-	"app/utils"
 	"log"
 
 	"github.com/go-xorm/xorm"
@@ -13,15 +12,12 @@ import (
 var Engine *xorm.Engine
 
 // InitDB func() error
-func InitDB() error {
+func InitDB(dbtype string, dbstr string) error {
 	var err error
 	// dbtype := "postgres"
 	// dbstr := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=disable", host, port, user, password, dbname)
 	// dbstr := "postgres://test:test@localhost:5432/testdb?sslmode=disable"
 	// dbstr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", user, password, host, port, dbname)
-
-	dbtype, _ := utils.ReadConf("db", "dbtype")
-	dbstr, _ := utils.ReadConf("db", "dbstr")
 
 	log.Printf("%v,%v\n", dbtype, dbstr)
 
