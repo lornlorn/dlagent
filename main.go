@@ -3,7 +3,7 @@ package main
 import (
 	"app/db"
 	"app/httpsvr"
-	"app/monitor"
+	"app/scheduler"
 	"app/utils"
 	"log"
 )
@@ -24,9 +24,9 @@ func main() {
 	defer db.Engine.Close()
 
 	// Start Monitor
-	err = monitor.Start()
+	err = scheduler.Start()
 	if err != nil {
-		log.Printf("Monitor Start Fail : %v\n", err)
+		log.Printf("Scheduler Start Fail : %v\n", err)
 		return
 	}
 

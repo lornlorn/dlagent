@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"app/monitor"
+	"app/scheduler"
 	"fmt"
 	"html/template"
 	"log"
@@ -12,7 +12,7 @@ import (
 
 // TestHandle func(res http.ResponseWriter, req *http.Request)
 func TestHandle(res http.ResponseWriter, req *http.Request) {
-	monitor.Stop()
+	scheduler.Stop()
 
 	log.Printf("Route Test : %v\n", req.URL)
 	vars := mux.Vars(req)
