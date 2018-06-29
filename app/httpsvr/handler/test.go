@@ -10,8 +10,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// TestHandle func(res http.ResponseWriter, req *http.Request)
-func TestHandle(res http.ResponseWriter, req *http.Request) {
+// TestHandler func(res http.ResponseWriter, req *http.Request)
+func TestHandler(res http.ResponseWriter, req *http.Request) {
 	scheduler.Stop()
 
 	log.Printf("Route Test : %v\n", req.URL)

@@ -32,16 +32,22 @@ func StartHTTP() error {
 
 func initRoutes(r *mux.Router) {
 	// normal router
-	r.HandleFunc("/index", handler.IndexHandle)
+	r.HandleFunc("/index", handler.IndexHandler)
 
 	// html router
 	h := r.PathPrefix("/html").Subrouter()
 	h.HandleFunc("/", handler.NotFoundHandler)
-	h.HandleFunc("/{key}", handler.NotFoundHandler)
-	h.HandleFunc("/{group}/{module}", handler.HTMLHandler)
+	// h.HandleFunc("/{key}", handler.NotFoundHandler)
+	// h.HandleFunc("/{group}/{module}", handler.HTMLHandler)
+	h.HandleFunc("/{key}", handler.HTMLHandler)
+
+	// ajax router
+	a := r.PathPrefix("/ajax").Subrouter()
+	a.HandleFunc("/", handler.NotFoundHandler)
+	a.HandleFunc("/{key}", handler.AjaxHandler)
 
 	// test router
-	r.HandleFunc("/test/{page}", handler.TestHandle)
+	r.HandleFunc("/test/{page}", handler.TestHandler)
 
 	// static resource router
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
