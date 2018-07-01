@@ -2,11 +2,20 @@ package utils
 
 import (
 	"bufio"
+	"crypto/md5"
+	"crypto/rand"
+	"encoding/base64"
+	"encoding/hex"
 	"encoding/json"
+	"io"
 	"log"
 	"os"
 	"strings"
 )
+
+/*
+任意数据类型转JSON
+*/
 
 // Convert2JSON (data interface{}) []byte
 func Convert2JSON(data interface{}) ([]byte, error) {
@@ -24,6 +33,10 @@ func Convert2JSON(data interface{}) ([]byte, error) {
 		return retdata, err
 	}
 }
+
+/*
+读文件 并 设置偏移量和行数
+*/
 
 // ReadLines reads contents from file and splits them by new line.
 // A convenience wrapper to ReadLinesOffsetN(filename, 0, -1).
@@ -58,4 +71,26 @@ func ReadLinesOffsetN(filename string, offset uint, n int) ([]string, error) {
 	}
 
 	return ret, nil
+}
+
+/*
+生成随机UID GetUniqueID()
+*/
+
+// GetMd5String 生成32位MD5字符串
+func GetMd5String(s string) string {
+	newmd5 := md5.New()
+	newmd5.Write([]byte(s))
+	return hex.EncodeToString(newmd5.Sum(nil))
+}
+
+// GetUniqueID 生成UID唯一标识
+func GetUniqueID() (string, error) {
+	newbyte := make([]byte, 48)
+
+	_, err := io.ReadFull(rand.Reader, newbyte)
+	if err != nil {
+		return "", err
+	}
+	return GetMd5String(base64.URLEncoding.EncodeToString(newbyte)), nil
 }

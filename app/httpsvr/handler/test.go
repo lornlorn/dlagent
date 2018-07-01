@@ -2,6 +2,7 @@ package handler
 
 import (
 	"app/scheduler"
+	"app/utils"
 	"fmt"
 	"html/template"
 	"log"
@@ -13,6 +14,10 @@ import (
 // TestHandler func(res http.ResponseWriter, req *http.Request)
 func TestHandler(res http.ResponseWriter, req *http.Request) {
 	scheduler.Stop()
+
+	ps := []string{"a", "b"}
+	fc := utils.FuncCall("GetJobStatus", ps...)
+	log.Println(len(fc))
 
 	log.Printf("Route Test : %v\n", req.URL)
 	vars := mux.Vars(req)

@@ -15,6 +15,9 @@ func main() {
 	dbtype, _ := utils.ReadConf("db", "dbtype")
 	dbstr, _ := utils.ReadConf("db", "dbstr")
 
+	// Init Reflect Functions
+	utils.InitFunctionMap()
+
 	// Init DB
 	err = db.InitDB(dbtype, dbstr)
 	if err != nil {
