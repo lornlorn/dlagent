@@ -14,7 +14,7 @@ import (
 StartHTTP func()
 */
 func StartHTTP() error {
-	log.Println("Start HTTP Server...")
+
 	log.Println("-> Initialize HTTP Routes...")
 	r := mux.NewRouter()
 	initRoutes(r)

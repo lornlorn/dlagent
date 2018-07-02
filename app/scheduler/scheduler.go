@@ -6,7 +6,6 @@ import "log"
 Start func() error
 */
 func Start() error {
-	log.Println("Monitor Start...")
 	err := startCron()
 	return err
 }

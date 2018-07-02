@@ -15,7 +15,9 @@ import (
 func TestHandler(res http.ResponseWriter, req *http.Request) {
 	scheduler.Stop()
 
-	ps := []string{"a", "b"}
+	p1 := "p1"
+	p2 := "p2"
+	ps := []string{p1, p2}
 	fc := utils.FuncCall("GetJobStatus", ps...)
 	log.Println(len(fc))
 

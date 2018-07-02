@@ -3,7 +3,6 @@ package utils
 import (
 	"app/api"
 	"errors"
-	"fmt"
 	"log"
 	"reflect"
 )
@@ -19,6 +18,7 @@ InitFunctionMap func()
 初始化函数映射表
 */
 func InitFunctionMap() {
+
 	var ajaxapi api.API
 	FuncMap = make(FunctionMap, 0)
 	//创建反射变量，注意这里需要传入ruTest变量的地址；
@@ -27,18 +27,21 @@ func InitFunctionMap() {
 	apiObjType := apiObj.Type()
 	//读取方法数量
 	methodNum := apiObj.NumMethod()
-	fmt.Println("NumMethod:", methodNum)
+	// fmt.Println("NumMethod:", methodNum)
 
 	//遍历路由器的方法，并将其存入控制器映射变量中
 	for i := 0; i < methodNum; i++ {
 		methodName := apiObjType.Method(i).Name
-		fmt.Println("index:", i, " MethodName:", methodName)
-		FuncMap[methodName] = apiObj.Method(i) //<<<
+		log.Printf("Index : %v, MethodName : %v\n", i, methodName)
+		FuncMap[methodName] = apiObj.Method(i)
 	}
 }
 
-// FuncCall func(mName string, param ...interface{})
-func FuncCall(mName string, param ...interface{}) []reflect.Value {
+/*
+FuncCall func(mName string, param ...string)
+param指定string类型,若有其他类型需求，调用方法内自行转换
+*/
+func FuncCall(mName string, param ...string) []reflect.Value {
 
 	params := make([]reflect.Value, len(param))
 
