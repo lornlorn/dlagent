@@ -8,8 +8,9 @@ import (
 )
 
 // FunctionMap 定义函数映射类型
-// type FunctionMap map[string]reflect.Value
-type FunctionMap map[string]interface{}
+type FunctionMap map[string]reflect.Value
+
+// type FunctionMap map[string]interface{}
 
 // FuncMap 声明函数映射
 var FuncMap FunctionMap
@@ -42,17 +43,23 @@ func InitFunctionMap() {
 FuncCall func(mName string, param ...string)
 param指定string类型,若有其他类型需求，调用方法内自行转换
 */
-func FuncCall(mName string, param ...interface{}) []reflect.Value {
+func FuncCall(mName string, params ...interface{}) []reflect.Value {
 
-	params := make([]reflect.Value, len(param))
+	f := reflect.ValueOf(FuncMap[mName])
+	if len(params) != f.Type().NumIn() {
+		log.Println("The number of input params not match")
+		return nil
+	}
 
-	for i, v := range param {
-		log.Printf("index : %v, %v\n", i, v)
-		params[i] = reflect.ValueOf(v)
+	in := make([]reflect.Value, len(params))
+
+	for k, v := range params {
+		log.Printf("index : %v, %v\n", k, v)
+		in[k] = reflect.ValueOf(v)
 	}
 
 	//使用方法名字符串调用指定方法
-	return reflect.ValueOf(FuncMap[mName]).Call(params)
+	return f.Call(in)
 
 }
 
