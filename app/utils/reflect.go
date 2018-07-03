@@ -8,9 +8,8 @@ import (
 )
 
 // FunctionMap 定义函数映射类型
-type FunctionMap map[string]reflect.Value
-
-// type FunctionMap map[string]interface{}
+// type FunctionMap map[string]reflect.Value
+type FunctionMap map[string]interface{}
 
 // FuncMap 声明函数映射
 var FuncMap FunctionMap

@@ -17,10 +17,7 @@ import (
 func TestHandler(res http.ResponseWriter, req *http.Request) {
 	scheduler.Stop()
 
-	p1 := "p1"
-	p2 := "p2"
-	ps := []string{p1, p2}
-	fc := utils.FuncCall("GetJobStatus", ps...)
+	fc := utils.FuncCall("GetJobStatus", []byte("test"))
 	// fc := utils.FuncCall("GetJobStatus", p1)
 	log.Println(len(fc))
 
