@@ -47,7 +47,10 @@ func initRoutes(r *mux.Router) {
 	a.HandleFunc("/{key}", handler.AjaxHandler)
 
 	// test router
-	r.HandleFunc("/test/{page}", handler.TestHandler)
+	t := r.PathPrefix("/test").Subrouter()
+	t.HandleFunc("/", handler.NotFoundHandler)
+	t.HandleFunc("/{key}", handler.TestHandler)
+	t.HandleFunc("/ajax/{key}", handler.TestAjaxHandler)
 
 	// static resource router
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
