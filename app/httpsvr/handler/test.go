@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"app/scheduler"
 	"app/utils"
 	"fmt"
 	"html/template"
@@ -15,16 +14,11 @@ import (
 
 // TestHandler func(res http.ResponseWriter, req *http.Request)
 func TestHandler(res http.ResponseWriter, req *http.Request) {
-	scheduler.Stop()
-
-	fc := utils.FuncCall("GetJobStatus", []byte("test"))
-	// fc := utils.FuncCall("GetJobStatus", p1)
-	log.Println(len(fc))
 
 	log.Printf("Route Test : %v\n", req.URL)
 	vars := mux.Vars(req)
-	subroute := vars["page"]
-	tmpl, err := template.ParseFiles(fmt.Sprintf("views/test/%v.html", subroute))
+	key := vars["key"]
+	tmpl, err := template.ParseFiles(fmt.Sprintf("views/test/%v.html", key))
 	if err != nil {
 		log.Printf("Parse Error : %v\n", err)
 		return
@@ -55,6 +49,9 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	cmd := gjson.Get(string(reqBody), "data.cmd")
 	// syslist, err := models.GetSystemList(keyword.String())
 	log.Println(module, shell, cmd)
+
+	fc := utils.FuncCall(key, []byte("test"))
+	log.Println(len(fc))
 
 	retobj := map[string]string{
 		"module": module.String(),
