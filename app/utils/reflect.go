@@ -42,10 +42,9 @@ func InitFunctionMap() {
 }
 
 /*
-FuncCall func(mName string, param ...string)
-param指定string类型,若有其他类型需求，调用方法内自行转换
+FuncCall func(mName string, param ...interface{})
 */
-func FuncCall(mName string, params ...interface{}) []reflect.Value {
+func FuncCall(mName string, params ...interface{}) ([]reflect.Value, error) {
 
 	// f := reflect.ValueOf(FuncMap[mName])
 
@@ -55,8 +54,8 @@ func FuncCall(mName string, params ...interface{}) []reflect.Value {
 	// }
 
 	if len(params) != FuncMap[mName].Type().NumIn() {
-		log.Println("The number of input params not match")
-		return nil
+		// log.Println("The number of input params not match")
+		return nil, errors.New("The number of input params not match")
 	}
 
 	in := make([]reflect.Value, len(params))
@@ -68,7 +67,7 @@ func FuncCall(mName string, params ...interface{}) []reflect.Value {
 
 	//使用方法名字符串调用指定方法
 	// return f.Call(in)
-	return FuncMap[mName].Call(in)
+	return FuncMap[mName].Call(in), nil
 
 }
 

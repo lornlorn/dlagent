@@ -50,8 +50,12 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	// syslist, err := models.GetSystemList(keyword.String())
 	log.Println(module, shell, cmd)
 
-	fc := utils.FuncCall(key, []byte("test"))
-	log.Println(len(fc))
+	fc, err := utils.FuncCall(key, []byte("test"))
+	if err != nil {
+		log.Printf("Reflect Function Call Error : %v\n", err)
+		return
+	}
+	log.Println(string(fc[0].Bytes()))
 
 	retobj := map[string]string{
 		"module": module.String(),
