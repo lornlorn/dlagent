@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/api"
 	"app/db"
 	"app/httpsvr"
 	"app/scheduler"
@@ -18,7 +19,8 @@ func main() {
 
 	// Init Reflect Functions
 	log.Println("Initialize Reflect Function Map ...")
-	utils.InitFunctionMap()
+	var ajaxapi api.API
+	utils.InitFunctionMap(&ajaxapi)
 
 	// Init DB
 	log.Println("Initialize Database Connect ...")

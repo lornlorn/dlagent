@@ -18,7 +18,7 @@ var FuncMap FunctionMap
 InitFunctionMap func()
 初始化函数映射表
 */
-func InitFunctionMap(obj *interface{}) {
+func InitFunctionMap(obj interface{}) {
 
 	// var ajaxapi api.API
 	FuncMap = make(FunctionMap, 0)
