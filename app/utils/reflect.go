@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"app/api"
 	"errors"
 	"log"
 	"reflect"
@@ -19,13 +18,13 @@ var FuncMap FunctionMap
 InitFunctionMap func()
 初始化函数映射表
 */
-func InitFunctionMap() {
+func InitFunctionMap(obj *interface{}) {
 
-	var ajaxapi api.API
+	// var ajaxapi api.API
 	FuncMap = make(FunctionMap, 0)
 	//创建反射变量，注意这里需要传入ruTest变量的地址；
 	//不传入地址就只能反射Routers静态定义的方法
-	apiObj := reflect.ValueOf(&ajaxapi)
+	apiObj := reflect.ValueOf(obj)
 	apiObjType := apiObj.Type()
 	//读取方法数量
 	methodNum := apiObj.NumMethod()

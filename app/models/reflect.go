@@ -4,4 +4,5 @@ package models
 type ReflectReturn struct {
 	RetCode string
 	RetMsg  string
+	RetData []byte
 }
