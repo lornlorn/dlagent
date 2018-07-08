@@ -35,8 +35,8 @@ func InitFunctionMap(obj interface{}) {
 		methodName := apiObjType.Method(i).Name
 		log.Printf("Index : %v, MethodName : %v\n", i, methodName)
 		FuncMap[methodName] = apiObj.Method(i)
-		log.Println(FuncMap[methodName].Kind().String())
-		log.Println(FuncMap[methodName].Type().String())
+		// log.Println(FuncMap[methodName].Kind().String())
+		// log.Println(FuncMap[methodName].Type().String())
 	}
 }
 
@@ -60,7 +60,7 @@ func FuncCall(mName string, params ...interface{}) ([]reflect.Value, error) {
 	in := make([]reflect.Value, len(params))
 
 	for k, v := range params {
-		log.Printf("index : %v, %v\n", k, v)
+		// log.Printf("index : %v, %v\n", k, v)
 		in[k] = reflect.ValueOf(v)
 	}
 

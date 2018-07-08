@@ -63,7 +63,7 @@ func loadJobs(c *cron.Cron) error {
 		} else if cr.CronType == "user-defined" { // 自定义调用外部命令
 			c.AddFunc(cr.CronExpression, func() {
 				// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
-				ret, err := runCmd(cr.CronSh, cr.CronCmd)
+				ret, err := RunCmd(cr.CronSh, cr.CronCmd)
 				if err != nil {
 					log.Printf("Run Command Fail : %v\n", err)
 				}

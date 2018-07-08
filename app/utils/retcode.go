@@ -3,9 +3,7 @@ package utils
 // retCodeDict return code directory
 var retCodeDict = map[string]string{
 	"0000": "成功",
-	"1000": "系统错误",
-	"2000": "Ajax Autocomplete 错误",
-	"2001": "Ajax Data 应答错误",
+	"9999": "未知错误",
 }
 
 // GetRetMsg func(retcode string) string

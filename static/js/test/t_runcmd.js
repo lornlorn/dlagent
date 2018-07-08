@@ -17,7 +17,7 @@ $(function () {
         console.log('REQUEST : ' + JSON.stringify(params));
 
         $.ajax({
-            url: '/test/ajax/StopScheduler',
+            url: '/test/ajax/RunCMD',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(params),

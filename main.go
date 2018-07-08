@@ -19,8 +19,7 @@ func main() {
 
 	// Init Reflect Functions
 	log.Println("Initialize Reflect Function Map ...")
-	var ajaxapi api.API
-	utils.InitFunctionMap(&ajaxapi)
+	api.InitAPIFuncMap()
 
 	// Init DB
 	log.Println("Initialize Database Connect ...")

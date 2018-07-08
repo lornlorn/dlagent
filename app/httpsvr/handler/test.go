@@ -9,7 +9,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/tidwall/gjson"
 )
 
 // TestHandler func(res http.ResponseWriter, req *http.Request)
@@ -44,25 +43,17 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	log.Println("Request JSON Content :")
 	log.Println(string(reqBody))
 
-	module := gjson.Get(string(reqBody), "module")
-	shell := gjson.Get(string(reqBody), "data.shell")
-	cmd := gjson.Get(string(reqBody), "data.cmd")
-	// syslist, err := models.GetSystemList(keyword.String())
-	log.Println(module, shell, cmd)
+	// module := gjson.Get(string(reqBody), "module")
+	// shell := gjson.Get(string(reqBody), "data.shell")
+	// cmd := gjson.Get(string(reqBody), "data.cmd")
+	// log.Println(module, shell, cmd)
 
-	fc, err := utils.FuncCall(key, []byte("test"))
+	fc, err := utils.FuncCall(key, reqBody)
 	if err != nil {
 		log.Printf("Reflect Function Call Error : %v\n", err)
 		return
 	}
 	log.Println(string(fc[0].Bytes()))
 
-	retobj := map[string]string{
-		"module": module.String(),
-		"shell":  shell.String(),
-		"cmd":    cmd.String(),
-	}
-	ret, _ := utils.Convert2JSON(retobj)
-
-	res.Write(ret)
+	res.Write(fc[0].Bytes())
 }
