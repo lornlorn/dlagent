@@ -4,6 +4,7 @@ import (
 	"app/models"
 	"app/scheduler"
 	"app/utils"
+	"fmt"
 	"log"
 
 	"github.com/tidwall/gjson"
@@ -20,11 +21,11 @@ func (api API) StopScheduler(a []byte) []byte {
 	scheduler.Stop()
 
 	retobj := models.ReflectReturn{
-		models.AjaxReturn{
+		AjaxReturn: models.AjaxReturn{
 			RetCode: "0000",
-			RetMsg:  "成功",
-			RetData: nil,
+			RetMsg:  utils.GetRetMsg("0000"),
 		},
+		RetData: nil,
 	}
 
 	ret, _ := utils.Convert2JSON(retobj)
@@ -46,19 +47,20 @@ func (api API) RunCMD(data []byte) []byte {
 	if err != nil {
 		log.Printf("scheduler.RunCmd Fail : %v\n", err)
 		retobj = &models.ReflectReturn{
-			models.AjaxReturn{
-				RetCode: "0000",
-				RetMsg:  "成功",
-				RetData: nil,
+			AjaxReturn: models.AjaxReturn{
+				RetCode: "9999",
+				// RetMsg:  utils.GetRetMsg("9999"),
+				RetMsg: fmt.Sprintf("%v, %v", utils.GetRetMsg("9999"), err),
 			},
+			RetData: nil,
 		}
 	} else {
 		retobj = &models.ReflectReturn{
-			models.AjaxReturn{
+			AjaxReturn: models.AjaxReturn{
 				RetCode: "0000",
-				RetMsg:  "成功",
-				RetData: nil,
+				RetMsg:  utils.GetRetMsg("0000"),
 			},
+			RetData: nil,
 		}
 	}
 	log.Println(result)
