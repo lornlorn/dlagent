@@ -20,9 +20,11 @@ func (api API) StopScheduler(a []byte) []byte {
 	scheduler.Stop()
 
 	retobj := models.ReflectReturn{
-		RetCode: "0000",
-		RetMsg:  "成功",
-		RetData: nil,
+		models.AjaxReturn{
+			RetCode: "0000",
+			RetMsg:  "成功",
+			RetData: nil,
+		},
 	}
 
 	ret, _ := utils.Convert2JSON(retobj)
@@ -44,15 +46,19 @@ func (api API) RunCMD(data []byte) []byte {
 	if err != nil {
 		log.Printf("scheduler.RunCmd Fail : %v\n", err)
 		retobj = &models.ReflectReturn{
-			RetCode: "9999",
-			RetMsg:  utils.GetRetMsg("9999"),
-			RetData: nil,
+			models.AjaxReturn{
+				RetCode: "0000",
+				RetMsg:  "成功",
+				RetData: nil,
+			},
 		}
 	} else {
 		retobj = &models.ReflectReturn{
-			RetCode: "0000",
-			RetMsg:  utils.GetRetMsg("0000"),
-			RetData: nil,
+			models.AjaxReturn{
+				RetCode: "0000",
+				RetMsg:  "成功",
+				RetData: nil,
+			},
 		}
 	}
 	log.Println(result)
