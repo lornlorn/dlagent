@@ -41,7 +41,7 @@ func (api API) RunCMD(data []byte) []byte {
 	} else {
 		retobj = utils.GetAjaxRetObj("0000", err)
 	}
-	log.Println(result)
+	log.Println(string(result))
 
 	ret, _ := utils.Convert2JSON(retobj)
 
