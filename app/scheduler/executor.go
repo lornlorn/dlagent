@@ -5,6 +5,9 @@ import (
 	"strings"
 )
 
+/*
+RunCmd func(cronsh string, croncmd string) ([]byte, error)
+*/
 func RunCmd(cronsh string, croncmd string) ([]byte, error) {
 	var command string
 	var args []string

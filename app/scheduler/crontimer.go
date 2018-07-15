@@ -2,7 +2,6 @@ package scheduler
 
 import (
 	"app/models"
-	"errors"
 	"log"
 
 	"github.com/robfig/cron"
@@ -57,32 +56,26 @@ func loadJobs(c *cron.Cron) error {
 		default:
 		}
 
-		if job.JobType == "default" { // 默认采集待完善
-			c.AddFunc(cr.CronExpression, func() {
-				// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
-			})
+		/*
+			if job.JobType == "default" { // 默认采集待完善
+				c.AddFunc(cr.CronExpression, func() {
+					// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
+				})
 
-			// switch cr.CronCmd {
-			// case "cpu":
-
-			// case "mem":
-
-			// default:
-			// }
-
-		} else if cr.CronType == "user-defined" { // 自定义调用外部命令
-			c.AddFunc(cr.CronExpression, func() {
-				// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
-				ret, err := RunCmd(cr.CronSh, cr.CronCmd)
-				if err != nil {
-					log.Printf("Run Command Fail : %v\n", err)
-				}
-				log.Println(string(ret))
-			})
-		} else {
-			log.Println("Error CronType")
-			return errors.New("Error CronType")
-		}
+			} else if cr.CronType == "user-defined" { // 自定义调用外部命令
+				c.AddFunc(cr.CronExpression, func() {
+					// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
+					ret, err := RunCmd(cr.CronSh, cr.CronCmd)
+					if err != nil {
+						log.Printf("Run Command Fail : %v\n", err)
+					}
+					log.Println(string(ret))
+				})
+			} else {
+				log.Println("Error CronType")
+				return errors.New("Error CronType")
+			}
+		*/
 	}
 	return nil
 }
