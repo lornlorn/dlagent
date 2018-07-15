@@ -9,17 +9,17 @@ import (
 Job struct map table job
 */
 type Job struct {
-	JobId         int    `xorm:"INTEGER not null pk"` // xorm
-	JobName       string `xorm:"VARCHAR not null"`
-	JobType       string `xorm:"VARCHAR not null"`
-	JobCrontime   string `xorm:"VARCHAR"`
-	JobPlantime   string `xorm:"VARCHAR"`
-	JobStatus     string `xorm:"VARCHAR not null"`
-	JobRemark     string `xorm:"VARCHAR"`
-	JobCreate     string `xorm:"VARCHAR"`
-	JobCreatetime string `xorm:"VARCHAR"`
-	JobModify     string `xorm:"VARCHAR"`
-	JobModifytime string `xorm:"VARCHAR"`
+	JobId         int    `xorm:"INTEGER not null unique pk"`
+	JobName       string `xorm:"VARCHAR(64) not null"`
+	JobType       string `xorm:"VARCHAR(16) not null"`
+	JobCrontime   string `xorm:"VARCHAR(128)"`
+	JobPlantime   string `xorm:"VARCHAR(15)"`
+	JobStatus     string `xorm:"VARCHAR(16) not null"`
+	JobRemark     string `xorm:"VARCHAR(512)"`
+	JobCreate     string `xorm:"VARCHAR(32)"`
+	JobCreatetime string `xorm:"VARCHAR(15)"`
+	JobModify     string `xorm:"VARCHAR(32)"`
+	JobModifytime string `xorm:"VARCHAR(15)"`
 }
 
 // Save insert method
