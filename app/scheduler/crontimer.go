@@ -36,18 +36,28 @@ func loadJobs(c *cron.Cron) error {
 	//  time.Sleep(time.Second * 8)
 	// })
 
-	crons, err := models.GetCronList()
+	jobs, err := models.GetJobList()
 	if err != nil {
-		log.Printf("Get Crons Fail : %v\n", err)
+		log.Printf("Get Jobs Fail : %v\n", err)
 		return err
 	}
 
-	for i, v := range crons {
+	for i, v := range jobs {
 		log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
 
-		cr := v
+		job := v
 
-		if cr.CronType == "default" { // 默认采集待完善
+		switch job.JobType {
+		case "collect":
+
+		case "cron":
+
+		case "plan":
+
+		default:
+		}
+
+		if job.JobType == "default" { // 默认采集待完善
 			c.AddFunc(cr.CronExpression, func() {
 				// log.Println(cr.CronType, cr.CronExpression, cr.CronCmd)
 			})

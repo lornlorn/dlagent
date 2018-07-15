@@ -9,12 +9,12 @@ import (
 Job struct map table job
 */
 type Job struct {
-	JobId         int    `xorm:"INTEGER not null unique pk"`
-	JobName       string `xorm:"VARCHAR(64) not null"`
-	JobType       string `xorm:"VARCHAR(16) not null"`
+	JobId         int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
+	JobName       string `xorm:"VARCHAR(64) NOT NULL"`
+	JobType       string `xorm:"VARCHAR(16) NOT NULL"`
 	JobCrontime   string `xorm:"VARCHAR(128)"`
 	JobPlantime   string `xorm:"VARCHAR(15)"`
-	JobStatus     string `xorm:"VARCHAR(16) not null"`
+	JobStatus     string `xorm:"VARCHAR(16) NOT NULL"`
 	JobRemark     string `xorm:"VARCHAR(512)"`
 	JobCreate     string `xorm:"VARCHAR(32)"`
 	JobCreatetime string `xorm:"VARCHAR(15)"`
