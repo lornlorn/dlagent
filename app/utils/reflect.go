@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"reflect"
 )
@@ -18,38 +19,50 @@ var FuncMap FunctionMap
 InitFunctionMap func()
 初始化函数映射表
 */
-func InitFunctionMap(obj interface{}) {
+func InitFunctionMap(objs ...interface{}) {
 
 	// var ajaxapi api.API
 	FuncMap = make(FunctionMap, 0)
-	//创建反射变量，注意这里需要传入ruTest变量的地址；
-	//不传入地址就只能反射Routers静态定义的方法
-	apiObj := reflect.ValueOf(obj)
-	apiObjType := apiObj.Type()
-	//读取方法数量
-	methodNum := apiObj.NumMethod()
-	// fmt.Println("NumMethod:", methodNum)
 
-	//遍历路由器的方法，并将其存入控制器映射变量中
-	for i := 0; i < methodNum; i++ {
-		methodName := apiObjType.Method(i).Name
-		log.Printf("Index : %v, MethodName : %v\n", i, methodName)
-		FuncMap[methodName] = apiObj.Method(i)
-		// log.Println(FuncMap[methodName].Kind().String())
-		// log.Println(FuncMap[methodName].Type().String())
+	for idx, obj := range objs {
+		log.Println(idx, reflect.TypeOf(obj))
+
+		//创建反射变量，注意这里需要传入ruTest变量的地址；
+		//不传入地址就只能反射Routers静态定义的方法
+		apiObj := reflect.ValueOf(obj)
+		apiObjType := apiObj.Type()
+		//读取方法数量
+		methodNum := apiObj.NumMethod()
+		// fmt.Println("NumMethod:", methodNum)
+
+		//遍历路由器的方法，并将其存入控制器映射变量中
+		for i := 0; i < methodNum; i++ {
+			methodName := apiObjType.Method(i).Name
+			log.Printf("Index : %v, MethodName : %v\n", i, methodName)
+			FuncMap[methodName] = apiObj.Method(i)
+			// log.Println(FuncMap[methodName].Kind().String())
+			// log.Println(FuncMap[methodName].Type().String())
+		}
 	}
+	log.Println(FuncMap)
 }
 
 /*
 FuncCall func(mName string, param ...interface{})
 */
 func FuncCall(mName string, params ...interface{}) ([]reflect.Value, error) {
+	// 判断调用方法是否存在
+	if _, ok := FuncMap[mName]; ok {
+
+	} else {
+		return nil, fmt.Errorf("Function Name [%v] Not Exists In FuncMap", mName)
+	}
 
 	// f := reflect.ValueOf(FuncMap[mName])
 
 	// if len(params) != f.Type().NumIn() {
-	// 	log.Println("The number of input params not match")
-	// 	return nil
+	//  log.Println("The number of input params not match")
+	//  return nil
 	// }
 
 	if len(params) != FuncMap[mName].Type().NumIn() {

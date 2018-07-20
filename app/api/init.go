@@ -6,6 +6,7 @@ import "app/utils"
 InitAPIFuncMap func()
 */
 func InitAPIFuncMap() {
-	var ajaxapi API
-	utils.InitFunctionMap(&ajaxapi)
+	var ajax Ajax
+	var tmpl Tmpl
+	utils.InitFunctionMap(&ajax, &tmpl)
 }

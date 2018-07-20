@@ -22,8 +22,20 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 		log.Printf("Parse Error : %v\n", err)
 		return
 	}
-	tmpl.Execute(res, nil)
 
+	switch key {
+	case "joblist":
+		fc, err := utils.FuncCall("GetJobList")
+		if err != nil {
+			log.Printf("Reflect Function Call Error : %v\n", err)
+			return
+		}
+		log.Println(fc[0].Interface())
+
+		tmpl.Execute(res, fc[0].Interface())
+	default:
+		tmpl.Execute(res, nil)
+	}
 }
 
 // TestAjaxHandler func(res http.ResponseWriter, req *http.Request)

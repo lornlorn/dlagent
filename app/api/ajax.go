@@ -9,12 +9,12 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-// API struct
-type API struct {
+// Ajax struct
+type Ajax struct {
 }
 
 // StopScheduler (api API) func(a []byte) ([]byte, error)
-func (api API) StopScheduler(a []byte) []byte {
+func (ajax Ajax) StopScheduler(a []byte) []byte {
 	log.Println(a)
 
 	scheduler.Stop()
@@ -27,7 +27,7 @@ func (api API) StopScheduler(a []byte) []byte {
 /*
 RunCMD func(data []byte) []byte
 */
-func (api API) RunCMD(data []byte) []byte {
+func (ajax Ajax) RunCMD(data []byte) []byte {
 
 	var retobj models.AjaxReturn
 
