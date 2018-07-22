@@ -12,7 +12,7 @@ type Tmpl struct {
 }
 
 /*
-GetJoblist func(data []byte) []byte
+GetJobList func(data []byte) []byte
 */
 func (tmpl Tmpl) GetJobList() interface{} {
 
