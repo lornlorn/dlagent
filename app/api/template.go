@@ -24,6 +24,9 @@ func (tmpl Tmpl) GetJobList() interface{} {
 		return nil
 	}
 
+	// ret, _ := utils.Convert2JSON(jobs)
+
+	// return ret
 	return jobs
 
 	/*

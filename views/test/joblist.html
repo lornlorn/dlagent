@@ -1,17 +1,33 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="utf-8" /> 
-<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-<title>JOB LIST</title> 
-<meta name="viewport" content="width=device-width, initial-scale=1"> 
-<!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> --> 
-<script src="/static/js/jquery-3.2.1.min.js"></script> 
-<!-- <script src="/static/js/test/joblist.js"></script> --> 
-</head> 
-<body> 
-{{range $idx,$obj := .}} 
-<div>{{$idx}}, {{$obj.JobName}}</div> 
-{{end}} 
-</body> 
-</html> 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JOB LIST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bulma/bulma.min.css" />
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/test/joblist.js"></script>
+</head>
+
+<body>
+
+<div>{{.}}</div>
+    <div class="columns">
+        <div class="column is-one-fifth">
+            <ul>
+                {{range $idx,$obj := .}}
+                <li><a data-id="{{$obj.JobId}}" onclick="showContent(this);">{{$idx}}, {{$obj.JobName}}</a></li>
+                {{end}}
+            </ul>
+        </div>
+
+        <div class="column">
+            <div id="content"></div>
+        </div>
+    </div>
+    {{template "footer"}}
+</body>
+
+</html>
