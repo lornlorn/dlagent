@@ -23,7 +23,7 @@ func HTMLHandler(res http.ResponseWriter, req *http.Request) {
 		//二级子路由模板不存在返回404页面
 		tmpl, err := template.ParseFiles("views/error/404.html")
 		if err != nil {
-			log.Printf("Parse Error : %v\n", err)
+			log.Printf("httpsvr.handler.html.HTMLHandler template.ParseFiles Error : %v\n", err)
 			return
 		}
 		tmpl.Execute(res, req.URL)

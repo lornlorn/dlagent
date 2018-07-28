@@ -36,7 +36,7 @@ func (ajax Ajax) RunCMD(data []byte) []byte {
 
 	result, err := scheduler.RunCmd(shell.String(), cmd.String())
 	if err != nil {
-		log.Printf("scheduler.RunCmd Fail : %v\n", err)
+		log.Printf("api.ajax.RunCMD scheduler.RunCmd Error : %v\n", err)
 		retobj = utils.GetAjaxRetObj("9999", err)
 	} else {
 		retobj = utils.GetAjaxRetObj("0000", err)

@@ -20,7 +20,7 @@ func (tmpl Tmpl) GetJobList() interface{} {
 
 	jobs, err := models.GetJobList()
 	if err != nil {
-		log.Printf("models.GetJobList Call Fail : %v", err)
+		log.Printf("api.template.GetJobList models.GetJobList Error : %v", err)
 		return nil
 	}
 

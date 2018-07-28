@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"app/models"
 	"app/utils"
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -17,9 +17,17 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route Test : %v\n", req.URL)
 	vars := mux.Vars(req)
 	key := vars["key"]
-	tmpl, err := template.ParseFiles(fmt.Sprintf("views/test/%v.html", key))
+
+	tmplPages, err := models.GetTmplPages(key)
 	if err != nil {
-		log.Printf("Parse Error : %v\n", err)
+		log.Printf("httpsvr.handler.test.TestHandler models.GetTmplPages Error : %v\n", err)
+		return
+	}
+
+	// tmpl, err := template.ParseFiles(fmt.Sprintf("views/test/%v.html", key))
+	tmpl, err := template.ParseFiles(tmplPages...)
+	if err != nil {
+		log.Printf("httpsvr.handler.test.TestHandler template.ParseFiles Error : %v\n", err)
 		return
 	}
 
@@ -27,7 +35,7 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	case "joblist":
 		fc, err := utils.FuncCall("GetJobList")
 		if err != nil {
-			log.Printf("Reflect Function Call Error : %v\n", err)
+			log.Printf("httpsvr.handler.test.TestHandler utils.FuncCall Error : %v\n", err)
 			return
 		}
 		log.Println(fc[0].Interface())
@@ -49,7 +57,7 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	// 获取请求包体(json数据)
 	reqBody, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		log.Printf("Request Body Read Failed : %v\n", err)
+		log.Printf("httpsvr.handler.test.TestAjaxHandler ioutil.ReadAll Error : %v\n", err)
 		return
 	}
 	log.Println("Request JSON Content :")
@@ -62,7 +70,7 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 
 	fc, err := utils.FuncCall(key, reqBody)
 	if err != nil {
-		log.Printf("Reflect Function Call Error : %v\n", err)
+		log.Printf("httpsvr.handler.test.TestAjaxHandler utils.FuncCall Error : %v\n", err)
 		return
 	}
 	log.Println(string(fc[0].Bytes()))

@@ -28,7 +28,7 @@ func InitDB(dbtype string, dbstr string) error {
 	Engine.ShowSQL(true)
 	err = Engine.Ping()
 	if err != nil {
-		log.Printf("DB Ping Failed : %v\n", err)
+		log.Printf("db.driver.InitDB Engine.Ping Error : %v\n", err)
 		return err
 	}
 	return nil
