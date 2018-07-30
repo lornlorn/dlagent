@@ -3,6 +3,7 @@ package handler
 import (
 	"app/models"
 	"app/utils"
+	"errors"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -31,9 +32,14 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	switch key {
-	case "joblist":
-		fc, err := utils.FuncCall("GetJobList")
+	api, err := models.GetAPIMap("html", key)
+	if err != nil {
+		log.Printf("httpsvr.handler.test.TestHandler models.GetTmplAPI Error : %v\n", err)
+		return
+	}
+
+	if api != "" {
+		fc, err := utils.FuncCall(api)
 		if err != nil {
 			log.Printf("httpsvr.handler.test.TestHandler utils.FuncCall Error : %v\n", err)
 			return
@@ -41,9 +47,10 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 		log.Println(fc[0].Interface())
 
 		tmpl.Execute(res, fc[0].Interface())
-	default:
+	} else {
 		tmpl.Execute(res, nil)
 	}
+
 }
 
 // TestAjaxHandler func(res http.ResponseWriter, req *http.Request)
@@ -68,12 +75,23 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	// cmd := gjson.Get(string(reqBody), "data.cmd")
 	// log.Println(module, shell, cmd)
 
-	fc, err := utils.FuncCall(key, reqBody)
+	api, err := models.GetAPIMap("ajax", key)
 	if err != nil {
-		log.Printf("httpsvr.handler.test.TestAjaxHandler utils.FuncCall Error : %v\n", err)
+		log.Printf("httpsvr.handler.test.TestAjaxHandler models.GetAjaxAPI Error : %v\n", err)
 		return
 	}
-	log.Println(string(fc[0].Bytes()))
 
-	res.Write(fc[0].Bytes())
+	if api != "" {
+		fc, err := utils.FuncCall(api, reqBody)
+		if err != nil {
+			log.Printf("httpsvr.handler.test.TestAjaxHandler utils.FuncCall Error : %v\n", err)
+			return
+		}
+		log.Println(string(fc[0].Bytes()))
+
+		res.Write(fc[0].Bytes())
+	} else {
+		res.Write(utils.GetAjaxRetJSON("9999", errors.New("models.ajaxmap.GetAjaxAPI : No Records")))
+	}
+
 }
