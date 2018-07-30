@@ -8,20 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bulma/bulma.min.css" />
     <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script defer src="/static/js/FontAwesome/all.min.js"></script>
     <script src="/static/js/test/joblist.js"></script>
 </head>
 
 <body>
 
     <div class="columns">
-        <div class="column is-one-fifth has-background-warning">
-            <ul>
+        <div class="column is-one-fifth">
+
+            <nav class="panel">
                 {{range $idx,$obj := .}}
-                <li>
-                    <a data-id="{{$obj.JobId}}" onclick="showContent(this);">{{$idx}}, {{$obj.JobName}}</a>
-                </li>
+                <a class="panel-block" onclick="showContent(this);">
+                    <span class="panel-icon">
+                        <i class="fas fa-wrench" aria-hidden="true"></i>
+                    </span>
+                    <p data-jobid="{{$obj.JobId}}">{{$idx}}, {{$obj.JobName}}</p>
+                </a>
                 {{end}}
-            </ul>
+            </nav>
         </div>
 
         <div class="column">

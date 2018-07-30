@@ -5,5 +5,6 @@ $(function () {
 
 function showContent(el) {
     // alert($(this).attr("data-id"));
-    console.log($(el).attr("data-id"));
+    var title = $(el).children("p[data-jobid]");
+    console.log(title.attr("data-jobid"));
 }
