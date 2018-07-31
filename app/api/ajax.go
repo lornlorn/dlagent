@@ -48,3 +48,10 @@ func (ajax Ajax) RunCMD(data []byte) []byte {
 	return ret
 
 }
+
+/*
+GetJobDtl func(data []byte) []byte
+*/
+func (ajax Ajax) GetJobDtl(data []byte) []byte {
+	return
+}

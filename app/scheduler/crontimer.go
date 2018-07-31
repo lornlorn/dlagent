@@ -35,7 +35,7 @@ func loadJobs(c *cron.Cron) error {
 	//  time.Sleep(time.Second * 8)
 	// })
 
-	jobs, err := models.GetJobList()
+	jobs, err := models.GetJobs("cron")
 	if err != nil {
 		log.Printf("Get Jobs Fail : %v\n", err)
 		return err

@@ -59,7 +59,7 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route Test Ajax : %v\n", req.URL)
 	vars := mux.Vars(req)
 	key := vars["key"]
-	log.Println(key)
+	// log.Println(key)
 
 	// 获取请求包体(json数据)
 	reqBody, err := ioutil.ReadAll(req.Body)
@@ -91,7 +91,7 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 
 		res.Write(fc[0].Bytes())
 	} else {
-		res.Write(utils.GetAjaxRetJSON("9999", errors.New("models.ajaxmap.GetAjaxAPI : No Records")))
+		res.Write(utils.GetAjaxRetJSON("9999", errors.New("API调用失败")))
 	}
 
 }

@@ -33,13 +33,13 @@ func (j *Job) Save() error {
 }
 
 /*
-GetJobList func() ([]Job, error)
+GetJobs func(jobType string) ([]Job, error)
 */
-func GetJobList() ([]Job, error) {
+func GetJobs(jobType string) ([]Job, error) {
 
 	jobs := make([]Job, 0)
 	// if err := db.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
-	if err := db.Engine.Where("job_type = ?", "tool").Find(&jobs); err != nil {
+	if err := db.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
 		// return nil, err
 		log.Println(err)
 		return nil, err
