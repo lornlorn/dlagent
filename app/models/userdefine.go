@@ -6,8 +6,8 @@ type AjaxReturn struct {
 	RetMsg  string
 }
 
-// ReflectReturn struct
-type ReflectReturn struct {
-	AjaxReturn
-	RetData []byte
+// AjaxReturnWithData struct
+type AjaxReturnWithData struct {
+	Ret     AjaxReturn
+	RetData interface{}
 }

@@ -2,6 +2,7 @@ package models
 
 import (
 	"app/db"
+	"errors"
 	"log"
 )
 
@@ -38,7 +39,7 @@ GetJobs func(jobType string) ([]Job, error)
 func GetJobs(jobType string) ([]Job, error) {
 
 	jobs := make([]Job, 0)
-	// if err := db.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
+
 	if err := db.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
 		// return nil, err
 		log.Println(err)
@@ -46,8 +47,35 @@ func GetJobs(jobType string) ([]Job, error) {
 	}
 
 	// for i, v := range crons {
-	// 	log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
+	//  log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
 	// }
 
 	return jobs, nil
+}
+
+/*
+GetJobByID func(jobid int) (Job, error)
+*/
+func GetJobByID(jobid int) (Job, error) {
+
+	job := new(Job)
+	job.JobId = jobid
+
+	has, err := db.Engine.Get(job)
+	if err != nil {
+		log.Println(err)
+		return Job{}, err
+	}
+
+	if !has {
+		return Job{}, errors.New("Get 0 rows")
+	}
+
+	log.Println(job)
+
+	// for i, v := range crons {
+	//  log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
+	// }
+
+	return *job, nil
 }

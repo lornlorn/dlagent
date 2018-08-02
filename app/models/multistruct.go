@@ -1,3 +1,10 @@
 package models
 
-type 
+/*
+JobDtl struct
+*/
+type JobDtl struct {
+	Job          Job
+	JobFlow      []Jobflow
+	JobflowParam []JobflowParam
+}

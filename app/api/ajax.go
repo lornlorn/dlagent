@@ -53,5 +53,19 @@ func (ajax Ajax) RunCMD(data []byte) []byte {
 GetJobDtl func(data []byte) []byte
 */
 func (ajax Ajax) GetJobDtl(data []byte) []byte {
-	return
+	jobid := gjson.Get(string(data), "data.jobid")
+
+	var retobj models.AjaxReturnWithData
+
+	job, err := models.GetJobByID(int(jobid.Int()))
+	if err != nil {
+		log.Printf("api.ajax.GetJobDtl models.GetJobByID Error : %v\n", err)
+		retobj = utils.GetAjaxRetWithDataObj("9999", err, nil)
+	} else {
+		retobj = utils.GetAjaxRetWithDataObj("0000", err, job)
+	}
+
+	ret, _ := utils.Convert2JSON(retobj)
+
+	return ret
 }
