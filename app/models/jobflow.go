@@ -1,5 +1,11 @@
 package models
 
+import (
+	"app/db"
+	"errors"
+	"log"
+)
+
 /*
 Jobflow struct map table jobflow
 */
@@ -16,4 +22,23 @@ type Jobflow struct {
 	JfCreatetime string `xorm:"VARCHAR(15)"`
 	JfModify     string `xorm:"VARCHAR(32)"`
 	JfModifytime string `xorm:"VARCHAR(15)"`
+}
+
+/*
+GetJobFlowsByJobID func(jobid int) ([]Jobflow, error)
+*/
+func GetJobFlowsByJobID(jobid int) ([]Jobflow, error) {
+
+	jobFlows := make([]Jobflow, 0)
+
+	if err := db.Engine.Where("jf_job_id = ?", jobid).Find(&jobFlows); err != nil {
+		log.Println(err)
+		return []Jobflow{}, err
+	}
+
+	if len(jobFlows) == 0 {
+		return nil, errors.New("models.jobflow.GetJobFlowsByJobID : No Records")
+	}
+
+	return jobFlows, nil
 }

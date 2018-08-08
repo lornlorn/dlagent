@@ -33,6 +33,8 @@ function showContent(el) {
             // $('#status').text('请求成功'); 
             console.log("请求成功");
             // $('#result').text(result['retcode'] + '|' + result['retmsg']); 
+            $('#jobname').text(result['retdata']['Job']['JobName']);
+            $('#jobremark').text(result['retdata']['Job']['JobRemark']);
         },
         error: function (result) {
             // $('#status').text('请求失败'); 

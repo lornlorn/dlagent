@@ -1,5 +1,11 @@
 package models
 
+import (
+	"app/db"
+	"errors"
+	"log"
+)
+
 /*
 JobflowParam struct map table jobflow_param
 */
@@ -15,4 +21,23 @@ type JobflowParam struct {
 	JfpCreatetime string `xorm:"VARCHAR(15)"`
 	JfpModify     string `xorm:"VARCHAR(32)"`
 	JfpModifytime string `xorm:"VARCHAR(15)"`
+}
+
+/*
+GetJobFlowParamsByJobFlowID func(jobFlowIDs int) ([]JobflowParam, error)
+*/
+func GetJobFlowParamsByJobFlowID(jobFlowIDs int) ([]JobflowParam, error) {
+
+	jobFlowParams := make([]JobflowParam, 0)
+
+	if err := db.Engine.Where("jf_job_id = ?", jobFlowIDs).Find(&jobFlowParams); err != nil {
+		log.Println(err)
+		return []JobflowParam{}, err
+	}
+
+	if len(jobFlowParams) == 0 {
+		return nil, errors.New("models.jobflowparam.GetJobFlowParamsByJobFlowID : No Records")
+	}
+
+	return jobFlowParams, nil
 }

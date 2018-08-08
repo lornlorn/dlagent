@@ -57,12 +57,12 @@ func (ajax Ajax) GetJobDtl(data []byte) []byte {
 
 	var retobj models.AjaxReturnWithData
 
-	job, err := models.GetJobByID(int(jobid.Int()))
+	jobdtl, err := models.GetJobDtlByID(int(jobid.Int()))
 	if err != nil {
 		log.Printf("api.ajax.GetJobDtl models.GetJobByID Error : %v\n", err)
 		retobj = utils.GetAjaxRetWithDataObj("9999", err, nil)
 	} else {
-		retobj = utils.GetAjaxRetWithDataObj("0000", err, job)
+		retobj = utils.GetAjaxRetWithDataObj("0000", err, jobdtl)
 	}
 
 	ret, _ := utils.Convert2JSON(retobj)
