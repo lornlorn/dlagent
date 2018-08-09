@@ -50,4 +50,8 @@ function showContent(el) {
 function drawContent(result) {
     $('#jobname').val(result['retdata']['Job']['JobName']);
     $('#jobremark').text(result['retdata']['Job']['JobRemark']);
+
+    $.each(result['retdata']['JobFlow'], function (i, v) {
+        console.log(i, v);
+    });
 }
