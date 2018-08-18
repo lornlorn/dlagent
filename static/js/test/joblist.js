@@ -51,6 +51,8 @@ function drawContent(result) {
     $('#jobname').val(result['retdata']['Job']['JobName']);
     $('#jobremark').text(result['retdata']['Job']['JobRemark']);
 
+    console.log(result['retdata']['JobFlow'].length);
+
     $.each(result['retdata']['JobFlow'], function (i, v) {
         console.log(i, v);
     });
