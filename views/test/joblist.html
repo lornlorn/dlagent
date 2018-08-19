@@ -37,7 +37,7 @@
                             <label class="label">作业名称</label>
                             <div class="control">
                                 <!-- <input class="input" type="text" placeholder="" id="jobname"> -->
-                                <textarea class="textarea" type="text" id="jobname" rows="2"></textarea>
+                                <textarea class="textarea" type="text" id="JobName" rows="2"></textarea>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="field">
                             <label class="label">描述</label>
                             <div class="control">
-                                <textarea class="textarea" type="text" id="jobremark" rows="2"></textarea>
+                                <textarea class="textarea" type="text" id="JobRemark" rows="2"></textarea>
                             </div>
                         </div>
                     </div>
@@ -57,13 +57,114 @@
                 </div>
                 <div id="jobflows">
 
-                    <div class="jobflow" data-JfId="1">
-                        A
+                    <div class="jobflow" data-JfId="1" data-JfSeq="1">
+                        <p>序号 : 1</p>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="label">描述信息</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            名称
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="" id="JfName">
+                                    </div>
+                                </div>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            描述
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="" id="JfRemark">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="label">执行信息</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            SHELL路径
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="" id="JfSh">
+                                    </div>
+                                </div>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            命令
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="" id="JfCmd">
+                                    </div>
+                                </div>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            状态
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="" id="JfStatus">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="label">参数信息</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            参数1
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="" id="JfSh">
+                                    </div>
+                                </div>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            参数2
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="命令" id="JfCmd">
+                                    </div>
+                                </div>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <a class="button is-static">
+                                            参数3
+                                        </a>
+                                    </div>
+                                    <div class="control is-expanded">
+                                        <input class="input" type="text" placeholder="状态" id="JfStatus">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr class="hr">
                     <!-- style="margin-bottom: 0;" -->
-                    <div class="jobflow">
-                        B
+                    <div class="jobflow" data-JfId="2" data-JfSeq="2">
+                        <p>序号 : 2</p>
                     </div>
                     <hr class="hr">
                 </div>
