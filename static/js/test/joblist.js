@@ -48,12 +48,12 @@ function showContent(el) {
 }
 
 function drawContent(result) {
-    $('#JobName').val(result['retdata']['Job']['JobName']);
-    $('#JobRemark').text(result['retdata']['Job']['JobRemark']);
+    $('#JobName').val(result['retdata']['job']['JobName']);
+    $('#JobRemark').text(result['retdata']['job']['JobRemark']);
 
-    console.log(result['retdata']['JobFlow'].length);
+    console.log(result['retdata']['jobflow'].length);
 
-    $.each(result['retdata']['JobFlow'], function (i, v) {
+    $.each(result['retdata']['jobflow'], function (i, v) {
         console.log(i, v);
     });
 }
