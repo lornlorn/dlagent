@@ -6,9 +6,9 @@ import "log"
 JobDtl struct
 */
 type JobDtl struct {
-	Job          Job
-	JobFlow      []Jobflow
-	JobflowParam []JobflowParam
+	Job          Job            `json:"job"`
+	JobFlow      []Jobflow      `json:"jobflow"`
+	JobflowParam []JobflowParam `json:"jobflowparam"`
 }
 
 /*
