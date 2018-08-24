@@ -6,9 +6,15 @@ type AjaxReturn struct {
 	RetMsg  string `json:"retmsg"`
 }
 
+// // AjaxReturnWithData struct
+// type AjaxReturnWithData struct {
+// 	RetCode string      `json:"retcode"`
+// 	RetMsg  string      `json:"retmsg"`
+// 	RetData interface{} `json:"retdata"`
+// }
+
 // AjaxReturnWithData struct
 type AjaxReturnWithData struct {
-	RetCode string      `json:"retcode"`
-	RetMsg  string      `json:"retmsg"`
+	AjaxReturn
 	RetData interface{} `json:"retdata"`
 }

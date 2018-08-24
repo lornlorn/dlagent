@@ -73,17 +73,23 @@ func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) model
 	var retobj models.AjaxReturnWithData
 
 	if errmsg != nil {
-		retobj = models.AjaxReturnWithData{
-			RetCode: retcode,
-			RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
-			RetData: data,
-		}
+		retobj.RetCode = retcode
+		retobj.RetMsg = fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg)
+		retobj.RetData = data
+		// retobj = models.AjaxReturnWithData{
+		// 	RetCode: retcode,
+		// 	RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
+		// 	RetData: data,
+		// }
 	} else {
-		retobj = models.AjaxReturnWithData{
-			RetCode: retcode,
-			RetMsg:  GetRetMsg(retcode),
-			RetData: data,
-		}
+		retobj.RetCode = retcode
+		retobj.RetMsg = GetRetMsg(retcode)
+		retobj.RetData = data
+		// retobj = models.AjaxReturnWithData{
+		// 	RetCode: retcode,
+		// 	RetMsg:  GetRetMsg(retcode),
+		// 	RetData: data,
+		// }
 	}
 	return retobj
 }
@@ -97,17 +103,23 @@ func GetAjaxRetWithDataJSON(retcode string, errmsg error, data interface{}) []by
 	var retobj models.AjaxReturnWithData
 
 	if errmsg != nil {
-		retobj = models.AjaxReturnWithData{
-			RetCode: retcode,
-			RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
-			RetData: data,
-		}
+		retobj.RetCode = retcode
+		retobj.RetMsg = fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg)
+		retobj.RetData = data
+		// retobj = models.AjaxReturnWithData{
+		// 	RetCode: retcode,
+		// 	RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
+		// 	RetData: data,
+		// }
 	} else {
-		retobj = models.AjaxReturnWithData{
-			RetCode: retcode,
-			RetMsg:  GetRetMsg(retcode),
-			RetData: data,
-		}
+		retobj.RetCode = retcode
+		retobj.RetMsg = GetRetMsg(retcode)
+		retobj.RetData = data
+		// retobj = models.AjaxReturnWithData{
+		// 	RetCode: retcode,
+		// 	RetMsg:  GetRetMsg(retcode),
+		// 	RetData: data,
+		// }
 	}
 
 	ret, _ := Convert2JSON(retobj)

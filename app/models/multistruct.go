@@ -7,8 +7,17 @@ JobDtl struct
 */
 type JobDtl struct {
 	Job          Job            `json:"job"`
-	JobFlow      []Jobflow      `json:"jobflow"`
+	Jobflow      []Jobflow      `json:"jobflow"`
 	JobflowParam []JobflowParam `json:"jobflowparam"`
+}
+
+/*
+JobflowWithParam struct
+Jobflow with parameters
+*/
+type JobflowWithParam struct {
+	Jobflow
+	JobflowParam []JobflowParam
 }
 
 /*
@@ -31,7 +40,7 @@ func GetJobDtlByID(jobid int) (JobDtl, error) {
 	}
 
 	jobdtl.Job = job
-	jobdtl.JobFlow = jobflows
+	jobdtl.Jobflow = jobflows
 
 	return *jobdtl, nil
 }
