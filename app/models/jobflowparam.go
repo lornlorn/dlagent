@@ -26,11 +26,11 @@ type JobflowParam struct {
 /*
 GetJobFlowParamsByJobFlowID func(jobFlowIDs int) ([]JobflowParam, error)
 */
-func GetJobFlowParamsByJobFlowID(jobFlowIDs int) ([]JobflowParam, error) {
+func GetJobFlowParamsByJobFlowID(jobFlowID int) ([]JobflowParam, error) {
 
 	jobFlowParams := make([]JobflowParam, 0)
 
-	if err := db.Engine.Where("jf_job_id = ?", jobFlowIDs).Find(&jobFlowParams); err != nil {
+	if err := db.Engine.Where("jfp_jf_id = ?", jobFlowID).Find(&jobFlowParams); err != nil {
 		log.Println(err)
 		return []JobflowParam{}, err
 	}
