@@ -55,5 +55,6 @@ function drawContent(result) {
 
     $.each(result['retdata']['jobflow'], function (i, v) {
         console.log(i, v);
+        console.log(result['retdata']['jobflow'][i]['JobflowParam'].length);
     });
 }

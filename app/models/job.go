@@ -10,17 +10,17 @@ import (
 Job struct map table job
 */
 type Job struct {
-	JobId         int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
-	JobName       string `xorm:"VARCHAR(64) NOT NULL"`
-	JobType       string `xorm:"VARCHAR(16) NOT NULL"`
-	JobCrontime   string `xorm:"VARCHAR(128)"`
-	JobPlantime   string `xorm:"VARCHAR(15)"`
-	JobStatus     string `xorm:"VARCHAR(16) NOT NULL"`
-	JobRemark     string `xorm:"VARCHAR(512)"`
-	JobCreate     string `xorm:"VARCHAR(32)"`
-	JobCreatetime string `xorm:"VARCHAR(15)"`
-	JobModify     string `xorm:"VARCHAR(32)"`
-	JobModifytime string `xorm:"VARCHAR(15)"`
+	JobId       int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
+	JobName     string `xorm:"VARCHAR(64) NOT NULL"`
+	JobType     string `xorm:"VARCHAR(16) NOT NULL"`
+	JobCrontime string `xorm:"VARCHAR(128)"`
+	JobPlantime string `xorm:"VARCHAR(15)"`
+	JobStatus   string `xorm:"VARCHAR(16) NOT NULL"`
+	JobRemark   string `xorm:"VARCHAR(512)"`
+	// JobCreate     string `xorm:"VARCHAR(32)"`
+	// JobCreatetime string `xorm:"VARCHAR(15)"`
+	// JobModify     string `xorm:"VARCHAR(32)"`
+	// JobModifytime string `xorm:"VARCHAR(15)"`
 }
 
 // Save insert method
@@ -56,10 +56,10 @@ func GetJobs(jobType string) ([]Job, error) {
 /*
 GetJobByID func(jobid int) (Job, error)
 */
-func GetJobByID(jobid int) (Job, error) {
+func GetJobByID(jobID int) (Job, error) {
 
 	job := new(Job)
-	job.JobId = jobid
+	job.JobId = jobID
 
 	has, err := db.Engine.Get(job)
 	if err != nil {
