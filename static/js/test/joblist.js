@@ -57,4 +57,10 @@ function drawContent(result) {
         console.log(i, v);
         console.log(result['retdata']['jobflow'][i]['JobflowParam'].length);
     });
+
+    // console.log($('#JfStatus').val());
+    // console.log($('#JfStatus').text());
+    $('#JfStatus').val('停用');
+
+    // $('#content').empty();
 }
