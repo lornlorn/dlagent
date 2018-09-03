@@ -4,8 +4,8 @@ $(function () {
 });
 
 function showContent(el) {
-    var item = $(el).children("p[data-jobid]");
-    // console.log(item.attr("data-jobid"));
+    var item = $(el).children("p[data-JobId]");
+    // console.log(item.attr("data-JobId"));
 
     var params = {};
     // params['module'] = $module.val(); 
