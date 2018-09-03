@@ -11,12 +11,12 @@ Job struct map table job
 */
 type Job struct {
 	JobId       int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
-	JobName     string `xorm:"VARCHAR(64) NOT NULL"`
+	JobName     string `xorm:"VARCHAR(128) NOT NULL"`
 	JobType     string `xorm:"VARCHAR(16) NOT NULL"`
 	JobCrontime string `xorm:"VARCHAR(128)"`
 	JobPlantime string `xorm:"VARCHAR(15)"`
 	JobStatus   string `xorm:"VARCHAR(16) NOT NULL"`
-	JobRemark   string `xorm:"VARCHAR(512)"`
+	JobRemark   string `xorm:"VARCHAR(1024)"`
 	// JobCreate     string `xorm:"VARCHAR(32)"`
 	// JobCreatetime string `xorm:"VARCHAR(15)"`
 	// JobModify     string `xorm:"VARCHAR(32)"`

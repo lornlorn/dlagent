@@ -16,7 +16,7 @@ type JobflowParam struct {
 	JfpParameter string `xorm:"VARCHAR(64) NOT NULL"`
 	JfpDefault   string `xorm:"VARCHAR(512)"`
 	// JfpStatus    string `xorm:"VARCHAR(16) NOT NULL"`
-	// JfpRemark     string `xorm:"VARCHAR(512)"`
+	// JfpRemark     string `xorm:"VARCHAR(1024)"`
 	// JfpCreate     string `xorm:"VARCHAR(32)"`
 	// JfpCreatetime string `xorm:"VARCHAR(15)"`
 	// JfpModify     string `xorm:"VARCHAR(32)"`

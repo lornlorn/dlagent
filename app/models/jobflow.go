@@ -17,7 +17,7 @@ type Jobflow struct {
 	JfSh     string `xorm:"VARCHAR(64)"`
 	JfCmd    string `xorm:"VARCHAR(256) NOT NULL"`
 	JfStatus string `xorm:"VARCHAR(16) NOT NULL"`
-	// JfRemark     string `xorm:"VARCHAR(512)"`
+	// JfRemark     string `xorm:"VARCHAR(1024)"`
 	// JfCreate     string `xorm:"VARCHAR(32)"`
 	// JfCreatetime string `xorm:"VARCHAR(15)"`
 	// JfModify     string `xorm:"VARCHAR(32)"`
