@@ -56,6 +56,132 @@ function drawContent(result) {
     $.each(result['retdata']['jobflow'], function (i, v) {
         console.log(i, v);
         console.log(result['retdata']['jobflow'][i]['JobflowParam'].length);
+        var html =
+            "<div class=\"jobflow\" data-JfId=\"" + result['retdata']['jobflow'][i]['JfId'] + "\" data-JfSeq=\"" + result['retdata']['jobflow'][i]['JfSeq'] + "\">" +
+            "<h6 class=\"title is-6\">序号:" + result['retdata']['jobflow'][i]['JfSeq'] + "</h6>" +
+            "<div class=\"columns\">" +
+            "<div class=\"column is-four-fifths\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "名称" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control is-expanded\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfName\" value=\"" + result['retdata']['jobflow'][i]['JfName'] + "\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"column\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "状态" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control is-expanded\">" +
+            "<div class=\"select\">" +
+            "<select id=\"JfStatus\">" +
+            "<option>启用</option>" +
+            "<option>停用</option>" +
+            "</select>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"columns\">" +
+            "<div class=\"column is-one-fifth\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "SHELL路径" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control is-expanded\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfSh\" value=\"" + result['retdata']['jobflow'][i]['JfSh'] + "\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"column\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "命令" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control is-expanded\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfCmd\" value=\"" + result['retdata']['jobflow'][i]['JfCmd'] + "\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"columns parameters\">" +
+            "<div class=\"column is-one-fifth\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "参数1" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter1\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"column is-one-fifth\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "参数2" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter2\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"column is-one-fifth\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "参数3" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter3\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"column is-one-fifth\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "参数4" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter4\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"column is-one-fifth\">" +
+            "<div class=\"field has-addons\">" +
+            "<div class=\"control\">" +
+            "<a class=\"button is-static\">" +
+            "参数5" +
+            "</a>" +
+            "</div>" +
+            "<div class=\"control\">" +
+            "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter5\">" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "<hr class=\"hr\">";
+
+        $('#jobflows').append(html);
     });
 
     // console.log($('#JfStatus').val());
@@ -64,130 +190,5 @@ function drawContent(result) {
 
     // $('#content').empty();
 
-    var html = 
-    "<div class=\"jobflow\" data-JfId=\"1\" data-JfSeq=\"1\">" +
-        "<h6 class=\"title is-6\">序号:1</h6>" +
-        "<div class=\"columns\">" +
-            "<div class=\"column is-four-fifths\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "名称" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control is-expanded\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfName\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div class=\"column\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "状态" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control is-expanded\">" +
-                        "<div class=\"select\">" +
-                            "<select id=\"JfStatus\">" +
-                                "<option>启用</option>" +
-                                "<option>停用</option>" +
-                            "</select>" +
-                        "</div>" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-        "</div>" +
-        "<div class=\"columns\">" +
-            "<div class=\"column is-one-fifth\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "SHELL路径" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control is-expanded\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfSh\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div class=\"column\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "命令" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control is-expanded\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfCmd\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-        "</div>" +
-        "<div class=\"columns parameters\">" +
-            "<div class=\"column is-one-fifth\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "参数1" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter1\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div class=\"column is-one-fifth\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "参数2" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter2\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div class=\"column is-one-fifth\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "参数3" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter3\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div class=\"column is-one-fifth\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "参数4" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter4\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div class=\"column is-one-fifth\">" +
-                "<div class=\"field has-addons\">" +
-                    "<div class=\"control\">" +
-                        "<a class=\"button is-static\">" +
-                            "参数5" +
-                        "</a>" +
-                    "</div>" +
-                    "<div class=\"control\">" +
-                        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter5\">" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-        "</div>" +
-    "</div>" +
-    "<hr class=\"hr\">";
 
-    $('#jobflows').append(html);
 }
