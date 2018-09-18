@@ -4,7 +4,7 @@ $(function () {
     $('#submit').click(function () {
         var params = {};
         // params['module'] = $module.val(); 
-        params['module'] = 'runcmd';
+        params['from'] = 'runcmd';
         params['data'] = {};
         // $('#json').find('input[name]').each(function () { 
         // var k = $(this).attr('name'); 
