@@ -56,6 +56,11 @@ function drawContent(result) {
     $('#JobRemark').text(result['retdata']['job']['JobRemark']);
 
     // console.log(result['retdata']['jobflow'].length);
+    var jobFlowTitleHtml =
+    "<div class=\"field\">" +
+    "<h5 class=\"title is-5\">作业流</h5>" +
+    "</div>";
+    $('#jobflows').append(jobFlowTitleHtml);
 
     $.each(result['retdata']['jobflow'], function (i, v) {
         // console.log(i, v);
@@ -80,9 +85,6 @@ function drawContent(result) {
         });
 
         var jobFlowHtml =
-            "<div class=\"field\">" +
-            "<h5 class=\"title is-5\">作业流</h5>" +
-            "</div>" +
             "<div class=\"jobflow\" data-JfId=\"" + v.JfId + "\" data-JfSeq=\"" + v.JfSeq + "\">" +
             "<h6 class=\"title is-6\">序号:" + v.JfSeq + "</h6>" +
             "<div class=\"columns\">" +
