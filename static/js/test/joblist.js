@@ -17,7 +17,9 @@ function showContent(el) {
     // params['data'][k] = v; 
     // }); 
     params['data']['jobtype'] = 'tool';
-    params['data']['jobid'] = item.attr("data-jobid");
+    params['data']['jobid'] = item.attr("data-JobId");
+
+    $('.content').find('#run').attr("data-JobId", item.attr("data-JobId"));
 
     console.log('REQUEST : ' + JSON.stringify(params));
 
@@ -78,6 +80,9 @@ function drawContent(result) {
         });
 
         var jobFlowHtml =
+            "<div class=\"field\">" +
+            "<h5 class=\"title is-5\">作业流</h5>" +
+            "</div>" +
             "<div class=\"jobflow\" data-JfId=\"" + v.JfId + "\" data-JfSeq=\"" + v.JfSeq + "\">" +
             "<h6 class=\"title is-6\">序号:" + v.JfSeq + "</h6>" +
             "<div class=\"columns\">" +
