@@ -1,6 +1,27 @@
 
 $(function () {
     // $(document).tooltip();
+
+    // 添加指令 
+    $("#steplist").on("click", ".stepdtl-add", function () {
+        var seq = $(this).parent().parent().attr("data-seq");
+        var html =
+            "<div class=\"stepdtl\">" +
+            " <input data-type=\"check\" data-name=\"stepdtl-check\" type=\"checkbox\">" +
+            " <label>IP:</label>" +
+            " <input data-type=\"data\" data-name=\"ip\" value=\"192.168.100.101\">" +
+            " <label>端口:</label>" +
+            " <input data-type=\"data\" data-name=\"port\" value=\"22\">" +
+            " <label>用户名:</label>" +
+            " <input data-type=\"data\" data-name=\"username\" value=\"test\">" +
+            " <label>密码:</label>" +
+            " <input data-type=\"data\" data-name=\"password\" value=\"test\">" +
+            " <label>命令:</label>" +
+            " <input data-type=\"data\" data-name=\"command\" value=\"ls -lrt\">" +
+            "</div>";
+
+        $("div.step[data-seq=" + seq + "]").append(html);
+    });
 });
 
 function showContent(el) {
@@ -57,9 +78,19 @@ function drawContent(result) {
 
     // console.log(result['retdata']['jobflow'].length);
     var jobFlowTitleHtml =
-    "<div class=\"field\">" +
-    "<h5 class=\"title is-5\">作业流</h5>" +
-    "</div>";
+        "<div class=\"field is-grouped\">" +
+        "<div class=\"control\">" +
+        "<h5 class=\"title is-5\">作业流</h5>" +
+        "</div>" +
+        "<div class=\"control\">" +
+        "<a class=\"button is-primary is-small is-outlined\" id=\"add\" onclick=\"addJobFlow();\">" +
+        "<span class=\"icon\">" +
+        "<i class=\"fas fa-plus\"></i>" +
+        "</span>" +
+        "<span>增加作业流</span>" +
+        "</a>" +
+        "</div>" +
+        "</div>";
     $('#jobflows').append(jobFlowTitleHtml);
 
     $.each(result['retdata']['jobflow'], function (i, v) {
@@ -71,6 +102,7 @@ function drawContent(result) {
             // console.log(i, v);
             jobFlowParamHtml = jobFlowParamHtml +
                 "<div class=\"column is-one-fifth\">" +
+                "<div class=\"parameter\" data-JfpId=\"" + v.JfpId + "\" data-JfpSeq=\"" + v.JfpSeq + "\">" +
                 "<div class=\"field has-addons\">" +
                 "<div class=\"control\">" +
                 "<a class=\"button is-static\">" +
@@ -78,7 +110,8 @@ function drawContent(result) {
                 "</a>" +
                 "</div>" +
                 "<div class=\"control\">" +
-                "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfpParameter1\" value=\"" + v.JfpDefault + "\">" +
+                "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"parameter-" + v.JfpId + "\" value=\"" + v.JfpDefault + "\">" +
+                "</div>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
@@ -154,4 +187,8 @@ function drawContent(result) {
 
         $("div.jobflow[data-JfId=" + v.JfId + "]").find("#JfStatus").val(v.JfStatus);
     });
+}
+
+function addJobFlow() {
+    alert("add");
 }
