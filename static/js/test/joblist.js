@@ -190,5 +190,73 @@ function drawContent(result) {
 }
 
 function addJobFlow() {
-    alert("add");
+    var len = Number($("#jobflows").find(".jobflow").length);
+    var newSeq = len + 1;
+    var newFlowHtml =
+        "<div class=\"jobflow\" data-JfSeq=\"" + newSeq + "\">" +
+        "<h6 class=\"title is-6\">序号:" + newSeq + "</h6>" +
+        "<div class=\"columns\">" +
+        "<div class=\"column is-four-fifths\">" +
+        "<div class=\"field has-addons\">" +
+        "<div class=\"control\">" +
+        "<a class=\"button is-static\">" +
+        "名称" +
+        "</a>" +
+        "</div>" +
+        "<div class=\"control is-expanded\">" +
+        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfName\" value=\"\">" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"column\">" +
+        "<div class=\"field has-addons\">" +
+        "<div class=\"control\">" +
+        "<a class=\"button is-static\">" +
+        "状态" +
+        "</a>" +
+        "</div>" +
+        "<div class=\"control is-expanded\">" +
+        "<div class=\"select\">" +
+        "<select id=\"JfStatus\">" +
+        "<option>启用</option>" +
+        "<option>停用</option>" +
+        "</select>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"columns\">" +
+        "<div class=\"column is-one-fifth\">" +
+        "<div class=\"field has-addons\">" +
+        "<div class=\"control\">" +
+        "<a class=\"button is-static\">" +
+        "SHELL路径" +
+        "</a>" +
+        "</div>" +
+        "<div class=\"control is-expanded\">" +
+        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfSh\" value=\"\">" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"column\">" +
+        "<div class=\"field has-addons\">" +
+        "<div class=\"control\">" +
+        "<a class=\"button is-static\">" +
+        "命令" +
+        "</a>" +
+        "</div>" +
+        "<div class=\"control is-expanded\">" +
+        "<input class=\"input\" type=\"text\" placeholder=\"\" id=\"JfCmd\" value=\"\">" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"columns parameters\">" +
+        // jobFlowParamHtml +
+        "</div>" +
+        "</div>" +
+        "<hr class=\"hr\">";
+
+    $('#jobflows').append(newFlowHtml);
 }
