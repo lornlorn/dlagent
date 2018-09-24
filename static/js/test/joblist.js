@@ -156,7 +156,7 @@ function drawContent(result) {
             "<div class=\"field has-addons\">" +
             "<div class=\"control\">" +
             "<a class=\"button is-static\">" +
-            "SHELL路径" +
+            "SHELL" +
             "</a>" +
             "</div>" +
             "<div class=\"control is-expanded\">" +
