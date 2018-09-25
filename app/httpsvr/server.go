@@ -58,6 +58,7 @@ func initRoutes(r *mux.Router) {
 	// other root subrouter
 	root := r.PathPrefix("/").Subrouter()
 	root.HandleFunc("/", handler.NotFoundHandler)
+	root.Handle("/favicon.ico", http.StripPrefix("/favicon.ico", http.FileServer(http.Dir("static/img/favicon.ico"))))
 	root.HandleFunc("/{key}", handler.NotFoundHandler)
 
 	// http.HandleFunc("/", notFoundHandler)
