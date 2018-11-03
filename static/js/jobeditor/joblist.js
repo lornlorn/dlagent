@@ -45,7 +45,7 @@ function showContent(el) {
     console.log('REQUEST : ' + JSON.stringify(params));
 
     $.ajax({
-        url: '/test/ajax/getjobdtl',
+        url: '/ajax/getjobdtl',
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(params),

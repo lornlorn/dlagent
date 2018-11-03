@@ -11,7 +11,7 @@ func IndexHandler(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route Index : %v\n", req.URL)
 	tmpl, err := template.ParseFiles("views/html/index.html")
 	if err != nil {
-		log.Printf("httpsvr.handler.index.IndexHandler template.ParseFiles Error : %v\n", err)
+		log.Printf("httpsvr.handler.index.IndexHandler -> template.ParseFiles Error : %v\n", err)
 		return
 	}
 
