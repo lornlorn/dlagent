@@ -33,7 +33,7 @@ func AjaxHandler(res http.ResponseWriter, req *http.Request) {
 	// cmd := gjson.Get(string(reqBody), "data.cmd")
 	// log.Println(module, shell, cmd)
 
-	api, err := models.GetAPIMap("ajax", key)
+	api, err := models.GetSysAPIMap("ajax", key)
 	if err != nil {
 		log.Printf("httpsvr.handler.ajax.AjaxHandler -> models.GetAjaxAPI Error : %v\n", err)
 		return
