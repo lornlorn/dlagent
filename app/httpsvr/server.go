@@ -52,12 +52,13 @@ func initRoutes(r *mux.Router) {
 	t.HandleFunc("/ajax/{key}", handler.TestAjaxHandler)
 
 	// static resource router
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	// other root subrouter
 	root := r.PathPrefix("/").Subrouter()
 	root.HandleFunc("/", handler.IndexHandler)
 	// root.Handle("/favicon.ico", http.StripPrefix("/favicon.ico", http.FileServer(http.Dir("static/img/favicon.ico"))))
+	// root.Handle("/favicon.ico", http.FileServer(http.Dir("static/img/favicon.ico")))
 	root.HandleFunc("/{key}", handler.NotFoundHandler)
 
 	// http.HandleFunc("/", notFoundHandler)

@@ -25,6 +25,12 @@ func NotFoundHandler(res http.ResponseWriter, req *http.Request) {
 	// 	fmt.Fprintln(res, "Route aaa Finish")
 	// 	return
 	// }
+
+	if req.URL.Path == "/favicon.ico" {
+		http.ServeFile(res, req, "./static/img/favicon.ico")
+		return
+	}
+
 	tmpl, err := template.ParseFiles("views/error/404.html")
 	if err != nil {
 		log.Printf("httpsvr.handler.404.NotFoundHandler -> template.ParseFiles Error : %v\n", err)
