@@ -59,7 +59,7 @@ func GetAjaxRetJSON(retcode string, errmsg error) []byte {
 		}
 	}
 
-	ret, _ := Convert2JSON(retobj)
+	ret := Convert2JSON(retobj)
 
 	return ret
 }
@@ -122,7 +122,7 @@ func GetAjaxRetWithDataJSON(retcode string, errmsg error, data interface{}) []by
 		// }
 	}
 
-	ret, _ := Convert2JSON(retobj)
+	ret := Convert2JSON(retobj)
 
 	return ret
 }

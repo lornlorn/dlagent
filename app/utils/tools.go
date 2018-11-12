@@ -18,19 +18,20 @@ import (
 */
 
 // Convert2JSON (data interface{}) []byte
-func Convert2JSON(data interface{}) ([]byte, error) {
+func Convert2JSON(data interface{}) []byte {
 	switch data.(type) {
 	case []byte:
 		// log.Println("Convert To JSON args []byte")
 		retdata := data.([]byte)
-		return retdata, nil
+		return retdata
 	default:
 		// log.Println("Convert To JSON args not []byte")
 		retdata, err := json.Marshal(data)
 		if err != nil {
-			log.Printf("Marshal Json Error : %v\n", err)
+			log.Printf("utils.tools.Convert2JSON -> json.Marshal Error : %v\n", err)
+			return []byte("")
 		}
-		return retdata, err
+		return retdata
 	}
 }
 
@@ -85,12 +86,13 @@ func GetMd5String(s string) string {
 }
 
 // GetUniqueID 生成UID唯一标识
-func GetUniqueID() (string, error) {
+func GetUniqueID() string {
 	newbyte := make([]byte, 48)
 
 	_, err := io.ReadFull(rand.Reader, newbyte)
 	if err != nil {
-		return "", err
+		log.Printf("utils.tools.GetUniqueID -> io.ReadFull Error : %v\n", err)
+		return "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 	}
-	return GetMd5String(base64.URLEncoding.EncodeToString(newbyte)), nil
+	return GetMd5String(base64.URLEncoding.EncodeToString(newbyte))
 }
