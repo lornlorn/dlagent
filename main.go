@@ -7,9 +7,16 @@ import (
 	"app/scheduler"
 	"app/utils"
 	"log"
+	"net/http"
+	_ "net/http/pprof"
 )
 
 func main() {
+	//这里实现了远程获取pprof数据的接口
+	go func() {
+		log.Println(http.ListenAndServe("localhost:8765", nil))
+	}()
+
 	var err error
 
 	// Read Configuration
