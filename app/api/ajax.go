@@ -43,7 +43,7 @@ func (ajax Ajax) RunCMD(data []byte) []byte {
 	}
 	log.Println(string(result))
 
-	ret, _ := utils.Convert2JSON(retobj)
+	ret := utils.Convert2JSON(retobj)
 
 	return ret
 
@@ -59,13 +59,13 @@ func (ajax Ajax) GetJobDtl(data []byte) []byte {
 
 	jobdtl, err := models.GetJobDtlByID(int(jobid.Int()))
 	if err != nil {
-		log.Printf("api.ajax.GetJobDtl models.GetJobByID Error : %v\n", err)
+		log.Printf("api.ajax.GetJobDtl -> models.GetJobDtlByID Error : %v\n", err)
 		retobj = utils.GetAjaxRetWithDataObj("9999", err, nil)
 	} else {
 		retobj = utils.GetAjaxRetWithDataObj("0000", err, jobdtl)
 	}
 
-	ret, _ := utils.Convert2JSON(retobj)
+	ret := utils.Convert2JSON(retobj)
 
 	return ret
 }

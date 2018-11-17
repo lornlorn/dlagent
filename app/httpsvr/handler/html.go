@@ -17,9 +17,9 @@ func HTMLHandler(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	key := vars["key"]
 
-	tmplPages, err := models.GetSysTmplMap(key)
+	tmplPages, err := models.GetTmpls(key)
 	if err != nil {
-		log.Printf("httpsvr.handler.html.HTMLHandler -> models.GetSysTmplMap Error : %v\n", err)
+		log.Printf("httpsvr.handler.html.HTMLHandler -> models.GetTmpls Error : %v\n", err)
 		return
 	}
 
@@ -30,9 +30,9 @@ func HTMLHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	api, err := models.GetSysAPIMap("html", key)
+	api, err := models.GetApi("html", key)
 	if err != nil {
-		log.Printf("httpsvr.handler.html.HTMLHandler -> models.GetTmplAPI Error : %v\n", err)
+		log.Printf("httpsvr.handler.html.HTMLHandler -> models.GetApi Error : %v\n", err)
 		return
 	}
 

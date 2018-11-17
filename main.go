@@ -4,7 +4,6 @@ import (
 	"app/api"
 	"app/db"
 	"app/httpsvr"
-	"app/scheduler"
 	"app/utils"
 	"log"
 	"net/http"
@@ -37,13 +36,15 @@ func main() {
 	}
 	defer db.Engine.Close()
 
-	// Start Monitor
-	log.Println("Scheduler Start ...")
-	err = scheduler.Start()
-	if err != nil {
-		log.Printf("Scheduler Start Fail : %v\n", err)
-		return
-	}
+	/*
+		// Start Monitor
+		log.Println("Scheduler Start ...")
+		err = scheduler.Start()
+		if err != nil {
+			log.Printf("Scheduler Start Fail : %v\n", err)
+			return
+		}
+	*/
 
 	// Start HTTP Server
 	log.Println("Start HTTP Server ...")

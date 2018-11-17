@@ -1,11 +1,9 @@
 package db
 
 import (
-	"log"
-
-	"github.com/go-xorm/xorm"
-	// _ "github.com/lib/pq" // postgresql driver
+	"github.com/go-xorm/xorm"       // _ "github.com/lib/pq" // postgresql driver
 	_ "github.com/mattn/go-sqlite3" // sqlite3 driver
+	"log"
 )
 
 // Engine xorm
@@ -28,7 +26,7 @@ func InitDB(dbtype string, dbstr string) error {
 	Engine.ShowSQL(true)
 	err = Engine.Ping()
 	if err != nil {
-		log.Printf("db.driver.InitDB Engine.Ping Error : %v\n", err)
+		log.Printf("db.driver.InitDB -> Engine.Ping Error : %v\n", err)
 		return err
 	}
 	return nil

@@ -6,19 +6,19 @@ import (
 )
 
 /*
-Tmpl struct
+HTML struct
 */
-type Tmpl struct {
+type HTML struct {
 }
 
 /*
 GetJobList func(data []byte) []byte
 */
-func (tmpl Tmpl) GetJobList() interface{} {
+func (html HTML) GetJobList() interface{} {
 
 	jobs, err := models.GetJobs("tool")
 	if err != nil {
-		log.Printf("api.template.GetJobList models.GetJobs Error : %v", err)
+		log.Printf("api.html.GetJobList -> models.GetJobs Error : %v", err)
 		return nil
 	}
 

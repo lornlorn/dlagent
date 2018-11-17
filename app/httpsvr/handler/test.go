@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"app/test"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -46,6 +47,8 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	// shell := gjson.Get(string(reqBody), "data.shell")
 	// cmd := gjson.Get(string(reqBody), "data.cmd")
 	// log.Println(module, shell, cmd)
+
+	test.GetWFsTest()
 
 	res.Write(reqBody)
 }
