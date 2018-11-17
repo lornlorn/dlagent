@@ -1,7 +1,8 @@
-package new
+package models
 
 import (
 	"app/db"
+	"errors"
 	"log"
 )
 
@@ -27,7 +28,7 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 	// if err := db.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
 	if err := db.Engine.Find(&workflows); err != nil {
 		// return nil, err
-		log.Println(err)
+		log.Printf("models.workflow_inf.GetWorkflows -> db.Engine.Find Error : %v\n", err)
 		return nil, err
 	}
 
@@ -36,4 +37,31 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 	// }
 
 	return workflows, nil
+}
+
+/*
+GetWorkflowByID func(wfid int) (SysWorkflowInf, error)
+*/
+func GetWorkflowByID(wfid int) (SysWorkflowInf, error) {
+
+	wf := new(SysWorkflowInf)
+	wf.WfiId = wfid
+
+	has, err := db.Engine.Get(wf)
+	if err != nil {
+		log.Printf("models.workflow_inf.GetWorkflowByID -> db.Engine.Get Error : %v\n", err)
+		return SysWorkflowInf{}, err
+	}
+
+	if !has {
+		return SysWorkflowInf{}, errors.New("Get 0 rows")
+	}
+
+	log.Println(wf)
+
+	// for i, v := range crons {
+	//  log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
+	// }
+
+	return *wf, nil
 }
