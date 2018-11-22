@@ -1,4 +1,4 @@
-package new
+package models
 
 /*
 SysWorkflowParam struct map to table sys_workflow_param

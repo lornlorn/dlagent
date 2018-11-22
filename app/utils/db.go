@@ -1,4 +1,4 @@
-package db
+package utils
 
 import (
 	"github.com/go-xorm/xorm"       // _ "github.com/lib/pq" // postgresql driver

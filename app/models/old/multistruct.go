@@ -1,7 +1,7 @@
 package models
 
 import (
-	"app/db"
+	"app/utils"
 	"fmt"
 	"log"
 )
@@ -30,7 +30,7 @@ func GetJobFlowsWithParamsByJobFlowID(jobID int) ([]JobflowWithParam, error) {
 	jobFlowWithParams := make([]JobflowWithParam, 0)
 
 	jobFlow := new(Jobflow)
-	rows, err := db.Engine.Where("jf_job_id = ?", jobID).Rows(jobFlow)
+	rows, err := utils.Engine.Where("jf_job_id = ?", jobID).Rows(jobFlow)
 	if err != nil {
 		return nil, fmt.Errorf("models.multistruct.GetJobFlowsWithParamsByJobFlowID Error : %v", err)
 	}

@@ -1,7 +1,7 @@
 package models
 
 import (
-	"app/db"
+	"app/utils"
 	"errors"
 	"log"
 )
@@ -12,6 +12,7 @@ SysTmpl struct map to table sys_tmpl
 type SysTmpl struct {
 	Key   string `xorm:"VARCHAR(32) NOT NULL"`
 	Value string `xorm:"VARCHAR(128) NOT NULL"`
+	Seq   int    `xorm:"INTEGER NOT NULL"`
 }
 
 /*
@@ -21,8 +22,8 @@ Return HTML pages path as []string
 func GetTmpls(key string) ([]string, error) {
 
 	tmpls := make([]SysTmpl, 0)
-	// if err := db.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
-	if err := db.Engine.Where("key = ?", key).Find(&tmpls); err != nil {
+	// if err := utils.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
+	if err := utils.Engine.Where("key = ?", key).Asc("seq").Find(&tmpls); err != nil {
 		// return nil, err
 		log.Println(err)
 		return nil, err

@@ -1,7 +1,7 @@
 package test
 
 import (
-	"app/models/new"
+	"app/models"
 	"log"
 )
 
@@ -9,7 +9,7 @@ import (
 GetWFsTest func()
 */
 func GetWFsTest() {
-	workflows, err := new.GetWorkflows()
+	workflows, err := models.GetWorkflows()
 	if err != nil {
 		log.Println(err)
 	}

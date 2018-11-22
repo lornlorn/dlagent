@@ -1,7 +1,7 @@
 package models
 
 import (
-	"app/db"
+	"app/utils"
 	"errors"
 	"log"
 )
@@ -25,10 +25,10 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 
 	workflows := make([]SysWorkflowInf, 0)
 
-	// if err := db.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
-	if err := db.Engine.Find(&workflows); err != nil {
+	// if err := utils.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
+	if err := utils.Engine.Find(&workflows); err != nil {
 		// return nil, err
-		log.Printf("models.workflow_inf.GetWorkflows -> db.Engine.Find Error : %v\n", err)
+		log.Printf("models.workflow_inf.GetWorkflows -> utils.Engine.Find Error : %v\n", err)
 		return nil, err
 	}
 
@@ -47,9 +47,9 @@ func GetWorkflowByID(wfid int) (SysWorkflowInf, error) {
 	wf := new(SysWorkflowInf)
 	wf.WfiId = wfid
 
-	has, err := db.Engine.Get(wf)
+	has, err := utils.Engine.Get(wf)
 	if err != nil {
-		log.Printf("models.workflow_inf.GetWorkflowByID -> db.Engine.Get Error : %v\n", err)
+		log.Printf("models.workflow_inf.GetWorkflowByID -> utils.Engine.Get Error : %v\n", err)
 		return SysWorkflowInf{}, err
 	}
 

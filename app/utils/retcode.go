@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"app/models"
 	"fmt"
 )
 
@@ -11,6 +10,25 @@ var retCodeDict = map[string]string{
 	"9999": "未知错误",
 }
 
+// AjaxReturn struct
+type AjaxReturn struct {
+	RetCode string `json:"retcode"`
+	RetMsg  string `json:"retmsg"`
+}
+
+// // AjaxReturnWithData struct
+// type AjaxReturnWithData struct {
+// 	RetCode string      `json:"retcode"`
+// 	RetMsg  string      `json:"retmsg"`
+// 	RetData interface{} `json:"retdata"`
+// }
+
+// AjaxReturnWithData struct
+type AjaxReturnWithData struct {
+	AjaxReturn
+	RetData interface{} `json:"retdata"`
+}
+
 // GetRetMsg func(retcode string) string
 // Get Return Message By Return Code
 func GetRetMsg(retcode string) string {
@@ -18,20 +36,20 @@ func GetRetMsg(retcode string) string {
 }
 
 /*
-GetAjaxRetObj func(retcode string, errmsg error) models.AjaxReturn
+GetAjaxRetObj func(retcode string, errmsg error) AjaxReturn
 Get return code and errors
-Convert to models.AjaxReturn struct object
+Convert to AjaxReturn struct object
 */
-func GetAjaxRetObj(retcode string, errmsg error) models.AjaxReturn {
-	var retobj models.AjaxReturn
+func GetAjaxRetObj(retcode string, errmsg error) AjaxReturn {
+	var retobj AjaxReturn
 
 	if errmsg != nil {
-		retobj = models.AjaxReturn{
+		retobj = AjaxReturn{
 			RetCode: retcode,
 			RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
 		}
 	} else {
-		retobj = models.AjaxReturn{
+		retobj = AjaxReturn{
 			RetCode: retcode,
 			RetMsg:  GetRetMsg(retcode),
 		}
@@ -42,18 +60,18 @@ func GetAjaxRetObj(retcode string, errmsg error) models.AjaxReturn {
 /*
 GetAjaxRetJSON func(retcode string, errmsg error) []byte
 Get return code and errors
-Convert to models.AjaxReturn struct and Marshal to JSON
+Convert to AjaxReturn struct and Marshal to JSON
 */
 func GetAjaxRetJSON(retcode string, errmsg error) []byte {
-	var retobj models.AjaxReturn
+	var retobj AjaxReturn
 
 	if errmsg != nil {
-		retobj = models.AjaxReturn{
+		retobj = AjaxReturn{
 			RetCode: retcode,
 			RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
 		}
 	} else {
-		retobj = models.AjaxReturn{
+		retobj = AjaxReturn{
 			RetCode: retcode,
 			RetMsg:  GetRetMsg(retcode),
 		}
@@ -65,18 +83,18 @@ func GetAjaxRetJSON(retcode string, errmsg error) []byte {
 }
 
 /*
-GetAjaxRetWithDataObj func(retcode string, errmsg error, data []byte) models.AjaxReturnWithData
+GetAjaxRetWithDataObj func(retcode string, errmsg error, data []byte) AjaxReturnWithData
 Get return message and data
-Convert to models.AjaxReturnWithData struct object
+Convert to AjaxReturnWithData struct object
 */
-func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) models.AjaxReturnWithData {
-	var retobj models.AjaxReturnWithData
+func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) AjaxReturnWithData {
+	var retobj AjaxReturnWithData
 
 	if errmsg != nil {
 		retobj.RetCode = retcode
 		retobj.RetMsg = fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg)
 		retobj.RetData = data
-		// retobj = models.AjaxReturnWithData{
+		// retobj = AjaxReturnWithData{
 		// 	RetCode: retcode,
 		// 	RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
 		// 	RetData: data,
@@ -85,7 +103,7 @@ func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) model
 		retobj.RetCode = retcode
 		retobj.RetMsg = GetRetMsg(retcode)
 		retobj.RetData = data
-		// retobj = models.AjaxReturnWithData{
+		// retobj = AjaxReturnWithData{
 		// 	RetCode: retcode,
 		// 	RetMsg:  GetRetMsg(retcode),
 		// 	RetData: data,
@@ -97,16 +115,16 @@ func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) model
 /*
 GetAjaxRetWithDataJSON func(retcode string, errmsg error, data []byte) []byte
 Get return message and data
-Convert to models.AjaxReturnWithData struct and Marshal to JSON
+Convert to AjaxReturnWithData struct and Marshal to JSON
 */
 func GetAjaxRetWithDataJSON(retcode string, errmsg error, data interface{}) []byte {
-	var retobj models.AjaxReturnWithData
+	var retobj AjaxReturnWithData
 
 	if errmsg != nil {
 		retobj.RetCode = retcode
 		retobj.RetMsg = fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg)
 		retobj.RetData = data
-		// retobj = models.AjaxReturnWithData{
+		// retobj = AjaxReturnWithData{
 		// 	RetCode: retcode,
 		// 	RetMsg:  fmt.Sprintf("%v, %v", GetRetMsg(retcode), errmsg),
 		// 	RetData: data,
@@ -115,7 +133,7 @@ func GetAjaxRetWithDataJSON(retcode string, errmsg error, data interface{}) []by
 		retobj.RetCode = retcode
 		retobj.RetMsg = GetRetMsg(retcode)
 		retobj.RetData = data
-		// retobj = models.AjaxReturnWithData{
+		// retobj = AjaxReturnWithData{
 		// 	RetCode: retcode,
 		// 	RetMsg:  GetRetMsg(retcode),
 		// 	RetData: data,

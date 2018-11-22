@@ -1,7 +1,7 @@
 package models
 
 import (
-	"app/db"
+	"app/utils"
 	"errors"
 	"log"
 )
@@ -30,7 +30,7 @@ func GetJobFlowParamsByJobFlowID(jobFlowID int) ([]JobflowParam, error) {
 
 	jobFlowParams := make([]JobflowParam, 0)
 
-	if err := db.Engine.Where("jfp_jf_id = ?", jobFlowID).Find(&jobFlowParams); err != nil {
+	if err := utils.Engine.Where("jfp_jf_id = ?", jobFlowID).Find(&jobFlowParams); err != nil {
 		log.Println(err)
 		return []JobflowParam{}, err
 	}

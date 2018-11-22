@@ -2,7 +2,6 @@ package api
 
 import (
 	"app/models"
-	"app/scheduler"
 	"app/utils"
 	"log"
 
@@ -14,6 +13,7 @@ type Ajax struct {
 }
 
 // StopScheduler (api API) func(a []byte) ([]byte, error)
+/*
 func (ajax Ajax) StopScheduler(a []byte) []byte {
 	log.Println(a)
 
@@ -23,13 +23,15 @@ func (ajax Ajax) StopScheduler(a []byte) []byte {
 
 	return ret
 }
+*/
 
 /*
 RunCMD func(data []byte) []byte
 */
+/*
 func (ajax Ajax) RunCMD(data []byte) []byte {
 
-	var retobj models.AjaxReturn
+	var retobj utils.AjaxReturn
 
 	shell := gjson.Get(string(data), "data.shell")
 	cmd := gjson.Get(string(data), "data.cmd")
@@ -48,6 +50,7 @@ func (ajax Ajax) RunCMD(data []byte) []byte {
 	return ret
 
 }
+*/
 
 /*
 GetJobDtl func(data []byte) []byte
@@ -55,9 +58,9 @@ GetJobDtl func(data []byte) []byte
 func (ajax Ajax) GetJobDtl(data []byte) []byte {
 	jobid := gjson.Get(string(data), "data.jobid")
 
-	var retobj models.AjaxReturnWithData
+	var retobj utils.AjaxReturnWithData
 
-	jobdtl, err := models.GetJobDtlByID(int(jobid.Int()))
+	jobdtl, err := models.GetWorkflowsAllByID(int(jobid.Int()))
 	if err != nil {
 		log.Printf("api.ajax.GetJobDtl -> models.GetJobDtlByID Error : %v\n", err)
 		retobj = utils.GetAjaxRetWithDataObj("9999", err, nil)

@@ -1,7 +1,7 @@
 package models
 
 import (
-	"app/db"
+	"app/utils"
 	"errors"
 	"log"
 )
@@ -25,8 +25,8 @@ type Job struct {
 
 // Save insert method
 func (j *Job) Save() error {
-	// affected, err := db.Engine.Insert(d)
-	_, err := db.Engine.Insert(j)
+	// affected, err := utils.Engine.Insert(d)
+	_, err := utils.Engine.Insert(j)
 	if err != nil {
 		return err
 	}
@@ -40,7 +40,7 @@ func GetJobs(jobType string) ([]Job, error) {
 
 	jobs := make([]Job, 0)
 
-	if err := db.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
+	if err := utils.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
 		// return nil, err
 		log.Println(err)
 		return nil, err
@@ -61,7 +61,7 @@ func GetJobByID(jobID int) (Job, error) {
 	job := new(Job)
 	job.JobId = jobID
 
-	has, err := db.Engine.Get(job)
+	has, err := utils.Engine.Get(job)
 	if err != nil {
 		log.Println(err)
 		return Job{}, err

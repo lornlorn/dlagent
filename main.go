@@ -2,7 +2,6 @@ package main
 
 import (
 	"app/api"
-	"app/db"
 	"app/httpsvr"
 	"app/utils"
 	"log"
@@ -29,12 +28,12 @@ func main() {
 
 	// Init DB
 	log.Println("Initialize Database Connect ...")
-	err = db.InitDB(dbtype, dbstr)
+	err = utils.InitDB(dbtype, dbstr)
 	if err != nil {
 		log.Printf("DB Initialize Fail : %v\n", err)
 		return
 	}
-	defer db.Engine.Close()
+	defer utils.Engine.Close()
 
 	/*
 		// Start Monitor

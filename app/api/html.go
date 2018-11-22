@@ -16,9 +16,9 @@ GetJobList func(data []byte) []byte
 */
 func (html HTML) GetJobList() interface{} {
 
-	jobs, err := models.GetJobs("tool")
+	jobs, err := models.GetWorkflows()
 	if err != nil {
-		log.Printf("api.html.GetJobList -> models.GetJobs Error : %v", err)
+		log.Printf("api.html.GetJobList -> models.GetWorkflows Error : %v", err)
 		return nil
 	}
 

@@ -1,4 +1,4 @@
-package new
+package models
 
 /*
 SysWorkflowDtl struct map to table sys_workflow_dtl
