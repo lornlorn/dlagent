@@ -18,6 +18,10 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	key := vars["key"]
 
+	query := req.URL.Query()
+	// log.Println(query["WfiId"][0])
+	log.Println(query)
+
 	var tmplPages []string
 	var api string
 	switch key {
@@ -58,7 +62,6 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route Test Ajax : %v\n", req.URL)
 	vars := mux.Vars(req)
 	key := vars["key"]
-	log.Println(key)
 
 	// 获取请求包体(json数据)
 	reqBody, err := ioutil.ReadAll(req.Body)
@@ -78,6 +81,8 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	switch key {
 	case "datatables":
 		retdata = test.GetWFsTest()
+	case "delete":
+		retdata = test.DelWfByID(reqBody)
 	default:
 		retdata = test.GetWFsTest()
 	}

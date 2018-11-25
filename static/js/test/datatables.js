@@ -8,11 +8,11 @@ $(function () {
             dataSrc: ''
         },
         columns: [
-            { "data": "WfiName" },
+            { "data": "WfiName", className: 'wfiname' },
             { "data": "WfiDesc" },
             { "data": "WfiStatus" },
             { "data": "ModifyTime" },
-            { "data": null }
+            { "data": null, className: 'operation', width: '10%' }
         ],
         columnDefs: [
             {
@@ -28,25 +28,60 @@ $(function () {
         ]
     });
 
+    /*
     // 点击事件
     $('#table tbody').on('click', 'tr', function () {
         var table = $('#table').DataTable();
         var data = table.row(this).data();
-        // alert( 'You clicked on '+data[0]+'\'s row' );
         console.log(data);
     });
+    */
 
     // 修改
     $('#table tbody').on('click', 'a.edit', function () {
         var data = $('#table').DataTable().row($(this).parents('tr')).data();
-        // alert("查看修改：" + data[1] + "," + data[2]);
-        console.log(data);
+        console.log(data.WfiId, data.WfiName);
+        var editpage = window.open("/test/test");
+
     });
 
     // 删除
-    $('a.delete').click(function () {
+    $('#table tbody').on('click', 'a.delete', function () {
         var data = $('#table').DataTable().row($(this).parents('tr')).data();
-        alert("删除：" + data[1] + "," + data[2]);
+        console.log(data.WfiId, data.WfiName);
+        /*
+            Ajax
+        */
+        var params = {};
+        params['from'] = 'datatables';
+        params['data'] = {};
+        params['data']['WfiId'] = data.WfiId;
+
+        console.log('REQUEST : ' + JSON.stringify(params));
+
+        $.ajax({
+            url: '/test/ajax/delete',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(params),
+            async: 'true',
+            dataType: 'json',
+            success: function (result) {
+                console.log('RESPONSE : ' + JSON.stringify(result));
+                console.log("请求成功");
+            },
+            error: function (result) {
+                console.log("请求失败");
+            },
+            complete: function () {
+                console.log("Ajax finish");
+                $('#table').DataTable().ajax.reload();
+            },
+        });
+        /*
+             Ajax end
+        */
+        // $('#table').DataTable().ajax.reload();
     });
 
 }); 

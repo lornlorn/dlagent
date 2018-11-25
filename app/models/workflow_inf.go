@@ -42,10 +42,10 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 /*
 GetWorkflowByID func(wfid int) (SysWorkflowInf, error)
 */
-func GetWorkflowByID(wfid int) (SysWorkflowInf, error) {
+func GetWorkflowByID(wfiid int) (SysWorkflowInf, error) {
 
 	wf := new(SysWorkflowInf)
-	wf.WfiId = wfid
+	wf.WfiId = wfiid
 
 	has, err := utils.Engine.Get(wf)
 	if err != nil {
@@ -64,4 +64,19 @@ func GetWorkflowByID(wfid int) (SysWorkflowInf, error) {
 	// }
 
 	return *wf, nil
+}
+
+/*
+DelWorkflowByID func(wfiid int)
+*/
+func DelWorkflowByID(wfiid int) error {
+	wfi := new(SysWorkflowInf)
+	wfi.WfiId = wfiid
+	affected, err := utils.Engine.Delete(wfi)
+	if err != nil {
+		log.Printf("models.workflow_inf.DelWorkflowByID -> utils.Engine.Delete Error : %v\n", err)
+		return err
+	}
+	log.Printf("删除%v条记录\n", affected)
+	return nil
 }
