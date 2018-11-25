@@ -2,6 +2,7 @@ package handler
 
 import (
 	"app/test"
+	"app/utils"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -16,14 +17,39 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route Test : %v\n", req.URL)
 	vars := mux.Vars(req)
 	key := vars["key"]
-	log.Println(key)
-	tmpl, err := template.ParseFiles("views/test/test.html")
+
+	var tmplPages []string
+	var api string
+	switch key {
+	case "datatables":
+		tmplPages = append(tmplPages, "views/test/datatables.html")
+	case "test":
+		tmplPages = append(tmplPages, "views/test/test.html")
+	case "runcmd":
+		tmplPages = append(tmplPages, "views/test/runcmd.html")
+		api = "RunCMD"
+	default:
+	}
+
+	// tmpl, err := template.ParseFiles(fmt.Sprintf("views/test/%v.html", key))
+	tmpl, err := template.ParseFiles(tmplPages...)
 	if err != nil {
 		log.Printf("httpsvr.handler.test.TestHandler -> template.ParseFiles Error : %v\n", err)
 		return
 	}
 
-	tmpl.Execute(res, nil)
+	if api != "" {
+		fc, err := utils.FuncCall(api)
+		if err != nil {
+			log.Printf("httpsvr.handler.test.TestHandler -> utils.FuncCall Error : %v\n", err)
+			return
+		}
+		log.Println(fc[0].Interface())
+
+		tmpl.Execute(res, fc[0].Interface())
+	} else {
+		tmpl.Execute(res, nil)
+	}
 }
 
 // TestAjaxHandler func(res http.ResponseWriter, req *http.Request)
@@ -48,7 +74,13 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	// cmd := gjson.Get(string(reqBody), "data.cmd")
 	// log.Println(module, shell, cmd)
 
-	test.GetWFsTest()
+	var retdata []byte
+	switch key {
+	case "datatables":
+		retdata = test.GetWFsTest()
+	default:
+		retdata = test.GetWFsTest()
+	}
 
-	res.Write(reqBody)
+	res.Write(retdata)
 }
