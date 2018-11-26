@@ -27,6 +27,8 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	switch key {
 	case "datatables":
 		tmplPages = append(tmplPages, "views/test/datatables.html")
+	case "detail":
+		tmplPages = append(tmplPages, "views/test/detail.html")
 	case "test":
 		tmplPages = append(tmplPages, "views/test/test.html")
 	case "runcmd":

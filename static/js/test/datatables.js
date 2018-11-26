@@ -41,8 +41,8 @@ $(function () {
     $('#table tbody').on('click', 'a.edit', function () {
         var data = $('#table').DataTable().row($(this).parents('tr')).data();
         console.log(data.WfiId, data.WfiName);
-        var editpage = window.open("/test/test");
-
+        var editpage = window.open("/test/detail?WfiId="+data.WfiId);
+        // var timer = window.setInterval("IfWindowClosed("+editpage+")", 500);
     });
 
     // 删除
@@ -85,3 +85,20 @@ $(function () {
     });
 
 }); 
+
+//判断子窗口是否关闭，关闭刷新页面
+function IfWindowClosed(page) {
+       //判断B页面打开事件
+       if (page.closed == true)          
+       {
+          //执行A页面的相关方法操作
+          XXX();
+          //关闭监听器
+          window.clearInterval(timer);
+       }
+}
+
+//A页面的相关方法
+function XXX(){
+    alert("XXX");
+}
