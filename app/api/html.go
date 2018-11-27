@@ -4,7 +4,7 @@ import (
 	"app/models"
 	"app/utils"
 	"log"
-	"net/http"
+	"net/url"
 )
 
 /*
@@ -14,9 +14,9 @@ type HTML struct {
 }
 
 /*
-GetJobList func(req *http.Request) []byte
+GetJobList func(reqBody []byte, reqURL url.Values) []byte
 */
-func (html HTML) GetJobList(req *http.Request) interface{} {
+func (html HTML) GetJobList(reqBody []byte, reqURL url.Values) interface{} {
 
 	jobs, err := models.GetWorkflows()
 	if err != nil {
@@ -29,9 +29,9 @@ func (html HTML) GetJobList(req *http.Request) interface{} {
 }
 
 /*
-GetWorkflowAllByID func(req *http.Request) interface{}
+GetWorkflowAllByID func(reqBody []byte, reqURL url.Values) interface{}
 */
-func (html HTML) GetWorkflowAllByID(req *http.Request) interface{} {
+func (html HTML) GetWorkflowAllByID(reqBody []byte, reqURL url.Values) interface{} {
 	wfiID := utils.GetParamFromRequest(req, "WfiId")
 	return wfiID
 }
