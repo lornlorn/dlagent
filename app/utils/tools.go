@@ -8,16 +8,52 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"io"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strings"
+
+	"github.com/gorilla/mux"
+	"github.com/tidwall/gjson"
 )
 
 /*
-任意数据类型转JSON
+ReadRequestBody2JSON func(reqBody io.ReadCloser) []byte
 */
+func ReadRequestBody2JSON(reqBody io.ReadCloser) []byte {
+	body, err := ioutil.ReadAll(reqBody)
+	if err != nil {
+		log.Printf("utils.tools.ReadRequestBody2JSON -> ioutil.ReadAll Error : %v\n", err)
+		return []byte{}
+	}
+	return body
+}
 
-// Convert2JSON (data interface{}) []byte
+/*
+GetJSONResultFromRequestBody func(reqBody []byte, path string) gjson.Result
+*/
+func GetJSONResultFromRequestBody(reqBody []byte, path string) gjson.Result {
+	return gjson.Get(string(reqBody), path)
+}
+
+/*
+GetMuxVarsFromRequest func(req *http.Request, key string) string
+*/
+func GetMuxVarsFromRequest(req *http.Request, key string) string {
+	return mux.Vars(req)[key]
+}
+
+/*
+GetParamFromRequest func(req *http.Request, param string) string
+*/
+func GetParamFromRequest(req *http.Request, param string) string {
+	return req.URL.Query()[param][0]
+}
+
+/*
+Convert2JSON 任意数据类型转JSON
+*/
 func Convert2JSON(data interface{}) []byte {
 	switch data.(type) {
 	case []byte:

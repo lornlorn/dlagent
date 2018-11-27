@@ -4,7 +4,6 @@ import (
 	"app/models"
 	"app/utils"
 	"errors"
-	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -13,34 +12,22 @@ import (
 
 // AjaxHandler func(res http.ResponseWriter, req *http.Request)
 func AjaxHandler(res http.ResponseWriter, req *http.Request) {
-
 	log.Printf("Route Ajax : %v\n", req.URL)
-	vars := mux.Vars(req)
-	key := vars["key"]
-	// log.Println(key)
+	key := mux.Vars(req)["key"]
 
-	// 获取请求包体(json数据)
-	reqBody, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		log.Printf("httpsvr.handler.ajax.AjaxHandler -> ioutil.ReadAll Error : %v\n", err)
-		return
-	}
-	log.Println("Request JSON Content :")
+	reqBody := utils.ReadRequestBody2JSON(req.Body)
 	log.Println(string(reqBody))
 
-	// module := gjson.Get(string(reqBody), "module")
-	// shell := gjson.Get(string(reqBody), "data.shell")
-	// cmd := gjson.Get(string(reqBody), "data.cmd")
-	// log.Println(module, shell, cmd)
+	reqURL := req.URL.Query()
 
-	api, err := models.GetApi("ajax", key)
+	api, err := models.GetAPI("ajax", key)
 	if err != nil {
-		log.Printf("httpsvr.handler.ajax.AjaxHandler -> models.GetApi Error : %v\n", err)
+		log.Printf("httpsvr.handler.ajax.AjaxHandler -> models.GetAPI Error : %v\n", err)
 		return
 	}
 
 	if api != "" {
-		fc, err := utils.FuncCall(api, reqBody)
+		fc, err := utils.FuncCall(api, reqBody, reqURL)
 		if err != nil {
 			log.Printf("httpsvr.handler.ajax.AjaxHandler -> utils.FuncCall Error : %v\n", err)
 			return

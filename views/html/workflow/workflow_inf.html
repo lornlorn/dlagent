@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>datatables</title>
+    <title>Workflow Inf</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bulma/bulma.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery/jquery.datatables-1.10.19.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/test/datatables.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/workflow/workflow_inf.css" />
+    <script defer src="/static/js/FontAwesome/all.min.js"></script>
     <script src="/static/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="/static/js/jquery/jquery.dataTables-1.10.19.min.js"></script>
-    <script src="/static/js/test/datatables.js"></script>
+    <script src="/static/js/workflow/workflow_inf.js"></script>
 </head>
 
 <body>
-    <table id="table" class="display" style="width:100%">
+    <table id="wfi" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -36,6 +38,8 @@
         </tfoot>
         -->
     </table>
+
+    {{template "footer" .}}
 </body>
 
 </html>

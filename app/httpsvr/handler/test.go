@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"app/test"
 	"app/utils"
 	"html/template"
 	"io/ioutil"
@@ -25,10 +24,6 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	var tmplPages []string
 	var api string
 	switch key {
-	case "datatables":
-		tmplPages = append(tmplPages, "views/test/datatables.html")
-	case "detail":
-		tmplPages = append(tmplPages, "views/test/detail.html")
 	case "test":
 		tmplPages = append(tmplPages, "views/test/test.html")
 	case "runcmd":
@@ -81,12 +76,8 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 
 	var retdata []byte
 	switch key {
-	case "datatables":
-		retdata = test.GetWFsTest()
-	case "delete":
-		retdata = test.DelWfByID(reqBody)
+
 	default:
-		retdata = test.GetWFsTest()
 	}
 
 	res.Write(retdata)

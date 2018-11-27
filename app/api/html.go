@@ -2,7 +2,9 @@ package api
 
 import (
 	"app/models"
+	"app/utils"
 	"log"
+	"net/http"
 )
 
 /*
@@ -12,9 +14,9 @@ type HTML struct {
 }
 
 /*
-GetJobList func(data []byte) []byte
+GetJobList func(req *http.Request) []byte
 */
-func (html HTML) GetJobList() interface{} {
+func (html HTML) GetJobList(req *http.Request) interface{} {
 
 	jobs, err := models.GetWorkflows()
 	if err != nil {
@@ -24,4 +26,12 @@ func (html HTML) GetJobList() interface{} {
 
 	return jobs
 
+}
+
+/*
+GetWorkflowAllByID func(req *http.Request) interface{}
+*/
+func (html HTML) GetWorkflowAllByID(req *http.Request) interface{} {
+	wfiID := utils.GetParamFromRequest(req, "WfiId")
+	return wfiID
 }

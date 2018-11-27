@@ -14,8 +14,12 @@ import (
 func HTMLHandler(res http.ResponseWriter, req *http.Request) {
 
 	log.Printf("Route HTML : %v\n", req.URL)
-	vars := mux.Vars(req)
-	key := vars["key"]
+	key := mux.Vars(req)["key"]
+
+	reqBody := utils.ReadRequestBody2JSON(req.Body)
+	log.Println(string(reqBody))
+
+	reqURL := req.URL.Query()
 
 	tmplPages, err := models.GetTmpls(key)
 	if err != nil {
@@ -30,14 +34,14 @@ func HTMLHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	api, err := models.GetApi("html", key)
+	api, err := models.GetAPI("html", key)
 	if err != nil {
-		log.Printf("httpsvr.handler.html.HTMLHandler -> models.GetApi Error : %v\n", err)
+		log.Printf("httpsvr.handler.html.HTMLHandler -> models.GetAPI Error : %v\n", err)
 		return
 	}
 
 	if api != "" {
-		fc, err := utils.FuncCall(api)
+		fc, err := utils.FuncCall(api, reqBody, reqURL)
 		if err != nil {
 			log.Printf("httpsvr.handler.html.HTMLHandler -> utils.FuncCall Error : %v\n", err)
 			return

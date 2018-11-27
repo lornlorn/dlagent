@@ -14,17 +14,6 @@ Route "/" Direct To "/index"
 */
 func NotFoundHandler(res http.ResponseWriter, req *http.Request) {
 	log.Printf("Route 404 : %v\n", req.URL)
-	// if req.URL.Path == "/" {
-	// 	http.Redirect(res, req, "/index", http.StatusFound)
-	// } else if req.URL.Path == "/aaa" {
-	// 	for i := 0; i <= 10; i++ {
-	// 		go fmt.Printf("%v %v\n", req.URL, i)
-	// 		// time.Sleep(10 * time.Second)
-	// 	}
-	// 	// time.Sleep(10 * time.Second)
-	// 	fmt.Fprintln(res, "Route aaa Finish")
-	// 	return
-	// }
 
 	if req.URL.Path == "/favicon.ico" {
 		http.ServeFile(res, req, "./static/img/favicon.ico")
