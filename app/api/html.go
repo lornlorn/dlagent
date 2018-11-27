@@ -32,6 +32,6 @@ func (html HTML) GetJobList(reqBody []byte, reqURL url.Values) interface{} {
 GetWorkflowAllByID func(reqBody []byte, reqURL url.Values) interface{}
 */
 func (html HTML) GetWorkflowAllByID(reqBody []byte, reqURL url.Values) interface{} {
-	wfiID := utils.GetParamFromRequest(req, "WfiId")
+	wfiID := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiId")
 	return wfiID
 }
