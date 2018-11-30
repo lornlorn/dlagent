@@ -40,7 +40,7 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 }
 
 /*
-GetWorkflowByID func(wfid int) (SysWorkflowInf, error)
+GetWorkflowByID func(wfiid int) (SysWorkflowInf, error)
 */
 func GetWorkflowByID(wfiid int) (SysWorkflowInf, error) {
 

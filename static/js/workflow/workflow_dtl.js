@@ -1,18 +1,20 @@
 $(function () {
 
-       // 表格初始化
-       $('#wfd').DataTable({
+    // 表格初始化
+    $('#wfd').DataTable({
         ajax: {
-            url: '/ajax/getworkflowdtl?WfiId='+GetRequest()['WfiId'],
+            url: '/ajax/getworkflowdtl?WfiId=' + GetQuery('WfiId'),
             type: 'POST',
             dataSrc: ''
         },
         columns: [
-            { "data": "WfiName", className: 'wfiname' },
-            { "data": "WfiDesc" },
-            { "data": "WfiStatus" },
+            { "data": "WfdSeq",width: '5%' },
+            { "data": "WfdName" },
+            { "data": "WfdStatus" },
+            { "data": "WfdShell" },
+            { "data": "WfdCmd" },
             { "data": "ModifyTime" },
-            { "data": null, className: 'operation', width: '10%' }
+            { "data": null, width: '10%' }
         ],
         columnDefs: [
             {
@@ -27,17 +29,55 @@ $(function () {
             }
         ]
     });
+
+    // 删除
+    $('#wfd tbody').on('click', 'a.wfdDelete', function () {
+        var data = $('#wfd').DataTable().row($(this).parents('tr')).data();
+        console.log(data.WfdId, data.WfdName);
+        /*
+            Ajax
+        */
+        var params = {};
+        params['from'] = 'workflow_dtl';
+        params['data'] = {};
+        params['data']['WfdId'] = data.WfdId;
+
+        console.log('REQUEST : ' + JSON.stringify(params));
+
+        $.ajax({
+            url: '/ajax/wfddelete',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(params),
+            async: 'true',
+            dataType: 'json',
+            success: function (result) {
+                console.log('RESPONSE : ' + JSON.stringify(result));
+                console.log("请求成功");
+            },
+            error: function (result) {
+                console.log("请求失败");
+            },
+            complete: function () {
+                console.log("Ajax finish");
+                $('#wfd').DataTable().ajax.reload();
+            },
+        });
+        /*
+             Ajax end
+        */
+    });
 });
 
-function GetRequest() {
+function GetQuery(param) {
     var url = location.search; //获取url中"?"符后的字串 
-    var theRequest = new Object();
+    var query = new Object();
     if (url.indexOf("?") != -1) {
         var str = url.substr(1);
         strs = str.split("&");
         for (var i = 0; i < strs.length; i++) {
-            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            query[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }
     }
-    return theRequest;
+    return query[param];
 } 

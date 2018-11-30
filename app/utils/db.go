@@ -29,5 +29,6 @@ func InitDB(dbtype string, dbstr string) error {
 		log.Printf("db.driver.InitDB -> Engine.Ping Error : %v\n", err)
 		return err
 	}
+	Engine.Exec("PRAGMA foreign_keys = ON")
 	return nil
 }

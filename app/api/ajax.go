@@ -5,6 +5,7 @@ import (
 	"app/utils"
 	"log"
 	"net/url"
+	"strconv"
 )
 
 // Ajax struct
@@ -100,6 +101,28 @@ func (ajax Ajax) DelWorkflow(reqBody []byte, reqURL url.Values) []byte {
 GetWorkflowDtl func(reqBody []byte, reqURL url.Values) []byte
 */
 func (ajax Ajax) GetWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
-	wfiid := reqURL["WfiId"][0]
-	return utils.Convert2JSON(wfiid)
+	wfiid, err := strconv.Atoi(reqURL["WfiId"][0])
+	if err != nil {
+		log.Printf("api.ajax.GetWorkflowDtl -> strconv.Atoi Error : %v\n", err)
+	}
+	wfds, err := models.GetWorkflowDtlByWfiID(wfiid)
+	if err != nil {
+		log.Printf("api.ajax.GetWorkflowDtl -> models.GetWorkflowDtlByWfiID Error : %v\n", err)
+	}
+	log.Println(wfds)
+
+	return utils.Convert2JSON(wfds)
+}
+
+/*
+DelWorkflowDtl func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) DelWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
+	wfdid := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdId")
+	err := models.DelWorkflowDtlByID(int(wfdid.Int()))
+	if err != nil {
+		log.Printf("api.ajax.DelWorkflowDtl -> models.DelWorkflowDtlByID Error : %v\n", err)
+		return utils.GetAjaxRetJSON("9999", nil)
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
 }
