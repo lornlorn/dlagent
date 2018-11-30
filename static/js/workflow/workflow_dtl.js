@@ -1,5 +1,10 @@
 $(function () {
 
+    window.onunload = function () {
+        window.opener.location.reload();
+        // window.close();
+    }
+
     // 表格初始化
     $('#wfd').DataTable({
         ajax: {
@@ -8,7 +13,7 @@ $(function () {
             dataSrc: ''
         },
         columns: [
-            { "data": "WfdSeq",width: '5%' },
+            { "data": "WfdSeq", width: '5%' },
             { "data": "WfdName" },
             { "data": "WfdStatus" },
             { "data": "WfdShell" },
@@ -80,4 +85,4 @@ function GetQuery(param) {
         }
     }
     return query[param];
-} 
+}

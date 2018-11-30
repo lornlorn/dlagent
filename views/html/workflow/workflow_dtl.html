@@ -16,19 +16,76 @@
 </head>
 
 <body>
-    <table id="wfd" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>Seq</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Shell</th>
-                <th>Cmd</th>
-                <th>Modify Time</th>
-                <th></th>
-            </tr>
-        </thead>
-        <!--
+    <div id="info">
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" id="WfiName" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Status</label>
+                            <div class="control">
+                                <span class="select">
+                                    <select id="WfiStatus">
+                                        <option>可用</option>
+                                        <option>禁用</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Create</label>
+                            <div class="control">
+                                <input class="input" id="CreateTime" type="text" disabled value="aaa">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Modify</label>
+                            <div class="control">
+                                <input class="input" id="ModifyTime" type="text" disabled value="bbb">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+                <textarea class="textarea" type="text" id="WfiDesc" rows="2"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="hr">
+
+    <div id="table">
+        <table id="wfd" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Seq</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Shell</th>
+                    <th>Cmd</th>
+                    <th>Modify Time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <!--
         <tfoot>
             <tr>
                 <th>Name</th>
@@ -39,7 +96,8 @@
             </tr>
         </tfoot>
         -->
-    </table>
+        </table>
+    </div>
 
     {{template "footer" .}}
 </body>
