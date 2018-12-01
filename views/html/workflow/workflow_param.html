@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Workflow Dtl</title>
+    <title>Workflow Param</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bulma/bulma.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery/jquery.datatables-1.10.19.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/workflow/workflow_dtl.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/workflow/workflow_param.css" />
     <!-- <script defer src="/static/js/FontAwesome/all.min.js"></script> -->
     <script src="/static/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="/static/js/jquery/jquery.dataTables-1.10.19.min.js"></script>
-    <script src="/static/js/workflow/workflow_dtl.js"></script>
+    <script src="/static/js/workflow/workflow_param.js"></script>
     <script type="text/javascript">
         $(function () {
             // console.log("{{ .WfiStatus }}");
-            $('#WfiStatus').val("{{ .WfiStatus }}");
+            $('#WfdStatus').val("{{ .WFD.WfdStatus }}");
         });
     </script>
 </head>
@@ -29,7 +29,7 @@
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
-                        <input class="input" id="WfiName" type="text" value="{{ .WfiName }}">
+                        <input class="input" id="WfdName" type="text" value="{{ .WFD.WfdName }}">
                     </div>
                 </div>
             </div>
@@ -84,42 +84,36 @@
             </div>
         </div>
 
-        <div class="field">
-            <label class="label">Description</label>
-            <div class="control">
-                <textarea class="textarea" type="text" id="WfiDesc" rows="2">{{ .WfiDesc }}</textarea>
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Shell</label>
+                    <div class="control">
+                        <input class="input" id="WfdShell" type="text" value="{{ .WfdShell }}">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">CMD</label>
+                    <div class="control">
+                        <input class="input" id="WfdCmd" type="text" value="{{ .WfdCmd }}">
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
     <hr class="hr">
-
-    <div id="table">
-        <table id="wfd" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Seq</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Shell</th>
-                    <th>Cmd</th>
-                    <th>Modify Time</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <!--
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Modify Time</th>
-                <th></th>
-            </tr>
-        </tfoot>
-        -->
-        </table>
+    <div>
+        {{range $idx,$obj := .}}
+        <a class="panel-block" onclick="showContent(this);">
+            <span class="panel-icon">
+                <i class="fas fa-wrench" aria-hidden="true"></i>
+            </span>
+            <p data-WfiId="{{$obj.WfiId}}">{{$idx}}->{{$obj.WfiName}}</p>
+        </a>
+        {{end}}
     </div>
 
     {{template "footer" .}}

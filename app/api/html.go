@@ -5,6 +5,7 @@ import (
 	"app/utils"
 	"log"
 	"net/url"
+	"strconv"
 )
 
 /*
@@ -34,4 +35,20 @@ GetWorkflowAllByID func(reqBody []byte, reqURL url.Values) interface{}
 func (html HTML) GetWorkflowAllByID(reqBody []byte, reqURL url.Values) interface{} {
 	wfiID := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiId")
 	return wfiID
+}
+
+/*
+GetWorkflowInf func(reqBody []byte, reqURL url.Values) interface{}
+*/
+func (html HTML) GetWorkflowInf(reqBody []byte, reqURL url.Values) interface{} {
+	wfiid, err := strconv.Atoi(reqURL["WfiId"][0])
+	if err != nil {
+		log.Printf("api.html.GetWorkflowInf -> strconv.Atoi Error : %v\n", err)
+	}
+	wfi, err := models.GetWorkflowByID(wfiid)
+	if err != nil {
+		log.Printf("api.html.GetWorkflowInf -> models.GetWorkflowByID Error : %v\n", err)
+	}
+	log.Println(wfi)
+	return wfi
 }

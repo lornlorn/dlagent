@@ -25,12 +25,12 @@ func GetTmpls(key string) ([]string, error) {
 	// if err := utils.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
 	if err := utils.Engine.Where("key = ?", key).Asc("seq").Find(&tmpls); err != nil {
 		// return nil, err
-		log.Println(err)
+		log.Printf("models.tmpl.GetTmpls -> utils.Engine.Where Error : %v\n", err)
 		return nil, err
 	}
 
 	if len(tmpls) == 0 {
-		return nil, errors.New("models.sys_tmpl.GetTmpls : No Records")
+		return nil, errors.New("models.tmpl.GetTmpls : No Records")
 	}
 
 	pages := make([]string, len(tmpls))

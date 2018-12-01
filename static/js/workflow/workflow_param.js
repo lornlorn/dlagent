@@ -8,7 +8,7 @@ $(function () {
     // $('#WfiStatus').val("{{ .WfiStatus }}");
 
     // 表格初始化
-    $('#wfd').DataTable({
+    $('#wfp').DataTable({
         ajax: {
             url: '/ajax/getworkflowdtl?WfiId=' + GetQuery('WfiId'),
             type: 'POST',
