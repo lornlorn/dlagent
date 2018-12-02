@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Workflow Param</title>
+    <title>Document</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bulma/bulma.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/jquery/jquery.datatables-1.10.19.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/static/css/workflow/workflow_param.css" />
@@ -13,18 +13,18 @@
     <script src="/static/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="/static/js/jquery/jquery.dataTables-1.10.19.min.js"></script>
     <script src="/static/js/workflow/workflow_param.js"></script>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
-            // console.log("{{ .WfiStatus }}");
             $('#WfdStatus').val("{{ .WFD.WfdStatus }}");
         });
-    </script> -->
+    </script>
 </head>
 
 <body>
-    <div>{{ . }}</div>
+    <!-- <div>{{ .WFD }}</div>
+    <div>{{ .WFD.WfdName }}</div>
+    <div>{{ .WFP }}</div> -->
 
-    <!--
     <div id="info">
         <div class="columns">
             <div class="column">
@@ -44,7 +44,7 @@
                                     <label class="label">Status</label>
                                     <div class="control">
                                         <span class="select">
-                                            <select id="WfiStatus">
+                                            <select id="WfdStatus">
                                                 <option>启用</option>
                                                 <option>禁用</option>
                                             </select>
@@ -108,17 +108,22 @@
 
     <hr class="hr">
     <div>
-        {{range $idx,$obj := .WFP}}
+        <div class="columns">
+            {{range $idx,$obj := .WFP}}
+            <div class="column">
+                <div class="field">
+                    <label class="label">参数{{ $obj.WfpSeq }}->{{ $obj.WfpName }}</label>
+                    <div class="control">
+                        <input class="input" id="WfpDefault" type="text" value="{{ $obj.WfpDefault }}" placeholder="默认值">
+                    </div>
+                </div>
 
-            <p>{{$idx}}->{{$obj.WfpName}}</p>
+            </div>
 
-        {{end}}
+            {{end}}
+        </div>
     </div>
-
-    -->
-
     {{template "footer" .}}
-
 </body>
 
 </html>

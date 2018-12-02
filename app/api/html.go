@@ -49,6 +49,7 @@ func (html HTML) GetWorkflowInfDtl(reqBody []byte, reqURL url.Values) interface{
 	if err != nil {
 		log.Printf("api.html.GetWorkflowInfDtl -> models.GetWorkflowByID Error : %v\n", err)
 	}
+	log.Println("---")
 	log.Println(wfi)
 	return wfi
 }
@@ -74,6 +75,7 @@ func (html HTML) GetWorkflowDtlParam(reqBody []byte, reqURL url.Values) interfac
 	dtlAndParam.WFD = wfd
 	dtlAndParam.WFP = wfp
 
+	log.Println("===")
 	log.Println(dtlAndParam)
 
 	return dtlAndParam
