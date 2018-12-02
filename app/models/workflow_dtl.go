@@ -2,6 +2,7 @@ package models
 
 import (
 	"app/utils"
+	"errors"
 	"log"
 )
 
@@ -18,6 +19,29 @@ type SysWorkflowDtl struct {
 	WfdCmd     string `xorm:"VARCHAR(1024) NOT NULL"`
 	CreateTime string `xorm:"VARCHAR(15)"`
 	ModifyTime string `xorm:"VARCHAR(15)"`
+}
+
+/*
+GetWorkflowDtlByID func(wfdid int) (SysWorkflowDtl, error)
+*/
+func GetWorkflowDtlByID(wfdid int) (SysWorkflowDtl, error) {
+
+	wfd := new(SysWorkflowDtl)
+	wfd.WfdId = wfdid
+
+	has, err := utils.Engine.Get(wfd)
+	if err != nil {
+		log.Printf("models.workflow_dtl.GetWorkflowByID -> utils.Engine.Get Error : %v\n", err)
+		return SysWorkflowDtl{}, err
+	}
+
+	if !has {
+		return SysWorkflowDtl{}, errors.New("Get 0 rows")
+	}
+
+	log.Println(wfd)
+
+	return *wfd, nil
 }
 
 /*

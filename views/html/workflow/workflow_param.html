@@ -13,16 +13,18 @@
     <script src="/static/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="/static/js/jquery/jquery.dataTables-1.10.19.min.js"></script>
     <script src="/static/js/workflow/workflow_param.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(function () {
             // console.log("{{ .WfiStatus }}");
             $('#WfdStatus').val("{{ .WFD.WfdStatus }}");
         });
-    </script>
+    </script> -->
 </head>
 
 <body>
-    <!-- <div>{{ . }}</div> -->
+    <div>{{ . }}</div>
+
+    <!--
     <div id="info">
         <div class="columns">
             <div class="column">
@@ -66,7 +68,7 @@
                                 <div class="field">
                                     <label class="label">Create</label>
                                     <div class="control">
-                                        <input class="input" id="CreateTime" type="text" disabled value="{{ .CreateTime }}">
+                                        <input class="input" id="CreateTime" type="text" disabled value="{{ .WFD.CreateTime }}">
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +76,7 @@
                                 <div class="field">
                                     <label class="label">Modify</label>
                                     <div class="control">
-                                        <input class="input" id="ModifyTime" type="text" disabled value="{{ .ModifyTime }}">
+                                        <input class="input" id="ModifyTime" type="text" disabled value="{{ .WFD.ModifyTime }}">
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +91,7 @@
                 <div class="field">
                     <label class="label">Shell</label>
                     <div class="control">
-                        <input class="input" id="WfdShell" type="text" value="{{ .WfdShell }}">
+                        <input class="input" id="WfdShell" type="text" value="{{ .WFD.WfdShell }}">
                     </div>
                 </div>
             </div>
@@ -97,7 +99,7 @@
                 <div class="field">
                     <label class="label">CMD</label>
                     <div class="control">
-                        <input class="input" id="WfdCmd" type="text" value="{{ .WfdCmd }}">
+                        <input class="input" id="WfdCmd" type="text" value="{{ .WFD.WfdCmd }}">
                     </div>
                 </div>
             </div>
@@ -106,17 +108,17 @@
 
     <hr class="hr">
     <div>
-        {{range $idx,$obj := .}}
-        <a class="panel-block" onclick="showContent(this);">
-            <span class="panel-icon">
-                <i class="fas fa-wrench" aria-hidden="true"></i>
-            </span>
-            <p data-WfiId="{{$obj.WfiId}}">{{$idx}}->{{$obj.WfiName}}</p>
-        </a>
+        {{range $idx,$obj := .WFP}}
+
+            <p>{{$idx}}->{{$obj.WfpName}}</p>
+
         {{end}}
     </div>
 
+    -->
+
     {{template "footer" .}}
+
 </body>
 
 </html>

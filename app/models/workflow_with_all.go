@@ -15,8 +15,8 @@ WorkflowDtlWithParams struct
 workflow_dtl with parameters
 */
 type WorkflowDtlWithParams struct {
-	SysWorkflowDtl
-	Params []SysWorkflowParam
+	WFD SysWorkflowDtl
+	WFP []SysWorkflowParam
 }
 
 /*
