@@ -55,28 +55,3 @@ func GetJobFlowsWithParamsByJobFlowID(jobID int) ([]JobflowWithParam, error) {
 
 	return jobFlowWithParams, nil
 }
-
-/*
-GetJobDtlByID func(jobid int) (JobDtl, error)
-*/
-func GetJobDtlByID(jobID int) (JobDtl, error) {
-
-	jobDtl := new(JobDtl)
-
-	job, err := GetJobByID(jobID)
-	if err != nil {
-		log.Println(err)
-		return JobDtl{}, err
-	}
-
-	jobFlows, err := GetJobFlowsWithParamsByJobFlowID(jobID)
-	if err != nil {
-		log.Println(err)
-		return JobDtl{}, err
-	}
-
-	jobDtl.Job = job
-	jobDtl.Jobflow = jobFlows
-
-	return *jobDtl, nil
-}

@@ -82,4 +82,9 @@ $(function () {
         */
     });
 
+    // 增加
+    $('#add').click(function () {
+        var editpage = window.open("/html/workflow_inf_add");
+    });
+
 }); 

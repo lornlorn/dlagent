@@ -19,6 +19,36 @@ type SysWorkflowInf struct {
 }
 
 /*
+NewWorkflowInf struct map to table sys_workflow_inf
+*/
+type NewWorkflowInf struct {
+	WfiName    string `xorm:"VARCHAR(128) NOT NULL"`
+	WfiDesc    string `xorm:"VARCHAR(1024)"`
+	WfiStatus  string `xorm:"VARCHAR(8) NOT NULL"`
+	CreateTime string `xorm:"VARCHAR(15)"`
+	ModifyTime string `xorm:"VARCHAR(15)"`
+}
+
+/*
+TableName xorm mapper
+NewWorkflowInf struct map to table sys_workflow_inf
+*/
+func (wfi NewWorkflowInf) TableName() string {
+	return "sys_workflow_inf"
+}
+
+// Save insert method
+func (wfi NewWorkflowInf) Save() error {
+	// affected, err := utils.Engine.Insert(d)
+	_, err := utils.Engine.Insert(wfi)
+	if err != nil {
+		log.Printf("models.workflow_inf.Save -> utils.Engine.Insert Error : %v\n", err)
+		return err
+	}
+	return nil
+}
+
+/*
 GetWorkflows func() ([]SysWorkflowInf, error)
 */
 func GetWorkflows() ([]SysWorkflowInf, error) {
@@ -70,7 +100,8 @@ func GetWorkflowByID(wfiid int) (SysWorkflowInf, error) {
 DelWorkflowByID func(wfiid int)
 */
 func DelWorkflowByID(wfiid int) error {
-	wfi := new(SysWorkflowInf)
+	// wfi := new(SysWorkflowInf)
+	var wfi SysWorkflowInf
 	wfi.WfiId = wfiid
 	affected, err := utils.Engine.Delete(wfi)
 	if err != nil {

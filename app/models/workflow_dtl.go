@@ -17,8 +17,41 @@ type SysWorkflowDtl struct {
 	WfdStatus  string `xorm:"VARCHAR(8) NOT NULL"`
 	WfdShell   string `xorm:"VARCHAR(128)"`
 	WfdCmd     string `xorm:"VARCHAR(1024) NOT NULL"`
-	CreateTime string `xorm:"VARCHAR(15)"`
-	ModifyTime string `xorm:"VARCHAR(15)"`
+	CreateTime string `xorm:"VARCHAR(19)"`
+	ModifyTime string `xorm:"VARCHAR(19)"`
+}
+
+/*
+NewWorkflowDtl struct map to table sys_workflow_dtl
+*/
+type NewWorkflowDtl struct {
+	WfiId      int    `xorm:"INTEGER NOT NULL"`
+	WfdSeq     int    `xorm:"INTEGER NOT NULL"`
+	WfdName    string `xorm:"VARCHAR(128)"`
+	WfdStatus  string `xorm:"VARCHAR(8) NOT NULL"`
+	WfdShell   string `xorm:"VARCHAR(128)"`
+	WfdCmd     string `xorm:"VARCHAR(1024) NOT NULL"`
+	CreateTime string `xorm:"VARCHAR(19)"`
+	ModifyTime string `xorm:"VARCHAR(19)"`
+}
+
+/*
+TableName xorm mapper
+NewWorkflowDtl struct map to table sys_workflow_dtl
+*/
+func (wfd NewWorkflowDtl) TableName() string {
+	return "sys_workflow_dtl"
+}
+
+// Save insert method
+func (wfd NewWorkflowDtl) Save() error {
+	// affected, err := utils.Engine.Insert(d)
+	_, err := utils.Engine.Insert(wfd)
+	if err != nil {
+		log.Printf("models.workflow_dtl.Save -> utils.Engine.Insert Error : %v\n", err)
+		return err
+	}
+	return nil
 }
 
 /*

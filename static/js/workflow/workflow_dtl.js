@@ -41,7 +41,7 @@ $(function () {
     $('#wfd tbody').on('click', 'a.wfdEdit', function () {
         var data = $('#wfd').DataTable().row($(this).parents('tr')).data();
         console.log(data.WfdId, data.WfdName);
-        var editpage = window.open("/html/workflowparam?WfdId="+data.WfdId);
+        var editpage = window.open("/html/workflowparam?WfdId=" + data.WfdId);
     });
 
     // 删除
@@ -80,6 +80,11 @@ $(function () {
         /*
              Ajax end
         */
+    });
+
+    // 增加
+    $('#add').click(function () {
+        var editpage = window.open("/html/workflow_dtl_add?WfiId=" + GetQuery('WfiId'));
     });
 });
 

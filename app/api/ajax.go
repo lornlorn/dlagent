@@ -3,9 +3,11 @@ package api
 import (
 	"app/models"
 	"app/utils"
+	"fmt"
 	"log"
 	"net/url"
 	"strconv"
+	"time"
 )
 
 // Ajax struct
@@ -53,26 +55,6 @@ func (ajax Ajax) RunCMD(req *http.Request) []byte {
 */
 
 /*
-GetJobDtl func(reqBody []byte, reqURL url.Values) []byte
-暂时没用
-*/
-func (ajax Ajax) GetJobDtl(reqBody []byte, reqURL url.Values) []byte {
-
-	jobid := utils.GetJSONResultFromRequestBody(reqBody, "data.jobid")
-
-	var retobj utils.AjaxReturnWithData
-	jobdtl, err := models.GetWorkflowsAllByID(int(jobid.Int()))
-	if err != nil {
-		log.Printf("api.ajax.GetJobDtl -> models.GetJobDtlByID Error : %v\n", err)
-		retobj = utils.GetAjaxRetWithDataObj("9999", err, nil)
-	} else {
-		retobj = utils.GetAjaxRetWithDataObj("0000", err, jobdtl)
-	}
-
-	return utils.Convert2JSON(retobj)
-}
-
-/*
 GetWorkflows func(reqBody []byte, reqURL url.Values) []byte
 */
 func (ajax Ajax) GetWorkflows(reqBody []byte, reqURL url.Values) []byte {
@@ -82,6 +64,32 @@ func (ajax Ajax) GetWorkflows(reqBody []byte, reqURL url.Values) []byte {
 	}
 	log.Println(workflows)
 	return utils.Convert2JSON(workflows)
+}
+
+/*
+AddWorkflow func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) AddWorkflow(reqBody []byte, reqURL url.Values) []byte {
+	nowTime := time.Now()
+	timeFormat := "2006-01-02 15:04:05" // 时间格式化模板
+	wfiname := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiName")
+	wfistatus := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiStatus")
+	wfidesc := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiDesc")
+	var wfi models.NewWorkflowInf
+	wfi = models.NewWorkflowInf{
+		WfiName:    wfiname.String(),
+		WfiStatus:  wfistatus.String(),
+		WfiDesc:    wfidesc.String(),
+		CreateTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
+		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
+	}
+	log.Println(wfi)
+	err := wfi.Save()
+	if err != nil {
+		log.Printf("api.ajax.AddWorkflow -> wfi.Save Error : %v\n", err)
+		return utils.GetAjaxRetJSON("9999", nil)
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
 }
 
 /*
@@ -112,6 +120,38 @@ func (ajax Ajax) GetWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
 	log.Println(wfds)
 
 	return utils.Convert2JSON(wfds)
+}
+
+/*
+AddWorkflowDtl func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) AddWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
+	nowTime := time.Now()
+	timeFormat := "2006-01-02 15:04:05" // 时间格式化模板
+	wfiid := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiId")
+	wfdSeq := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdSeq")
+	wfdname := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdName")
+	wfdstatus := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdStatus")
+	wfdshell := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdShell")
+	wfdcmd := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdCmd")
+	var wfd models.NewWorkflowDtl
+	wfd = models.NewWorkflowDtl{
+		WfiId:      int(wfiid.Int()),
+		WfdSeq:     int(wfdSeq.Int()),
+		WfdName:    wfdname.String(),
+		WfdStatus:  wfdstatus.String(),
+		WfdShell:   wfdshell.String(),
+		WfdCmd:     wfdcmd.String(),
+		CreateTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
+		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
+	}
+	log.Println(wfd)
+	err := wfd.Save()
+	if err != nil {
+		log.Printf("api.ajax.AddWorkflowDtl -> wfd.Save Error : %v\n", err)
+		return utils.GetAjaxRetJSON("9999", nil)
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
 }
 
 /*
