@@ -38,6 +38,14 @@ func GetJSONResultFromRequestBody(reqBody []byte, path string) gjson.Result {
 }
 
 /*
+ReadJsonData2Array func(reqBody []byte, path string) []gjson.Result
+*/
+func ReadJSONData2Array(reqBody []byte, path string) []gjson.Result {
+	j := gjson.Get(string(reqBody), path)
+	return j.Array()
+}
+
+/*
 GetMuxVarsFromRequest func(req *http.Request, key string) string
 */
 func GetMuxVarsFromRequest(req *http.Request, key string) string {

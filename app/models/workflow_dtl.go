@@ -54,6 +54,17 @@ func (wfd NewWorkflowDtl) Save() error {
 	return nil
 }
 
+// Update method
+func (wfd SysWorkflowDtl) Update() error {
+	// affected, err := utils.Engine.Insert(d)
+	_, err := utils.Engine.ID(wfd.WfdId).Update(wfd)
+	if err != nil {
+		log.Printf("models.workflow_dtl.Update -> utils.Engine.ID.Update Error : %v\n", err)
+		return err
+	}
+	return nil
+}
+
 /*
 GetWorkflowDtlByID func(wfdid int) (SysWorkflowDtl, error)
 */

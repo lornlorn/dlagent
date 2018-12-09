@@ -48,6 +48,17 @@ func (wfi NewWorkflowInf) Save() error {
 	return nil
 }
 
+// Update method
+func (wfi SysWorkflowInf) Update() error {
+	// affected, err := utils.Engine.Insert(d)
+	_, err := utils.Engine.ID(wfi.WfiId).Update(wfi)
+	if err != nil {
+		log.Printf("models.workflow_inf.Update -> utils.Engine.ID.Update Error : %v\n", err)
+		return err
+	}
+	return nil
+}
+
 /*
 GetWorkflows func() ([]SysWorkflowInf, error)
 */

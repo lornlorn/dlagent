@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Workflow Param Add</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bulma/bulma.min.css" />
+    <!-- <script defer src="/static/js/FontAwesome/all.min.js"></script> -->
+    <script src="/static/js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/workflow/workflow_param_add.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <div class="field">
+            <label class="label">Seq</label>
+            <div class="control">
+                <input class="input" id="WfpSeq" type="text" placeholder="序号">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+                <input class="input" id="WfpName" type="text" placeholder="名称">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Default</label>
+            <div class="control">
+                <input class="input" id="WfpDefault" type="text" placeholder="默认值">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <a class="button is-link is-outlined" id="submit">保存</a>
+            </div>
+        </div>
+    </div>
+
+    {{template "footer" .}}
+</body>
+
+</html>

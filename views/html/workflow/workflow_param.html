@@ -68,7 +68,7 @@
                                 <div class="field">
                                     <label class="label" style="visibility:hidden">hidden</label>
                                     <div class="control is-fullwidth">
-                                        <a class="button is-primary" id="save">保存</a>
+                                        <a class="button is-primary" id="update">保存</a>
                                     </div>
                                 </div>
                             </div>
@@ -121,41 +121,42 @@
     <hr class="hr">
 
     <div id="ctrl">
-            <div class="field is-grouped">
-                <p class="control">
-                    <a class="button is-link is-outlined" id="add">
-                        增加
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button">
-                        XXX
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger">
-                        XXX
-                    </a>
-                </p>
-            </div>
+        <div class="field is-grouped">
+            <p class="control">
+                <a class="button is-link is-outlined" id="add">
+                    增加
+                </a>
+            </p>
+            <p class="control">
+                <a class="button is-danger is-outlined" id="del">
+                    删除
+                </a>
+            </p>
+            <p class="control">
+                <a class="button is-primary is-outlined" id="save">
+                    保存
+                </a>
+            </p>
         </div>
+    </div>
 
     <hr class="hr">
 
-    <div>
+    <div id="params">
         <div class="columns">
             {{range $idx,$obj := .WFP}}
             <div class="column">
-                <div class="field">
-                    <label class="label">参数{{ $obj.WfpSeq }}-></label>
-                    <div class="control">
-                        <input class="input" id="WfpName" type="text" value="{{ $obj.WfpName }}" placeholder="参数名">
-                    </div>
-                    <div class="control">
-                        <input class="input" id="WfpDefault" type="text" value="{{ $obj.WfpDefault }}" placeholder="默认值">
+                <div class="param">
+                    <div class="field">
+                        <label class="label" id="WfpSeq" data-WfpId="{{ $obj.WfpId }}">参数{{ $obj.WfpSeq }}-></label>
+                        <div class="control">
+                            <input class="input" id="WfpName" type="text" value="{{ $obj.WfpName }}" placeholder="参数名">
+                        </div>
+                        <div class="control">
+                            <input class="input" id="WfpDefault" type="text" value="{{ $obj.WfpDefault }}" placeholder="默认值">
+                        </div>
                     </div>
                 </div>
-
             </div>
 
             {{end}}

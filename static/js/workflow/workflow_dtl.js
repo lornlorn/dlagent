@@ -86,6 +86,41 @@ $(function () {
     $('#add').click(function () {
         var editpage = window.open("/html/workflow_dtl_add?WfiId=" + GetQuery('WfiId'));
     });
+
+    // 保存
+    $('#update').click(function () {
+        var params = {};
+        params['from'] = 'workflow_dtl';
+        params['data'] = {};
+        params['data']['WfiId'] = GetQuery('WfiId');
+        params['data']['WfiName'] = $('#WfiName').val();
+        params['data']['WfiStatus'] = $('#WfiStatus').val();
+        params['data']['WfiDesc'] = $('#WfiDesc').val();
+
+        console.log('REQUEST : ' + JSON.stringify(params));
+
+        $.ajax({
+            url: '/ajax/wfiupdate',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(params),
+            async: 'true',
+            dataType: 'json',
+            success: function (result) {
+                console.log('RESPONSE : ' + JSON.stringify(result));
+                console.log("请求成功");
+                alert("成功");
+                window.location.reload();
+            },
+            error: function (result) {
+                console.log("请求失败");
+            },
+            complete: function () {
+                console.log("Ajax finish");
+                // $('#wfd').DataTable().ajax.reload();
+            },
+        });
+    });
 });
 
 function GetQuery(param) {

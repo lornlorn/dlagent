@@ -20,7 +20,7 @@ func NotFoundHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("views/error/404.html")
+	tmpl, err := template.ParseFiles("./views/error/404.html")
 	if err != nil {
 		log.Printf("httpsvr.handler.404.NotFoundHandler -> template.ParseFiles Error : %v\n", err)
 		return
