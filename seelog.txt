@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"test"
+
+	log "github.com/cihub/seelog"
+)
+
+func main() {
+	defer log.Flush()
+
+	//º”‘ÿ≈‰÷√Œƒº˛
+	logger, err := log.LoggerFromConfigAsFile("./conf/seelog.xml")
+	if err != nil {
+		fmt.Println("parse config error")
+	}
+	log.ReplaceLogger(logger)
+	x := "xxx"
+	log.Debugf("===%v===", x)
+
+	test.Test()
+}
+
+<seelog>
+    <outputs>
+        <console formatid="default" />
+        <buffered formatid="default" size="10000" flushperiod="1000">
+            <rollingfile type="date" filename="./log/test.log" datepattern="20060102" fullname="true" maxrolls="31" />
+        </buffered>
+        <!-- <rollingfile formatid="main" type="date" filename="./log/test.log" datepattern="2006.01.02" fullname="true" maxrolls="31" /> -->
+    </outputs>
+    <formats>
+        <format id="default" format="%Date %Time [%Level] [%RelFile:%Line] [%Func] %Msg%n" />
+    </formats>
+</seelog>
