@@ -29,7 +29,7 @@ func main() {
 	msg = "1 -> Initialize Logger"
 	err = utils.InitLogger(SEELOG_CFG)
 	if err != nil {
-		log.Fatalf("%v Fail : %v", msg, err)
+		log.Fatalf("%v Error : %v", msg, err)
 		panic("Exit!")
 		// return
 	}
@@ -39,7 +39,7 @@ func main() {
 	msg = "2 -> Load Configuration"
 	err = utils.InitConfig(APP_CFG)
 	if err != nil {
-		seelog.Criticalf("%v Fail : %v", msg, err)
+		seelog.Criticalf("%v Error : %v", msg, err)
 		panic("Exit!")
 	}
 	seelog.Infof("%v Success !", msg)
@@ -55,7 +55,7 @@ func main() {
 	dbstr := utils.GetConfig("db", "dbstr")
 	err = utils.InitDB(dbtype, dbstr)
 	if err != nil {
-		seelog.Criticalf("%v Fail : %v", msg, err)
+		seelog.Criticalf("%v Error : %v", msg, err)
 		panic("Exit!")
 	}
 	defer utils.Engine.Close()
@@ -78,7 +78,7 @@ func main() {
 	// log.Fatalln(httpsvr.StartHTTP())
 	err = httpsvr.StartHTTP()
 	if err != nil {
-		seelog.Criticalf("%v Fail : %v", msg, err)
+		seelog.Criticalf("%v Error : %v", msg, err)
 		panic("Exit!")
 	}
 	seelog.Infof("%v Success !", msg)

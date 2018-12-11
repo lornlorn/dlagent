@@ -4,10 +4,11 @@ import (
 	"app/models"
 	"app/utils"
 	"fmt"
-	"log"
 	"net/url"
 	"strconv"
 	"time"
+
+	seelog "github.com/cihub/seelog"
 )
 
 // Ajax struct
@@ -60,9 +61,10 @@ GetWorkflows func(reqBody []byte, reqURL url.Values) []byte
 func (ajax Ajax) GetWorkflows(reqBody []byte, reqURL url.Values) []byte {
 	workflows, err := models.GetWorkflows()
 	if err != nil {
-		log.Printf("api.ajax.GetWorkflows ->  models.GetWorkflows Error : %v\n", err)
+		seelog.Errorf("models.GetWorkflows Error : %v", err)
+		return utils.GetAjaxRetJSON("9999", nil)
 	}
-	log.Println(workflows)
+	seelog.Debugf("models.GetWorkflows : %v", workflows)
 	return utils.Convert2JSON(workflows)
 }
 
@@ -83,10 +85,10 @@ func (ajax Ajax) AddWorkflowInf(reqBody []byte, reqURL url.Values) []byte {
 		CreateTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 	}
-	log.Println(wfi)
+	seelog.Debugf("models.NewWorkflowInf : %v", wfi)
 	err := wfi.Save()
 	if err != nil {
-		log.Printf("api.ajax.AddWorkflowInf -> wfi.Save Error : %v\n", err)
+		seelog.Errorf("wfi.Save Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -99,7 +101,7 @@ func (ajax Ajax) DelWorkflowInf(reqBody []byte, reqURL url.Values) []byte {
 	wfiid := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiId")
 	err := models.DelWorkflowByID(int(wfiid.Int()))
 	if err != nil {
-		log.Printf("api.ajax.DelWorkflowInf -> models.DelWorkflowByID Error : %v\n", err)
+		seelog.Errorf("models.DelWorkflowByID Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -123,10 +125,10 @@ func (ajax Ajax) UpdateWorkflowInf(reqBody []byte, reqURL url.Values) []byte {
 		WfiDesc:    wfidesc.String(),
 		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 	}
-	log.Println(wfi)
+	seelog.Debugf("models.SysWorkflowInf : %v", wfi)
 	err := wfi.Update()
 	if err != nil {
-		log.Printf("api.ajax.UpdateWorkflowInf -> wfi.Update Error : %v\n", err)
+		seelog.Errorf("wfi.Update Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -138,13 +140,13 @@ GetWorkflowDtl func(reqBody []byte, reqURL url.Values) []byte
 func (ajax Ajax) GetWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
 	wfiid, err := strconv.Atoi(reqURL["WfiId"][0])
 	if err != nil {
-		log.Printf("api.ajax.GetWorkflowDtl -> strconv.Atoi Error : %v\n", err)
+		seelog.Errorf("strconv.Atoi Error : %v\n", err)
 	}
 	wfds, err := models.GetWorkflowDtlByWfiID(wfiid)
 	if err != nil {
-		log.Printf("api.ajax.GetWorkflowDtl -> models.GetWorkflowDtlByWfiID Error : %v\n", err)
+		seelog.Errorf("models.GetWorkflowDtlByWfiID Error : %v", err)
 	}
-	log.Println(wfds)
+	seelog.Debugf("models.GetWorkflowDtlByWfiID : %v", wfds)
 
 	return utils.Convert2JSON(wfds)
 }
@@ -172,10 +174,10 @@ func (ajax Ajax) AddWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
 		CreateTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 	}
-	log.Println(wfd)
+	seelog.Debugf("models.NewWorkflowDtl : %v", wfd)
 	err := wfd.Save()
 	if err != nil {
-		log.Printf("api.ajax.AddWorkflowDtl -> wfd.Save Error : %v\n", err)
+		seelog.Errorf("wfd.Save Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -188,7 +190,7 @@ func (ajax Ajax) DelWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
 	wfdid := utils.GetJSONResultFromRequestBody(reqBody, "data.WfdId")
 	err := models.DelWorkflowDtlByID(int(wfdid.Int()))
 	if err != nil {
-		log.Printf("api.ajax.DelWorkflowDtl -> models.DelWorkflowDtlByID Error : %v\n", err)
+		seelog.Errorf("models.DelWorkflowDtlByID Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -216,10 +218,10 @@ func (ajax Ajax) UpdateWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
 		WfdCmd:     wfdcmd.String(),
 		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 	}
-	log.Println(wfd)
+	seelog.Debugf("models.SysWorkflowDtl : %v", wfd)
 	err := wfd.Update()
 	if err != nil {
-		log.Printf("api.ajax.UpdateWorkflowDtl -> wfd.Update Error : %v\n", err)
+		seelog.Errorf("wfd.Update Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -244,10 +246,10 @@ func (ajax Ajax) AddWorkflowParam(reqBody []byte, reqURL url.Values) []byte {
 		CreateTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
 	}
-	log.Println(wfp)
+	seelog.Debugf("models.NewWorkflowParam : %v", wfp)
 	err := wfp.Save()
 	if err != nil {
-		log.Printf("api.ajax.AddWorkflowParam -> wfp.Save Error : %v\n", err)
+		seelog.Errorf("wfp.Save Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -261,13 +263,13 @@ func (ajax Ajax) DelWorkflowParam(reqBody []byte, reqURL url.Values) []byte {
 
 	lastwfp, err := models.GetLastWorkflowParamByWfdID(int(wfdid.Int()))
 	if err != nil {
-		log.Printf("api.ajax.DelWorkflowParam -> models.GetLastWorkflowParamByWfdID Error : %v\n", err)
+		seelog.Errorf("models.GetLastWorkflowParamByWfdID Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 
 	err = models.DelWorkflowParamByID(lastwfp.WfpId)
 	if err != nil {
-		log.Printf("api.ajax.DelWorkflowParam -> models.DelWorkflowParamByID Error : %v\n", err)
+		seelog.Errorf("models.DelWorkflowParamByID Error : %v", err)
 		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
@@ -281,6 +283,7 @@ func (ajax Ajax) UpdateWorkflowParam(reqBody []byte, reqURL url.Values) []byte {
 	timeFormat := "2006-01-02 15:04:05" // 时间格式化模板
 
 	params := utils.ReadJSONData2Array(reqBody, "data.paramlist")
+	seelog.Debugf("Parameters : %v", params)
 
 	for _, v := range params {
 		wfp := models.SysWorkflowParam{
@@ -291,7 +294,7 @@ func (ajax Ajax) UpdateWorkflowParam(reqBody []byte, reqURL url.Values) []byte {
 		}
 		err := wfp.Update()
 		if err != nil {
-			log.Printf("api.ajax.UpdateWorkflowParam -> wfp.Update Error : %v\n", err)
+			seelog.Errorf("wfp.Update Error : %v", err)
 			return utils.GetAjaxRetJSON("9999", nil)
 		}
 	}
