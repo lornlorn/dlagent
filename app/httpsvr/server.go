@@ -2,10 +2,10 @@ package httpsvr
 
 import (
 	"app/httpsvr/handler"
-	"log"
 	"net/http"
 	"time"
 
+	seelog "github.com/cihub/seelog"
 	"github.com/gorilla/mux"
 )
 
@@ -13,17 +13,17 @@ import (
 StartHTTP func()
 */
 func StartHTTP() error {
-
-	log.Println("-> Initialize HTTP Routes...")
+	seelog.Debug("  --> Initialize HTTP Routers...")
 	r := mux.NewRouter()
 	initRoutes(r)
-	log.Println("-> Listen HTTP Port And Serve...")
+	seelog.Debug("  --> Listen HTTP Port And Serve...")
 	svr := &http.Server{
 		Handler:      r,
 		Addr:         ":5678",
 		WriteTimeout: 5 * time.Second,
 		ReadTimeout:  5 * time.Second,
 	}
+
 	// err := http.ListenAndServe(":8888", r)
 	err := svr.ListenAndServe()
 	return err

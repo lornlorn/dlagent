@@ -1,26 +1,41 @@
 package utils
 
 import (
-	"log"
-
+	seelog "github.com/cihub/seelog"
 	"github.com/robfig/config"
 )
 
 /*
-Conf *config.Config
+Config Global Configurations
 */
-// var conf *config.Config
+var cfg *config.Config
 
 /*
-ReadConf func(string,string) (string,error)
+InitConfig func(path string) error
+Initialize The Config Global Variable
 */
-func ReadConf(section string, option string) (string, error) {
-	conf, err := config.ReadDefault("conf/app.conf")
+func InitConfig(path string) error {
+	conf, err := config.ReadDefault(path)
 	if err != nil {
-		log.Printf("Read Config File Fail : %v\n", err)
-		return "", err
+		seelog.Errorf("Read Config File [%v] Fail : %v\n", path, err)
+		return err
 	}
-	return conf.String(section, option)
+	cfg = conf
+	return nil
+}
+
+/*
+GetConfig func(section string, option string) string
+Return String
+*/
+func GetConfig(section string, option string) string {
+
+	value, err := cfg.String(section, option)
+	if err != nil {
+		seelog.Errorf("Get Config [%v].[%v] Fail : %v", section, option, err)
+		return ""
+	}
+	return value
 	// result is string "http://www.example.com/some/path"
 
 	// c.Int("service-1", "maxclients")
