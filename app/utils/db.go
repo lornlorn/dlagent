@@ -1,9 +1,11 @@
 package utils
 
 import (
+	"log"
+
+	"github.com/cihub/seelog"
 	"github.com/go-xorm/xorm"       // _ "github.com/lib/pq" // postgresql driver
 	_ "github.com/mattn/go-sqlite3" // sqlite3 driver
-	"log"
 )
 
 // Engine xorm
@@ -17,13 +19,14 @@ func InitDB(dbtype string, dbstr string) error {
 	// dbstr := "postgres://test:test@localhost:5432/testdb?sslmode=disable"
 	// dbstr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", user, password, host, port, dbname)
 
-	log.Printf("%v,%v\n", dbtype, dbstr)
+	seelog.Debugf("%v,%v", dbtype, dbstr)
 
 	Engine, err = xorm.NewEngine(dbtype, dbstr)
 	if err != nil {
 		return err
 	}
 	Engine.ShowSQL(true)
+
 	err = Engine.Ping()
 	if err != nil {
 		log.Printf("db.driver.InitDB -> Engine.Ping Error : %v\n", err)

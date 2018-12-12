@@ -1,0 +1,64 @@
+2018-12-12 18:02:12 [Info] [main.go:40] [main.main] 1 -> Initialize Logger Success !
+2018-12-12 18:02:12 [Info] [main.go:49] [main.main] 2 -> Load Configuration Success !
+2018-12-12 18:02:12 [Info] [main.go:54] [main.main] 3 -> Initialize Reflect Function Map Success !
+2018-12-12 18:02:12 [Info] [main.go:76] [main.main] 4 -> Connect Database Success !
+2018-12-12 18:02:12 [Info] [main.go:77] [main.main] 5 -> Starting HTTP Server !
+2018-12-12 18:02:12 [Info] [main.go:79] [main.main] ***Everything is OK !***
+2018-12-12 18:02:12 [Debug] [F:/WorkSpace/Env/GoProjEnv/src/github.com/gorilla/mux/mux.go:25] [app/httpsvr.StartHTTP]   --> Initialize HTTP Routers...
+2018-12-12 18:02:12 [Debug] [app/httpsvr/server.go:24] [app/httpsvr.StartHTTP]   --> Listen HTTP Port And Serve...
+2018-12-12 18:03:14 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 18:03:18 [Debug] [app/api/html.go:30] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}
+2018-12-12 18:03:18 [Debug] [app/api/ajax.go:153] [app/api.Ajax.GetWorkflowDtl] models.GetWorkflowDtlByWfiID : [{3344 783 1 版本获取 启用 /bin/sh /a/b/c 2018-12-09 23:34:04 2018-12-09 23:34:04} {3341 783 2 版本解压 启用 /bin/sh /a/b/c/d 2018-12-09 23:27:59 2018-12-09 23:27:59}]
+2018-12-12 18:03:26 [Error] [app/api/html.go:29] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID Error : Get 0 rows
+2018-12-12 18:03:26 [Debug] [app/api/html.go:30] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {0     }
+2018-12-12 18:03:26 [Debug] [app/api/ajax.go:153] [app/api.Ajax.GetWorkflowDtl] models.GetWorkflowDtlByWfiID : []
+2018-12-12 18:03:27 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 18:09:16 [Error] [app/api/html.go:25] [app/api.HTML.GetWorkflowInfDtl] strconv.Atoi Error : strconv.Atoi: parsing "783a": invalid syntax
+2018-12-12 18:09:16 [Debug] [app/api/html.go:30] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}
+2018-12-12 18:09:16 [Error] [app/api/ajax.go:144] [app/api.Ajax.GetWorkflowDtl] strconv.Atoi Error : strconv.Atoi: parsing "783a": invalid syntax
+
+2018-12-12 18:09:17 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 18:09:41 [Error] [app/api/html.go:25] [app/api.HTML.GetWorkflowInfDtl] strconv.Atoi Error : strconv.Atoi: parsing "783b": invalid syntax
+2018-12-12 18:09:41 [Debug] [app/api/html.go:30] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}
+2018-12-12 18:09:41 [Error] [app/api/ajax.go:144] [app/api.Ajax.GetWorkflowDtl] strconv.Atoi Error : strconv.Atoi: parsing "783b": invalid syntax
+
+2018-12-12 18:09:42 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 18:09:44 [Debug] [app/api/html.go:30] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}
+2018-12-12 18:09:44 [Debug] [app/api/ajax.go:153] [app/api.Ajax.GetWorkflowDtl] models.GetWorkflowDtlByWfiID : [{3344 783 1 版本获取 启用 /bin/sh /a/b/c 2018-12-09 23:34:04 2018-12-09 23:34:04} {3341 783 2 版本解压 启用 /bin/sh /a/b/c/d 2018-12-09 23:27:59 2018-12-09 23:27:59}]
+2018-12-12 18:09:45 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 18:09:53 [Error] [app/api/html.go:25] [app/api.HTML.GetWorkflowInfDtl] strconv.Atoi Error : strconv.Atoi: parsing "783aaa": invalid syntax
+2018-12-12 18:09:53 [Debug] [app/api/html.go:30] [app/api.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}
+2018-12-12 18:09:53 [Error] [app/api/ajax.go:144] [app/api.Ajax.GetWorkflowDtl] strconv.Atoi Error : strconv.Atoi: parsing "783aaa": invalid syntax
+
+2018-12-12 18:09:54 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 21:05:01 [Info] [main.go:40] [main.main] 1 -> Initialize Logger Success !
+2018-12-12 21:05:01 [Info] [main.go:49] [main.main] 2 -> Load Configuration Success !
+2018-12-12 21:05:01 [Info] [main.go:54] [main.main] 3 -> Initialize Reflect Function Map Success !
+2018-12-12 21:05:01 [Info] [main.go:76] [main.main] 4 -> Connect Database Success !
+2018-12-12 21:05:01 [Info] [main.go:77] [main.main] 5 -> Starting HTTP Server !
+2018-12-12 21:05:01 [Info] [main.go:79] [main.main] ***Everything is OK !***
+2018-12-12 21:05:01 [Info] [app/httpsvr/server.go:24] [app/httpsvr.StartHTTP] Initialize HTTP Routers Success !
+2018-12-12 21:05:01 [Info] [app/httpsvr/server.go:29] [app/httpsvr.StartHTTP] Listen HTTP Port And Serve
+2018-12-12 21:05:32 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/workflow
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[]
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/workflow/workflow_inf.html views/html/footer.html]
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : 
+2018-12-12 21:05:32 [Info] [app/httpsvr/handler/ajax.go:16] [app/httpsvr/handler.AjaxHandler] Router Ajax : /ajax/getworkflows
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/ajax.go:21] [app/httpsvr/handler.AjaxHandler] Request Body : 
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/ajax.go:24] [app/httpsvr/handler.AjaxHandler] Request Params : map[]
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/ajax.go:32] [app/httpsvr/handler.AjaxHandler] models.GetAPI : GetWorkflows
+2018-12-12 21:05:32 [Debug] [app/api/ajax.go:68] [app/api.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 启用 2018-12-09 23:26:38 2018-12-09 23:26:54}]
+2018-12-12 21:05:32 [Debug] [app/httpsvr/handler/ajax.go:41] [app/httpsvr/handler.AjaxHandler] Return Data : [{"WfiId":783,"WfiName":"测试工作流1","WfiDesc":"TEST\nWorkflow1","WfiStatus":"启用","CreateTime":"2018-12-09 23:26:38","ModifyTime":"2018-12-09 23:26:54"}]

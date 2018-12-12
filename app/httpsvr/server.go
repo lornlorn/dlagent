@@ -13,10 +13,10 @@ import (
 StartHTTP func()
 */
 func StartHTTP() error {
-	seelog.Debug("  --> Initialize HTTP Routers...")
 	r := mux.NewRouter()
 	initRoutes(r)
-	seelog.Debug("  --> Listen HTTP Port And Serve...")
+	seelog.Info("Initialize HTTP Routers Success !")
+
 	svr := &http.Server{
 		Handler:      r,
 		Addr:         ":5678",
@@ -24,6 +24,7 @@ func StartHTTP() error {
 		ReadTimeout:  5 * time.Second,
 	}
 
+	seelog.Info("Listen HTTP Port And Serve")
 	// err := http.ListenAndServe(":8888", r)
 	err := svr.ListenAndServe()
 	return err

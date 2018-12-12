@@ -2,16 +2,17 @@ package handler
 
 import (
 	"html/template"
-	"log"
 	"net/http"
+
+	seelog "github.com/cihub/seelog"
 )
 
 // IndexHandler func(res http.ResponseWriter, req *http.Request)
 func IndexHandler(res http.ResponseWriter, req *http.Request) {
-	log.Printf("Route Index : %v\n", req.URL)
+	seelog.Infof("Router Index : %v", req.URL)
 	tmpl, err := template.ParseFiles("views/html/index.html")
 	if err != nil {
-		log.Printf("httpsvr.handler.index.IndexHandler -> template.ParseFiles Error : %v\n", err)
+		seelog.Errorf("template.ParseFiles Error : %v", err)
 		return
 	}
 

@@ -141,10 +141,12 @@ func (ajax Ajax) GetWorkflowDtl(reqBody []byte, reqURL url.Values) []byte {
 	wfiid, err := strconv.Atoi(reqURL["WfiId"][0])
 	if err != nil {
 		seelog.Errorf("strconv.Atoi Error : %v\n", err)
+		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	wfds, err := models.GetWorkflowDtlByWfiID(wfiid)
 	if err != nil {
 		seelog.Errorf("models.GetWorkflowDtlByWfiID Error : %v", err)
+		return utils.GetAjaxRetJSON("9999", nil)
 	}
 	seelog.Debugf("models.GetWorkflowDtlByWfiID : %v", wfds)
 

@@ -3,23 +3,23 @@ package handler
 import (
 	"app/utils"
 	"html/template"
-	"io/ioutil"
-	"log"
 	"net/http"
 
+	seelog "github.com/cihub/seelog"
 	"github.com/gorilla/mux"
 )
 
 // TestHandler func(res http.ResponseWriter, req *http.Request)
 func TestHandler(res http.ResponseWriter, req *http.Request) {
 
-	log.Printf("Route Test : %v\n", req.URL)
-	vars := mux.Vars(req)
-	key := vars["key"]
+	seelog.Infof("Router Test : %v", req.URL)
+	key := mux.Vars(req)["key"]
 
-	query := req.URL.Query()
-	// log.Println(query["WfiId"][0])
-	log.Println(query)
+	reqBody := utils.ReadRequestBody2JSON(req.Body)
+	seelog.Debugf("Request Body : %v", string(reqBody))
+
+	reqURL := req.URL.Query()
+	seelog.Debugf("Request Params : %v", reqURL)
 
 	var tmplPages []string
 	var api string
@@ -35,17 +35,17 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	// tmpl, err := template.ParseFiles(fmt.Sprintf("views/test/%v.html", key))
 	tmpl, err := template.ParseFiles(tmplPages...)
 	if err != nil {
-		log.Printf("httpsvr.handler.test.TestHandler -> template.ParseFiles Error : %v\n", err)
+		seelog.Errorf("template.ParseFiles Error : %v", err)
 		return
 	}
 
 	if api != "" {
-		fc, err := utils.FuncCall(api)
+		fc, err := utils.FuncCall(api, reqBody, reqURL)
 		if err != nil {
-			log.Printf("httpsvr.handler.test.TestHandler -> utils.FuncCall Error : %v\n", err)
+			seelog.Errorf("utils.FuncCall Error : %v", err)
 			return
 		}
-		log.Println(fc[0].Interface())
+		seelog.Debugf("Return Data : %v", fc[0].Interface())
 
 		tmpl.Execute(res, fc[0].Interface())
 	} else {
@@ -56,23 +56,14 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 // TestAjaxHandler func(res http.ResponseWriter, req *http.Request)
 func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 
-	log.Printf("Route Test Ajax : %v\n", req.URL)
-	vars := mux.Vars(req)
-	key := vars["key"]
+	seelog.Infof("Router Test Ajax : %v", req.URL)
+	key := mux.Vars(req)["key"]
 
-	// 获取请求包体(json数据)
-	reqBody, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		log.Printf("httpsvr.handler.test.TestAjaxHandler ioutil.ReadAll Error : %v\n", err)
-		return
-	}
-	log.Println("Request JSON Content :")
-	log.Println(string(reqBody))
+	reqBody := utils.ReadRequestBody2JSON(req.Body)
+	seelog.Debugf("Request Body : %v", string(reqBody))
 
-	// module := gjson.Get(string(reqBody), "module")
-	// shell := gjson.Get(string(reqBody), "data.shell")
-	// cmd := gjson.Get(string(reqBody), "data.cmd")
-	// log.Println(module, shell, cmd)
+	reqURL := req.URL.Query()
+	seelog.Debugf("Request Params : %v", reqURL)
 
 	var retdata []byte
 	switch key {

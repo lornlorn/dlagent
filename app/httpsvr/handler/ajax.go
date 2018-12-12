@@ -4,39 +4,43 @@ import (
 	"app/models"
 	"app/utils"
 	"errors"
-	"log"
 	"net/http"
 
+	seelog "github.com/cihub/seelog"
 	"github.com/gorilla/mux"
 )
 
 // AjaxHandler func(res http.ResponseWriter, req *http.Request)
 func AjaxHandler(res http.ResponseWriter, req *http.Request) {
-	log.Printf("Route Ajax : %v\n", req.URL)
+	seelog.Infof("Router Ajax : %v", req.URL)
 	key := mux.Vars(req)["key"]
 
 	reqBody := utils.ReadRequestBody2JSON(req.Body)
-	log.Println(string(reqBody))
+	seelog.Debugf("Request Body : %v", string(reqBody))
 
 	reqURL := req.URL.Query()
+	seelog.Debugf("Request Params : %v", reqURL)
 
 	api, err := models.GetAPI("ajax", key)
 	if err != nil {
-		log.Printf("httpsvr.handler.ajax.AjaxHandler -> models.GetAPI Error : %v\n", err)
+		seelog.Errorf("models.GetAPI Error : %v", err)
+		res.Write(utils.GetAjaxRetJSON("9999", errors.New("获取API失败")))
 		return
 	}
+	seelog.Debugf("models.GetAPI : %v", api)
 
 	if api != "" {
 		fc, err := utils.FuncCall(api, reqBody, reqURL)
 		if err != nil {
-			log.Printf("httpsvr.handler.ajax.AjaxHandler -> utils.FuncCall Error : %v\n", err)
+			seelog.Errorf("utils.FuncCall Error : %v", err)
+			res.Write(utils.GetAjaxRetJSON("9999", errors.New("API调用失败")))
 			return
 		}
-		log.Println(string(fc[0].Bytes()))
+		seelog.Debugf("Return Data : %v", string(fc[0].Bytes()))
 
 		res.Write(fc[0].Bytes())
 	} else {
-		res.Write(utils.GetAjaxRetJSON("9999", errors.New("API调用失败")))
+		res.Write(utils.GetAjaxRetJSON("9999", errors.New("非法API")))
 	}
 
 }
