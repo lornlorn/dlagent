@@ -3,7 +3,8 @@ package models
 import (
 	"app/utils"
 	"errors"
-	"log"
+
+	seelog "github.com/cihub/seelog"
 )
 
 /*
@@ -25,18 +26,20 @@ func GetTmpls(key string) ([]string, error) {
 	// if err := utils.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
 	if err := utils.Engine.Where("key = ?", key).Asc("seq").Find(&tmpls); err != nil {
 		// return nil, err
-		log.Printf("models.tmpl.GetTmpls -> utils.Engine.Where Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return nil, err
 	}
 
 	if len(tmpls) == 0 {
+		seelog.Debug("models.tmpl.GetTmpls : No Records")
 		return nil, errors.New("models.tmpl.GetTmpls : No Records")
 	}
 
 	pages := make([]string, len(tmpls))
 	for i, v := range tmpls {
-		log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
 		pages[i] = v.Value
 	}
+	seelog.Debugf("Templates : %v", pages)
+
 	return pages, nil
 }

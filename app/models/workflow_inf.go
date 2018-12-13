@@ -3,7 +3,8 @@ package models
 import (
 	"app/utils"
 	"errors"
-	"log"
+
+	seelog "github.com/cihub/seelog"
 )
 
 /*
@@ -40,22 +41,24 @@ func (wfi NewWorkflowInf) TableName() string {
 // Save insert method
 func (wfi NewWorkflowInf) Save() error {
 	// affected, err := utils.Engine.Insert(d)
-	_, err := utils.Engine.Insert(wfi)
+	affected, err := utils.Engine.Insert(wfi)
 	if err != nil {
-		log.Printf("models.workflow_inf.Save -> utils.Engine.Insert Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Insert Error : %v", err)
 		return err
 	}
+	seelog.Debugf("%v insert : %v", affected, wfi)
 	return nil
 }
 
 // Update method
 func (wfi SysWorkflowInf) Update() error {
 	// affected, err := utils.Engine.Insert(d)
-	_, err := utils.Engine.ID(wfi.WfiId).Update(wfi)
+	affected, err := utils.Engine.ID(wfi.WfiId).Update(wfi)
 	if err != nil {
-		log.Printf("models.workflow_inf.Update -> utils.Engine.ID.Update Error : %v\n", err)
+		seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
 		return err
 	}
+	seelog.Debugf("%v update : %v", affected, wfi)
 	return nil
 }
 
@@ -66,16 +69,11 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 
 	workflows := make([]SysWorkflowInf, 0)
 
-	// if err := utils.Engine.Where("job_type = ?", jobType).Find(&jobs); err != nil {
 	if err := utils.Engine.Find(&workflows); err != nil {
-		// return nil, err
-		log.Printf("models.workflow_inf.GetWorkflows -> utils.Engine.Find Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Find Error : %v", err)
 		return nil, err
 	}
-
-	// for i, v := range crons {
-	//  log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
-	// }
+	seelog.Debugf("Workflows : %v", workflows)
 
 	return workflows, nil
 }
@@ -85,40 +83,37 @@ GetWorkflowByID func(wfiid int) (SysWorkflowInf, error)
 */
 func GetWorkflowByID(wfiid int) (SysWorkflowInf, error) {
 
-	wf := new(SysWorkflowInf)
-	wf.WfiId = wfiid
+	var wfi SysWorkflowInf
+	wfi.WfiId = wfiid
 
-	has, err := utils.Engine.Get(wf)
+	has, err := utils.Engine.Get(wfi)
 	if err != nil {
-		log.Printf("models.workflow_inf.GetWorkflowByID -> utils.Engine.Get Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Get Error : %v", err)
 		return SysWorkflowInf{}, err
 	}
 
 	if !has {
-		return SysWorkflowInf{}, errors.New("Get 0 rows")
+		seelog.Debug("Get 0 row")
+		return SysWorkflowInf{}, errors.New("Get 0 row")
 	}
 
-	log.Println(wf)
+	seelog.Debugf("Workflow : %v", wfi)
 
-	// for i, v := range crons {
-	//  log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
-	// }
-
-	return *wf, nil
+	return wfi, nil
 }
 
 /*
 DelWorkflowByID func(wfiid int)
 */
 func DelWorkflowByID(wfiid int) error {
-	// wfi := new(SysWorkflowInf)
 	var wfi SysWorkflowInf
 	wfi.WfiId = wfiid
 	affected, err := utils.Engine.Delete(wfi)
 	if err != nil {
-		log.Printf("models.workflow_inf.DelWorkflowByID -> utils.Engine.Delete Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Delete Error : %v", err)
 		return err
 	}
-	log.Printf("删除%v条记录\n", affected)
+	seelog.Debugf("%v delete : %v", affected, wfi)
+
 	return nil
 }

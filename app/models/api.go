@@ -2,7 +2,8 @@ package models
 
 import (
 	"app/utils"
-	"log"
+
+	seelog "github.com/cihub/seelog"
 )
 
 /*
@@ -23,15 +24,16 @@ func GetAPI(apiType string, key string) (string, error) {
 	// if err := utils.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
 	has, err := utils.Engine.Where("key = ? and type = ?", key, apiType).Get(api)
 	if err != nil {
-		log.Printf("models.api.GetAPI -> utils.Engine.Where Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return "", err
 	}
 
 	if has {
 		// log.Println(api.Value)
+		seelog.Debugf("API : %v", api.Value)
 		return api.Value, nil
 	}
-	log.Println("models.api.GetAPI : No Records")
+	seelog.Debug("models.api.GetAPI : No Records")
 	return "", nil
 
 }
