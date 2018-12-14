@@ -9,11 +9,11 @@ import (
 	"encoding/json"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"strings"
 
+	seelog "github.com/cihub/seelog"
 	"github.com/gorilla/mux"
 	"github.com/tidwall/gjson"
 )
@@ -24,7 +24,7 @@ ReadRequestBody2JSON func(reqBody io.ReadCloser) []byte
 func ReadRequestBody2JSON(reqBody io.ReadCloser) []byte {
 	body, err := ioutil.ReadAll(reqBody)
 	if err != nil {
-		log.Printf("utils.tools.ReadRequestBody2JSON -> ioutil.ReadAll Error : %v\n", err)
+		seelog.Errorf("ioutil.ReadAll Error : %v", err)
 		return []byte{}
 	}
 	return body
@@ -65,14 +65,13 @@ Convert2JSON 任意数据类型转JSON
 func Convert2JSON(data interface{}) []byte {
 	switch data.(type) {
 	case []byte:
-		// log.Println("Convert To JSON args []byte")
 		retdata := data.([]byte)
 		return retdata
 	default:
 		// log.Println("Convert To JSON args not []byte")
 		retdata, err := json.Marshal(data)
 		if err != nil {
-			log.Printf("utils.tools.Convert2JSON -> json.Marshal Error : %v\n", err)
+			seelog.Errorf("json.Marshal Error : %v", err)
 			return []byte("")
 		}
 		return retdata
@@ -135,7 +134,7 @@ func GetUniqueID() string {
 
 	_, err := io.ReadFull(rand.Reader, newbyte)
 	if err != nil {
-		log.Printf("utils.tools.GetUniqueID -> io.ReadFull Error : %v\n", err)
+		seelog.Errorf("io.ReadFull Error : %v", err)
 		return "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 	}
 	return GetMd5String(base64.URLEncoding.EncodeToString(newbyte))

@@ -17,7 +17,7 @@ Initialize The Config Global Variable
 func InitConfig(path string) error {
 	conf, err := config.ReadDefault(path)
 	if err != nil {
-		seelog.Errorf("Read Config File [%v] Fail : %v\n", path, err)
+		seelog.Errorf("Read Config File [%v] Fail : %v", path, err)
 		return err
 	}
 	cfg = conf

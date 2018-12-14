@@ -1,8 +1,6 @@
 package utils
 
 import (
-	"log"
-
 	"github.com/cihub/seelog"
 	"github.com/go-xorm/xorm"       // _ "github.com/lib/pq" // postgresql driver
 	_ "github.com/mattn/go-sqlite3" // sqlite3 driver
@@ -19,7 +17,8 @@ func InitDB(dbtype string, dbstr string) error {
 	// dbstr := "postgres://test:test@localhost:5432/testdb?sslmode=disable"
 	// dbstr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", user, password, host, port, dbname)
 
-	seelog.Debugf("%v,%v", dbtype, dbstr)
+	seelog.Debugf("Database Type : %v", dbtype)
+	seelog.Debugf("Connect String : %v", dbstr)
 
 	Engine, err = xorm.NewEngine(dbtype, dbstr)
 	if err != nil {
@@ -29,7 +28,7 @@ func InitDB(dbtype string, dbstr string) error {
 
 	err = Engine.Ping()
 	if err != nil {
-		log.Printf("db.driver.InitDB -> Engine.Ping Error : %v\n", err)
+		seelog.Errorf("Engine.Ping Error : %v", err)
 		return err
 	}
 	Engine.Exec("PRAGMA foreign_keys = ON")

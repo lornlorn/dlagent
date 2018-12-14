@@ -3,7 +3,8 @@ package models
 import (
 	"app/utils"
 	"errors"
-	"log"
+
+	seelog "github.com/cihub/seelog"
 )
 
 /*
@@ -45,23 +46,23 @@ func (wfd NewWorkflowDtl) TableName() string {
 
 // Save insert method
 func (wfd NewWorkflowDtl) Save() error {
-	// affected, err := utils.Engine.Insert(d)
-	_, err := utils.Engine.Insert(wfd)
+	affected, err := utils.Engine.Insert(wfd)
 	if err != nil {
-		log.Printf("models.workflow_dtl.Save -> utils.Engine.Insert Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Insert Error : %v", err)
 		return err
 	}
+	seelog.Debugf("%v insert : %v", affected, wfd)
 	return nil
 }
 
 // Update method
 func (wfd SysWorkflowDtl) Update() error {
-	// affected, err := utils.Engine.Insert(d)
-	_, err := utils.Engine.ID(wfd.WfdId).Update(wfd)
+	affected, err := utils.Engine.ID(wfd.WfdId).Update(wfd)
 	if err != nil {
-		log.Printf("models.workflow_dtl.Update -> utils.Engine.ID.Update Error : %v\n", err)
+		seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
 		return err
 	}
+	seelog.Debugf("%v update : %v", affected, wfd)
 	return nil
 }
 
@@ -75,15 +76,16 @@ func GetWorkflowDtlByID(wfdid int) (SysWorkflowDtl, error) {
 
 	has, err := utils.Engine.Get(wfd)
 	if err != nil {
-		log.Printf("models.workflow_dtl.GetWorkflowByID -> utils.Engine.Get Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Get Error : %v", err)
 		return SysWorkflowDtl{}, err
 	}
 
 	if !has {
+		seelog.Debug("Get 0 row")
 		return SysWorkflowDtl{}, errors.New("Get 0 rows")
 	}
 
-	log.Println(wfd)
+	seelog.Debugf("Workflow Detail : %v", wfd)
 
 	return *wfd, nil
 }
@@ -96,9 +98,10 @@ func GetWorkflowDtlByWfiID(wfiid int) ([]SysWorkflowDtl, error) {
 	details := make([]SysWorkflowDtl, 0)
 
 	if err := utils.Engine.Where("wfi_id = ?", wfiid).Asc("wfd_seq").Find(&details); err != nil {
-		log.Printf("models.workflow_dtl.GetWorkflowDtlByWfiID -> utils.Engine.Where Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return nil, err
 	}
+	seelog.Debugf("Workflow Detail : %v", details)
 
 	return details, nil
 }
@@ -111,9 +114,10 @@ func DelWorkflowDtlByID(wfdid int) error {
 	wfd.WfdId = wfdid
 	affected, err := utils.Engine.Delete(wfd)
 	if err != nil {
-		log.Printf("models.workflow_dtl.DelWorkflowDtlByID -> utils.Engine.Delete Error : %v\n", err)
+		seelog.Errorf("utils.Engine.Delete Error : %v", err)
 		return err
 	}
-	log.Printf("删除%v条记录\n", affected)
+	seelog.Debugf("%v delete : %v", affected, wfd)
+
 	return nil
 }
