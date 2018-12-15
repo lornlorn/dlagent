@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	SEELOG_CFG = "./conf/seelog.xml" // SEELOG_CFG seelog config file path
-	APP_CFG    = "./conf/app.conf"   // APP_CFG app config file path
+	SEELOG_CFG = "./config/seelog.xml" // SEELOG_CFG seelog config file path
+	APP_CFG    = "./config/app.conf"   // APP_CFG app config file path
 )
 
 func main() {
