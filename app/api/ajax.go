@@ -302,3 +302,9 @@ func (ajax Ajax) UpdateWorkflowParam(reqBody []byte, reqURL url.Values) []byte {
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
 }
+
+/*
+func (ajax Ajax) RunCMD(reqBody []byte, reqURL url.Values) []byte {
+	wfiid := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiId")
+}
+*/
