@@ -40,6 +40,7 @@ func AjaxHandler(res http.ResponseWriter, req *http.Request) {
 
 		res.Write(fc[0].Bytes())
 	} else {
+		seelog.Errorf("非法API : [%v]", key)
 		res.Write(utils.GetAjaxRetJSON("9999", errors.New("非法API")))
 	}
 

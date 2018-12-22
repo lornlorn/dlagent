@@ -45,21 +45,21 @@ $(function () {
     });
 
     // 删除
-    $('#wfi tbody').on('click', 'a.wfiDelete', function () {
+    $('#wfi tbody').on('click', 'a.wfiRun', function () {
         var data = $('#wfi').DataTable().row($(this).parents('tr')).data();
         console.log(data.WfiId, data.WfiName);
         /*
             Ajax
         */
         var params = {};
-        params['from'] = 'workflow_inf';
+        params['from'] = 'runcmd';
         params['data'] = {};
         params['data']['WfiId'] = data.WfiId;
 
         console.log('REQUEST : ' + JSON.stringify(params));
 
         $.ajax({
-            url: '/ajax/wfidelete',
+            url: '/ajax/runcmd',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(params),
