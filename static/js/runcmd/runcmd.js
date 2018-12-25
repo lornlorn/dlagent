@@ -55,6 +55,7 @@ $(function () {
         params['from'] = 'runcmd';
         params['data'] = {};
         params['data']['WfiId'] = data.WfiId;
+        params['data']['WfiName'] = data.WfiName;
 
         console.log('REQUEST : ' + JSON.stringify(params));
 
@@ -68,13 +69,14 @@ $(function () {
             success: function (result) {
                 console.log('RESPONSE : ' + JSON.stringify(result));
                 console.log("请求成功");
+                $('#result').text(result['retdata']);
             },
             error: function (result) {
                 console.log("请求失败");
             },
             complete: function () {
                 console.log("Ajax finish");
-                $('#wfi').DataTable().ajax.reload();
+                // $('#wfi').DataTable().ajax.reload();
             },
         });
         /*

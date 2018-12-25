@@ -35,7 +35,7 @@ func loadJobs(c *cron.Cron) error {
 	//  time.Sleep(time.Second * 8)
 	// })
 
-	jobs, err := models.GetJobs("cron")
+	jobs, err := models.GetWorkflows()
 	if err != nil {
 		log.Printf("Get Jobs Fail : %v\n", err)
 		return err
@@ -45,16 +45,19 @@ func loadJobs(c *cron.Cron) error {
 		log.Printf("DataIndex : %v, DataContent : %v\n", i, v)
 
 		job := v
+		log.Println(job)
 
-		switch job.JobType {
-		case "collect":
+		/*
+			switch job.JobType {
+			case "collect":
 
-		case "cron":
+			case "cron":
 
-		case "plan":
+			case "plan":
 
-		default:
-		}
+			default:
+			}
+		*/
 
 		/*
 			if job.JobType == "default" { // 默认采集待完善
