@@ -317,6 +317,7 @@ func (ajax Ajax) RunCMD(reqBody []byte, reqURL url.Values) []byte {
 	ret, err := scheduler.Run(command, params...)
 	if err != nil {
 		seelog.Errorf("scheduler.Run Error : %v", err)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err)
 	}
 	result := string(ret)
 	seelog.Debugf("Command result : %v", result)
