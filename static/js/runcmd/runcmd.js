@@ -44,7 +44,7 @@ $(function () {
         var editpage = window.open("/html/workflowdetail?WfiId="+data.WfiId);
     });
 
-    // 删除
+    // 运行
     $('#wfi tbody').on('click', 'a.wfiRun', function () {
         var data = $('#wfi').DataTable().row($(this).parents('tr')).data();
         console.log(data.WfiId, data.WfiName);

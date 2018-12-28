@@ -13,6 +13,7 @@ import (
 StartHTTP func()
 */
 func StartHTTP() error {
+
 	r := mux.NewRouter()
 	initRoutes(r)
 	seelog.Info("Initialize HTTP Routers Success !")
@@ -27,10 +28,13 @@ func StartHTTP() error {
 	seelog.Info("Listen HTTP Port And Serve")
 	// err := http.ListenAndServe(":8888", r)
 	err := svr.ListenAndServe()
+
 	return err
+
 }
 
 func initRoutes(r *mux.Router) {
+
 	// normal router
 	r.HandleFunc("/index", handler.IndexHandler)
 
@@ -64,4 +68,5 @@ func initRoutes(r *mux.Router) {
 
 	// http.HandleFunc("/", notFoundHandler)
 	// http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+
 }

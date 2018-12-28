@@ -21,6 +21,7 @@ Return reflect function map as string
 func GetAPI(apiType string, key string) (string, error) {
 
 	api := new(SysApi)
+
 	has, err := utils.Engine.Where("key = ? and type = ?", key, apiType).Get(api)
 	if err != nil {
 		seelog.Errorf("utils.Engine.Where Error : %v", err)
@@ -28,10 +29,10 @@ func GetAPI(apiType string, key string) (string, error) {
 	}
 
 	if has {
-		seelog.Debugf("API : %v", api.Value)
 		return api.Value, nil
 	}
 	seelog.Debug("models.api.GetAPI : No Records")
+
 	return "", nil
 
 }

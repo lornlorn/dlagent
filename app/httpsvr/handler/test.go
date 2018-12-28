@@ -51,6 +51,7 @@ func TestHandler(res http.ResponseWriter, req *http.Request) {
 	} else {
 		tmpl.Execute(res, nil)
 	}
+
 }
 
 // TestAjaxHandler func(res http.ResponseWriter, req *http.Request)
@@ -72,4 +73,5 @@ func TestAjaxHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	res.Write(retdata)
+
 }

@@ -55,4 +55,5 @@ func HTMLHandler(res http.ResponseWriter, req *http.Request) {
 	} else {
 		tmpl.Execute(res, nil)
 	}
+
 }

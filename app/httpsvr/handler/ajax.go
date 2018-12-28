@@ -12,6 +12,7 @@ import (
 
 // AjaxHandler func(res http.ResponseWriter, req *http.Request)
 func AjaxHandler(res http.ResponseWriter, req *http.Request) {
+
 	seelog.Infof("Router Ajax : %v", req.URL)
 	key := mux.Vars(req)["key"]
 

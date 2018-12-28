@@ -22,12 +22,15 @@ import (
 ReadRequestBody2JSON func(reqBody io.ReadCloser) []byte
 */
 func ReadRequestBody2JSON(reqBody io.ReadCloser) []byte {
+
 	body, err := ioutil.ReadAll(reqBody)
 	if err != nil {
 		seelog.Errorf("ioutil.ReadAll Error : %v", err)
 		return []byte{}
 	}
+
 	return body
+
 }
 
 /*
@@ -63,6 +66,7 @@ func GetParamFromRequest(req *http.Request, param string) string {
 Convert2JSON 任意数据类型转JSON
 */
 func Convert2JSON(data interface{}) []byte {
+
 	switch data.(type) {
 	case []byte:
 		retdata := data.([]byte)
@@ -76,6 +80,7 @@ func Convert2JSON(data interface{}) []byte {
 		}
 		return retdata
 	}
+
 }
 
 /*
@@ -94,6 +99,7 @@ func ReadLines(filename string) ([]string, error) {
 //   n >= 0: at most n lines
 //   n < 0: whole file
 func ReadLinesOffsetN(filename string, offset uint, n int) ([]string, error) {
+
 	f, err := os.Open(filename)
 	if err != nil {
 		return []string{""}, err
@@ -115,6 +121,7 @@ func ReadLinesOffsetN(filename string, offset uint, n int) ([]string, error) {
 	}
 
 	return ret, nil
+
 }
 
 /*
@@ -130,6 +137,7 @@ func GetMd5String(s string) string {
 
 // GetUniqueID 生成UID唯一标识
 func GetUniqueID() string {
+
 	newbyte := make([]byte, 48)
 
 	_, err := io.ReadFull(rand.Reader, newbyte)
@@ -137,5 +145,7 @@ func GetUniqueID() string {
 		seelog.Errorf("io.ReadFull Error : %v", err)
 		return "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 	}
+
 	return GetMd5String(base64.URLEncoding.EncodeToString(newbyte))
+
 }

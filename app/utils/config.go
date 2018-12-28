@@ -15,13 +15,17 @@ InitConfig func(path string) error
 Initialize The Config Global Variable
 */
 func InitConfig(path string) error {
+
 	conf, err := config.ReadDefault(path)
 	if err != nil {
 		seelog.Errorf("Read Config File [%v] Fail : %v", path, err)
 		return err
 	}
+
 	cfg = conf
+
 	return nil
+
 }
 
 /*
@@ -35,6 +39,7 @@ func GetConfig(section string, option string) string {
 		seelog.Errorf("Get Config [%v].[%v] Fail : %v", section, option, err)
 		return ""
 	}
+
 	return value
 	// result is string "http://www.example.com/some/path"
 

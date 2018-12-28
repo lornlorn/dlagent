@@ -26,6 +26,7 @@ func InitFunctionMap(objs ...interface{}) {
 	FuncMap = make(FunctionMap, 0)
 
 	for idx, obj := range objs {
+
 		seelog.Debugf("Reflect Type %v : %v", idx, reflect.TypeOf(obj))
 
 		//创建反射变量，注意这里需要传入ruTest变量的地址；
@@ -43,13 +44,15 @@ func InitFunctionMap(objs ...interface{}) {
 			seelog.Debugf("Reflect Method Index : %v, Name : %v", i, methodName)
 		}
 	}
-	seelog.Debugf("Reflect Function Map : %v", FuncMap)
+	// seelog.Debugf("Reflect Function Map : %v", FuncMap)
+
 }
 
 /*
 FuncCall func(mName string, param ...interface{})
 */
 func FuncCall(mName string, params ...interface{}) ([]reflect.Value, error) {
+
 	seelog.Debugf("Call Reflect Method Name : %v, Params : %v", mName, params)
 
 	// 判断调用方法是否存在
@@ -84,13 +87,17 @@ func FuncCall(mName string, params ...interface{}) ([]reflect.Value, error) {
 
 // ReflectCall func(m map[string]interface{}, name string, params ...interface{}) ([]reflect.Value, error)
 func ReflectCall(m map[string]interface{}, name string, params ...interface{}) ([]reflect.Value, error) {
+
 	f := reflect.ValueOf(m[name])
 	if len(params) != f.Type().NumIn() {
 		return nil, errors.New("the number of input params not match")
 	}
+
 	in := make([]reflect.Value, len(params))
 	for k, v := range params {
 		in[k] = reflect.ValueOf(v)
 	}
+
 	return f.Call(in), nil
+
 }

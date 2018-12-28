@@ -14,10 +14,11 @@ And
 Route "/" Direct To "/index"
 */
 func NotFoundHandler(res http.ResponseWriter, req *http.Request) {
+
 	seelog.Infof("Router 404 : %v", req.URL)
 
 	if req.URL.Path == "/favicon.ico" {
-		seelog.Debug("Request A favicon")
+		seelog.Debugf("Request A favicon [%v]", "./static/img/favicon.ico")
 		http.ServeFile(res, req, "./static/img/favicon.ico")
 		return
 	}
@@ -27,5 +28,7 @@ func NotFoundHandler(res http.ResponseWriter, req *http.Request) {
 		seelog.Errorf("template.ParseFiles Error : %v", err)
 		return
 	}
+
 	tmpl.Execute(res, req.URL)
+
 }

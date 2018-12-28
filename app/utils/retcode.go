@@ -41,6 +41,7 @@ Get return code and errors
 Convert to AjaxReturn struct object
 */
 func GetAjaxRetObj(retcode string, errmsg error) AjaxReturn {
+
 	var retobj AjaxReturn
 
 	if errmsg != nil {
@@ -54,7 +55,9 @@ func GetAjaxRetObj(retcode string, errmsg error) AjaxReturn {
 			RetMsg:  GetRetMsg(retcode),
 		}
 	}
+
 	return retobj
+
 }
 
 /*
@@ -63,6 +66,7 @@ Get return code and errors
 Convert to AjaxReturn struct and Marshal to JSON
 */
 func GetAjaxRetJSON(retcode string, errmsg error) []byte {
+
 	var retobj AjaxReturn
 
 	if errmsg != nil {
@@ -80,6 +84,7 @@ func GetAjaxRetJSON(retcode string, errmsg error) []byte {
 	ret := Convert2JSON(retobj)
 
 	return ret
+
 }
 
 /*
@@ -88,6 +93,7 @@ Get return message and data
 Convert to AjaxReturnWithData struct object
 */
 func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) AjaxReturnWithData {
+
 	var retobj AjaxReturnWithData
 
 	if errmsg != nil {
@@ -109,7 +115,9 @@ func GetAjaxRetWithDataObj(retcode string, errmsg error, data interface{}) AjaxR
 		// 	RetData: data,
 		// }
 	}
+
 	return retobj
+
 }
 
 /*
@@ -118,6 +126,7 @@ Get return message and data
 Convert to AjaxReturnWithData struct and Marshal to JSON
 */
 func GetAjaxRetWithDataJSON(retcode string, errmsg error, data interface{}) []byte {
+
 	var retobj AjaxReturnWithData
 
 	if errmsg != nil {
@@ -143,4 +152,5 @@ func GetAjaxRetWithDataJSON(retcode string, errmsg error, data interface{}) []by
 	ret := Convert2JSON(retobj)
 
 	return ret
+
 }

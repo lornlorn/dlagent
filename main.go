@@ -82,4 +82,5 @@ func main() {
 		panic("Exit!")
 	}
 	seelog.Infof("%v Success !", msg)
+
 }

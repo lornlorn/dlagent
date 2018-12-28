@@ -9,6 +9,7 @@ InitLogger initial a logger by seelog
 Config file ./conf/seelog.xml
 */
 func InitLogger(path string) error {
+
 	defer seelog.Flush()
 
 	logger, err := seelog.LoggerFromConfigAsFile(path)
@@ -17,5 +18,7 @@ func InitLogger(path string) error {
 		return err
 	}
 	seelog.ReplaceLogger(logger)
+
 	return nil
+
 }

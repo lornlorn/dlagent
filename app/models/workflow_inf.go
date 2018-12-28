@@ -40,24 +40,30 @@ func (wfi NewWorkflowInf) TableName() string {
 
 // Save insert method
 func (wfi NewWorkflowInf) Save() error {
+
 	affected, err := utils.Engine.Insert(wfi)
 	if err != nil {
 		seelog.Errorf("utils.Engine.Insert Error : %v", err)
 		return err
 	}
 	seelog.Debugf("%v insert : %v", affected, wfi)
+
 	return nil
+
 }
 
 // Update method
 func (wfi SysWorkflowInf) Update() error {
+
 	affected, err := utils.Engine.ID(wfi.WfiId).Update(wfi)
 	if err != nil {
 		seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
 		return err
 	}
 	seelog.Debugf("%v update : %v", affected, wfi)
+
 	return nil
+
 }
 
 /*
@@ -71,9 +77,9 @@ func GetWorkflows() ([]SysWorkflowInf, error) {
 		seelog.Errorf("utils.Engine.Find Error : %v", err)
 		return nil, err
 	}
-	seelog.Debugf("Workflows : %v", workflows)
 
 	return workflows, nil
+
 }
 
 /*
@@ -95,15 +101,15 @@ func GetWorkflowByID(wfiid int) (SysWorkflowInf, error) {
 		return SysWorkflowInf{}, errors.New("Get 0 row")
 	}
 
-	seelog.Debugf("Workflow : %v", wfi)
-
 	return *wfi, nil
+
 }
 
 /*
 DelWorkflowByID func(wfiid int)
 */
 func DelWorkflowByID(wfiid int) error {
+
 	wfi := new(SysWorkflowInf)
 	wfi.WfiId = wfiid
 
@@ -115,4 +121,5 @@ func DelWorkflowByID(wfiid int) error {
 	seelog.Debugf("%v delete : %v", affected, wfi)
 
 	return nil
+
 }

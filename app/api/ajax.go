@@ -312,12 +312,12 @@ func (ajax Ajax) RunCMD(reqBody []byte, reqURL url.Values) []byte {
 	wfiName := utils.GetJSONResultFromRequestBody(reqBody, "data.WfiName")
 	seelog.Debugf("Workflow ID : [%v]", wfiid)
 
-	command := "D:\\WorkSpace\\Proj\\GoProj\\dlagent\\src\\data\\cmd\\test.bat"
+	command := "F:\\WorkSpace\\Proj\\GoProj\\dlagent\\src\\data\\cmd\\test.bat"
 	params := []string{"AAA", wfiName.String(), "111"}
 	ret, err := scheduler.Run(command, params...)
 	if err != nil {
 		seelog.Errorf("scheduler.Run Error : %v", err)
-		return utils.GetAjaxRetWithDataJSON("9999", nil, err)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	result := string(ret)
 	seelog.Debugf("Command result : %v", result)

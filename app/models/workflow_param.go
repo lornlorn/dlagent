@@ -42,24 +42,30 @@ func (wfp NewWorkflowParam) TableName() string {
 
 // Save insert method
 func (wfp NewWorkflowParam) Save() error {
+
 	affected, err := utils.Engine.Insert(wfp)
 	if err != nil {
 		seelog.Errorf("utils.Engine.Insert Error : %v\n", err)
 		return err
 	}
 	seelog.Debugf("%v insert : %v", affected, wfp)
+
 	return nil
+
 }
 
 // Update method
 func (wfp SysWorkflowParam) Update() error {
+
 	affected, err := utils.Engine.ID(wfp.WfpId).Update(wfp)
 	if err != nil {
 		seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
 		return err
 	}
 	seelog.Debugf("%v update : %v", affected, wfp)
+
 	return nil
+
 }
 
 /*
@@ -73,15 +79,16 @@ func GetWorkflowParamByWfdID(wfdid int) ([]SysWorkflowParam, error) {
 		seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return nil, err
 	}
-	seelog.Debugf("Workflows Params : %v", params)
 
 	return params, nil
+
 }
 
 /*
 DelWorkflowParamByID func(wfpid int)
 */
 func DelWorkflowParamByID(wfpid int) error {
+
 	wfp := new(SysWorkflowParam)
 	wfp.WfpId = wfpid
 
@@ -99,6 +106,7 @@ func DelWorkflowParamByID(wfpid int) error {
 GetLastWorkflowParamByWfdID func(wfdid int) (SysWorkflowParam, error)
 */
 func GetLastWorkflowParamByWfdID(wfdid int) (SysWorkflowParam, error) {
+
 	wfp := new(SysWorkflowParam)
 
 	has, err := utils.Engine.Where("wfd_id = ?", wfdid).Desc("wfp_seq").Get(wfp)
@@ -111,6 +119,8 @@ func GetLastWorkflowParamByWfdID(wfdid int) (SysWorkflowParam, error) {
 		seelog.Debugf("Workflow Last Param : %v", wfp)
 		return *wfp, nil
 	}
-	seelog.Debugf("This Dtl %v Has No Parameters", wfdid)
+	seelog.Debugf("This Dtl [%v] Has No Parameters", wfdid)
+
 	return SysWorkflowParam{}, errors.New("No Records")
+
 }

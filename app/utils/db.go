@@ -11,14 +11,14 @@ var Engine *xorm.Engine
 
 // InitDB func() error
 func InitDB(dbtype string, dbstr string) error {
+
 	var err error
 	// dbtype := "postgres"
 	// dbstr := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=disable", host, port, user, password, dbname)
 	// dbstr := "postgres://test:test@localhost:5432/testdb?sslmode=disable"
 	// dbstr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", user, password, host, port, dbname)
 
-	seelog.Debugf("Database Type : %v", dbtype)
-	seelog.Debugf("Connect String : %v", dbstr)
+	seelog.Debugf("Database Type : [%v], Connect String : [%v]", dbtype, dbstr)
 
 	Engine, err = xorm.NewEngine(dbtype, dbstr)
 	if err != nil {
@@ -32,5 +32,7 @@ func InitDB(dbtype string, dbstr string) error {
 		return err
 	}
 	Engine.Exec("PRAGMA foreign_keys = ON")
+
 	return nil
+
 }

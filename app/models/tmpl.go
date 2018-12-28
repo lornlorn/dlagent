@@ -23,9 +23,8 @@ Return HTML pages path as []string
 func GetTmpls(key string) ([]string, error) {
 
 	tmpls := make([]SysTmpl, 0)
-	// if err := utils.Engine.Where("cron_status = ? and upper(system_enname) like ?", "READY", strings.ToUpper(enkeyword)+"%").Find(&crons); err != nil {
+
 	if err := utils.Engine.Where("key = ?", key).Asc("seq").Find(&tmpls); err != nil {
-		// return nil, err
 		seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return nil, err
 	}
@@ -39,7 +38,7 @@ func GetTmpls(key string) ([]string, error) {
 	for i, v := range tmpls {
 		pages[i] = v.Value
 	}
-	seelog.Debugf("Templates : %v", pages)
 
 	return pages, nil
+
 }
