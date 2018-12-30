@@ -142,7 +142,7 @@ func GetUniqueID() string {
 
 	_, err := io.ReadFull(rand.Reader, newbyte)
 	if err != nil {
-		seelog.Errorf("io.ReadFull Error : %v", err)
+		// seelog.Errorf("io.ReadFull Error : %v", err)
 		return "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 	}
 

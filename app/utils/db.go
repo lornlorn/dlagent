@@ -28,7 +28,7 @@ func InitDB(dbtype string, dbstr string) error {
 
 	err = Engine.Ping()
 	if err != nil {
-		seelog.Errorf("Engine.Ping Error : %v", err)
+		// seelog.Errorf("Engine.Ping Error : %v", err)
 		return err
 	}
 	Engine.Exec("PRAGMA foreign_keys = ON")
