@@ -1,4 +1,4 @@
-package api
+package blfunc
 
 import (
 	"app/models"
