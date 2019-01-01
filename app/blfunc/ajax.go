@@ -313,8 +313,9 @@ func (ajax Ajax) RunCMD(reqBody []byte, reqURL url.Values) []byte {
 	seelog.Debugf("Workflow ID : [%v]", wfiid)
 
 	command := "F:\\WorkSpace\\Proj\\GoProj\\dlagent\\src\\data\\cmd\\test.bat"
-	params := []string{"AAA", wfiName.String(), "111"}
-	ret, err := scheduler.Run(command, params...)
+	envs := []string{"TEST_ARG=xxx"}
+	params := []string{"AAA", wfiName.String(), "哈哈哈"}
+	ret, err := scheduler.Run(command, envs, params...)
 	if err != nil {
 		seelog.Errorf("scheduler.Run Error : %v", err)
 		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
