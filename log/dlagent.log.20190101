@@ -172,3 +172,115 @@ AAA
 xxx
 
 2019-01-01 13:49:03 [Debug] [app/httpsvr/handler/ajax.go:42] [app/httpsvr/handler.AjaxHandler] Return Data : {"retcode":"0000","retmsg":"成功","retdata":"\r\nF:\\WorkSpace\\Proj\\GoProj\\dlagent\\src\u003echcp 65001 \r\n\"Hello World!\"\r\nF:\\WorkSpace\\Proj\\GoProj\\dlagent\\src\\data\\cmd\\test.bat\r\nAAA\r\n\ufffd\ufffd\ufffdԹ\ufffd\ufffd\ufffd\ufffd\ufffd1\r\nxxx\r\n"}
+2019-01-01 21:33:13 [Info] [main.go:40] [main.main] 1 -> Initialize Logger Success !
+2019-01-01 21:33:13 [Info] [main.go:49] [main.main] 2 -> Load Configuration Success !
+2019-01-01 21:33:13 [Debug] [F:/WorkSpace/Env/Go/src/reflect/value.go:2183] [app/utils.InitFunctionMap] Reflect Type 0 : *blfunc.Ajax
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 0, Name : AddWorkflowDtl
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 1, Name : AddWorkflowInf
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 2, Name : AddWorkflowParam
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 3, Name : DelWorkflowDtl
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 4, Name : DelWorkflowInf
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 5, Name : DelWorkflowParam
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 6, Name : GetWorkflowDtl
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 7, Name : GetWorkflows
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 8, Name : RunCMD
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 9, Name : UpdateWorkflowDtl
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 10, Name : UpdateWorkflowInf
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 11, Name : UpdateWorkflowParam
+2019-01-01 21:33:13 [Debug] [F:/WorkSpace/Env/Go/src/reflect/value.go:2183] [app/utils.InitFunctionMap] Reflect Type 1 : *blfunc.HTML
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 0, Name : GetWorkflowDtlParam
+2019-01-01 21:33:13 [Debug] [app/utils/reflect.go:41] [app/utils.InitFunctionMap] Reflect Method Index : 1, Name : GetWorkflowInfDtl
+2019-01-01 21:33:13 [Info] [main.go:54] [main.main] 3 -> Initialize Reflect Function Map Success !
+2019-01-01 21:33:13 [Debug] [app/utils/db.go:23] [app/utils.InitDB] Database Type : [sqlite3], Connect String : [./config/dlagent.db]
+2019-01-01 21:33:13 [Info] [main.go:76] [main.main] 4 -> Connect Database Success !
+2019-01-01 21:33:13 [Info] [main.go:77] [main.main] 5 -> Starting HTTP Server !
+2019-01-01 21:33:13 [Info] [main.go:79] [main.main] ***Everything is OK !***
+2019-01-01 21:33:13 [Info] [app/httpsvr/server.go:25] [app/httpsvr.StartHTTP] Initialize HTTP Routers Success !
+2019-01-01 21:33:13 [Info] [app/httpsvr/server.go:30] [app/httpsvr.StartHTTP] Listen HTTP Port And Serve
+2019-01-01 21:33:16 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/runcmd
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[]
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/runcmd/runcmd.html views/html/footer.html]
+2019-01-01 21:33:16 [Debug] [app/models/api.go:36] [app/models.GetAPI] models.api.GetAPI : No Records
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : 
+2019-01-01 21:33:16 [Info] [app/httpsvr/handler/404.go:20] [app/httpsvr/handler.NotFoundHandler] Router 404 : /favicon.ico
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/404.go:22] [app/httpsvr/handler.NotFoundHandler] Request A favicon [./static/img/favicon.ico]
+2019-01-01 21:33:16 [Info] [app/httpsvr/handler/ajax.go:17] [app/httpsvr/handler.AjaxHandler] Router Ajax : /ajax/getworkflows
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/ajax.go:22] [app/httpsvr/handler.AjaxHandler] Request Body : 
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/ajax.go:25] [app/httpsvr/handler.AjaxHandler] Request Params : map[]
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/ajax.go:33] [app/httpsvr/handler.AjaxHandler] models.GetAPI : GetWorkflows
+2019-01-01 21:33:16 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflows, Params : [[] map[]]
+2019-01-01 21:33:16 [Debug] [app/blfunc/ajax.go:69] [app/blfunc.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19} {785 WL2 workflow
+2 启用 2018-12-16 00:21:49 2018-12-16 00:21:49}]
+2019-01-01 21:33:16 [Debug] [app/httpsvr/handler/ajax.go:42] [app/httpsvr/handler.AjaxHandler] Return Data : [{"WfiId":783,"WfiName":"测试工作流1","WfiDesc":"TEST\nWorkflow1","WfiStatus":"禁用","CreateTime":"2018-12-09 23:26:38","ModifyTime":"2018-12-16 00:27:19"},{"WfiId":785,"WfiName":"WL2","WfiDesc":"workflow\n2","WfiStatus":"启用","CreateTime":"2018-12-16 00:21:49","ModifyTime":"2018-12-16 00:21:49"}]
+2019-01-01 21:33:19 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/workflow
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[]
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/workflow/workflow_inf.html views/html/footer.html]
+2019-01-01 21:33:19 [Debug] [app/models/api.go:36] [app/models.GetAPI] models.api.GetAPI : No Records
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : 
+2019-01-01 21:33:19 [Info] [app/httpsvr/handler/ajax.go:17] [app/httpsvr/handler.AjaxHandler] Router Ajax : /ajax/getworkflows
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/ajax.go:22] [app/httpsvr/handler.AjaxHandler] Request Body : 
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/ajax.go:25] [app/httpsvr/handler.AjaxHandler] Request Params : map[]
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/ajax.go:33] [app/httpsvr/handler.AjaxHandler] models.GetAPI : GetWorkflows
+2019-01-01 21:33:19 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflows, Params : [[] map[]]
+2019-01-01 21:33:19 [Debug] [app/blfunc/ajax.go:69] [app/blfunc.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19} {785 WL2 workflow
+2 启用 2018-12-16 00:21:49 2018-12-16 00:21:49}]
+2019-01-01 21:33:19 [Debug] [app/httpsvr/handler/ajax.go:42] [app/httpsvr/handler.AjaxHandler] Return Data : [{"WfiId":783,"WfiName":"测试工作流1","WfiDesc":"TEST\nWorkflow1","WfiStatus":"禁用","CreateTime":"2018-12-09 23:26:38","ModifyTime":"2018-12-16 00:27:19"},{"WfiId":785,"WfiName":"WL2","WfiDesc":"workflow\n2","WfiStatus":"启用","CreateTime":"2018-12-16 00:21:49","ModifyTime":"2018-12-16 00:21:49"}]
+2019-01-01 21:33:32 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/workflowdetail?WfiId=783
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[WfiId:[783]]
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/workflow/workflow_dtl.html views/html/footer.html]
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : GetWorkflowInfDtl
+2019-01-01 21:33:32 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflowInfDtl, Params : [[] map[WfiId:[783]]]
+2019-01-01 21:33:32 [Debug] [app/blfunc/html.go:30] [app/blfunc.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19}
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/html.go:54] [app/httpsvr/handler.HTMLHandler] Return Data : {783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19}
+2019-01-01 21:33:32 [Info] [app/httpsvr/handler/ajax.go:17] [app/httpsvr/handler.AjaxHandler] Router Ajax : /ajax/getworkflowdtl?WfiId=783
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/ajax.go:22] [app/httpsvr/handler.AjaxHandler] Request Body : 
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/ajax.go:25] [app/httpsvr/handler.AjaxHandler] Request Params : map[WfiId:[783]]
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/ajax.go:33] [app/httpsvr/handler.AjaxHandler] models.GetAPI : GetWorkflowDtl
+2019-01-01 21:33:32 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflowDtl, Params : [[] map[WfiId:[783]]]
+2019-01-01 21:33:32 [Debug] [app/blfunc/ajax.go:154] [app/blfunc.Ajax.GetWorkflowDtl] models.GetWorkflowDtlByWfiID : [{3344 783 1 版本获取 启用 /bin/sh /a/b/c 2018-12-09 23:34:04 2018-12-09 23:34:04} {3341 783 2 版本解压 启用 /bin/sh /a/b/c/d 2018-12-09 23:27:59 2018-12-09 23:27:59}]
+2019-01-01 21:33:32 [Debug] [app/httpsvr/handler/ajax.go:42] [app/httpsvr/handler.AjaxHandler] Return Data : [{"WfdId":3344,"WfiId":783,"WfdSeq":1,"WfdName":"版本获取","WfdStatus":"启用","WfdShell":"/bin/sh","WfdCmd":"/a/b/c","CreateTime":"2018-12-09 23:34:04","ModifyTime":"2018-12-09 23:34:04"},{"WfdId":3341,"WfiId":783,"WfdSeq":2,"WfdName":"版本解压","WfdStatus":"启用","WfdShell":"/bin/sh","WfdCmd":"/a/b/c/d","CreateTime":"2018-12-09 23:27:59","ModifyTime":"2018-12-09 23:27:59"}]
+2019-01-01 21:33:50 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/workflow_dtl_add?WfiId=783
+2019-01-01 21:33:50 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2019-01-01 21:33:50 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[WfiId:[783]]
+2019-01-01 21:33:50 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/workflow/workflow_dtl_add.html views/html/footer.html]
+2019-01-01 21:33:50 [Debug] [app/models/api.go:36] [app/models.GetAPI] models.api.GetAPI : No Records
+2019-01-01 21:33:50 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : 
+2019-01-01 21:34:16 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/workflowdetail?WfiId=783
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[WfiId:[783]]
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/workflow/workflow_dtl.html views/html/footer.html]
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : GetWorkflowInfDtl
+2019-01-01 21:34:16 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflowInfDtl, Params : [[] map[WfiId:[783]]]
+2019-01-01 21:34:16 [Debug] [app/blfunc/html.go:30] [app/blfunc.HTML.GetWorkflowInfDtl] models.GetWorkflowByID : {783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19}
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:54] [app/httpsvr/handler.HTMLHandler] Return Data : {783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19}
+2019-01-01 21:34:16 [Info] [app/httpsvr/handler/html.go:17] [app/httpsvr/handler.HTMLHandler] Router HTML : /html/workflow
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:22] [app/httpsvr/handler.HTMLHandler] Request Body : 
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:25] [app/httpsvr/handler.HTMLHandler] Request Params : map[]
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:33] [app/httpsvr/handler.HTMLHandler] models.GetTmpls : [views/html/workflow/workflow_inf.html views/html/footer.html]
+2019-01-01 21:34:16 [Debug] [app/models/api.go:36] [app/models.GetAPI] models.api.GetAPI : No Records
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/html.go:46] [app/httpsvr/handler.HTMLHandler] models.GetAPI : 
+2019-01-01 21:34:16 [Info] [app/httpsvr/handler/ajax.go:17] [app/httpsvr/handler.AjaxHandler] Router Ajax : /ajax/getworkflowdtl?WfiId=783
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/ajax.go:22] [app/httpsvr/handler.AjaxHandler] Request Body : 
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/ajax.go:25] [app/httpsvr/handler.AjaxHandler] Request Params : map[WfiId:[783]]
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/ajax.go:33] [app/httpsvr/handler.AjaxHandler] models.GetAPI : GetWorkflowDtl
+2019-01-01 21:34:16 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflowDtl, Params : [[] map[WfiId:[783]]]
+2019-01-01 21:34:16 [Debug] [app/blfunc/ajax.go:154] [app/blfunc.Ajax.GetWorkflowDtl] models.GetWorkflowDtlByWfiID : [{3344 783 1 版本获取 启用 /bin/sh /a/b/c 2018-12-09 23:34:04 2018-12-09 23:34:04} {3341 783 2 版本解压 启用 /bin/sh /a/b/c/d 2018-12-09 23:27:59 2018-12-09 23:27:59}]
+2019-01-01 21:34:16 [Debug] [app/httpsvr/handler/ajax.go:42] [app/httpsvr/handler.AjaxHandler] Return Data : [{"WfdId":3344,"WfiId":783,"WfdSeq":1,"WfdName":"版本获取","WfdStatus":"启用","WfdShell":"/bin/sh","WfdCmd":"/a/b/c","CreateTime":"2018-12-09 23:34:04","ModifyTime":"2018-12-09 23:34:04"},{"WfdId":3341,"WfiId":783,"WfdSeq":2,"WfdName":"版本解压","WfdStatus":"启用","WfdShell":"/bin/sh","WfdCmd":"/a/b/c/d","CreateTime":"2018-12-09 23:27:59","ModifyTime":"2018-12-09 23:27:59"}]
+2019-01-01 21:34:17 [Info] [app/httpsvr/handler/ajax.go:17] [app/httpsvr/handler.AjaxHandler] Router Ajax : /ajax/getworkflows
+2019-01-01 21:34:17 [Debug] [app/httpsvr/handler/ajax.go:22] [app/httpsvr/handler.AjaxHandler] Request Body : 
+2019-01-01 21:34:17 [Debug] [app/httpsvr/handler/ajax.go:25] [app/httpsvr/handler.AjaxHandler] Request Params : map[]
+2019-01-01 21:34:17 [Debug] [app/httpsvr/handler/ajax.go:33] [app/httpsvr/handler.AjaxHandler] models.GetAPI : GetWorkflows
+2019-01-01 21:34:17 [Debug] [app/utils/reflect.go:59] [app/utils.FuncCall] Call Reflect Method Name : GetWorkflows, Params : [[] map[]]
+2019-01-01 21:34:17 [Debug] [app/blfunc/ajax.go:69] [app/blfunc.Ajax.GetWorkflows] models.GetWorkflows : [{783 测试工作流1 TEST
+Workflow1 禁用 2018-12-09 23:26:38 2018-12-16 00:27:19} {785 WL2 workflow
+2 启用 2018-12-16 00:21:49 2018-12-16 00:21:49}]
+2019-01-01 21:34:17 [Debug] [app/httpsvr/handler/ajax.go:42] [app/httpsvr/handler.AjaxHandler] Return Data : [{"WfiId":783,"WfiName":"测试工作流1","WfiDesc":"TEST\nWorkflow1","WfiStatus":"禁用","CreateTime":"2018-12-09 23:26:38","ModifyTime":"2018-12-16 00:27:19"},{"WfiId":785,"WfiName":"WL2","WfiDesc":"workflow\n2","WfiStatus":"启用","CreateTime":"2018-12-16 00:21:49","ModifyTime":"2018-12-16 00:21:49"}]
