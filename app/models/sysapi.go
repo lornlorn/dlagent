@@ -2,8 +2,6 @@ package models
 
 import (
 	"app/utils"
-
-	seelog "github.com/cihub/seelog"
 )
 
 /*
@@ -19,20 +17,18 @@ GetAPI func(apiType string,key string) (string, error)
 Return reflect function map as string
 */
 func GetAPI(apiType string, key string) (string, error) {
-
 	api := new(SysApi)
 
 	has, err := utils.Engine.Where("key = ? and type = ?", key, apiType).Get(api)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Where Error : %v", err)
+		// seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return "", err
 	}
 
 	if has {
 		return api.Value, nil
 	}
-	seelog.Debug("models.api.GetAPI : No Records")
+	// seelog.Debug("models.api.GetAPI : No Records")
 
 	return "", nil
-
 }

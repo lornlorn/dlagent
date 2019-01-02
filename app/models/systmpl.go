@@ -3,8 +3,6 @@ package models
 import (
 	"app/utils"
 	"errors"
-
-	seelog "github.com/cihub/seelog"
 )
 
 /*
@@ -21,16 +19,15 @@ GetTmpls func(key string) ([]string, error)
 Return HTML pages path as []string
 */
 func GetTmpls(key string) ([]string, error) {
-
 	tmpls := make([]SysTmpl, 0)
 
 	if err := utils.Engine.Where("key = ?", key).Asc("seq").Find(&tmpls); err != nil {
-		seelog.Errorf("utils.Engine.Where Error : %v", err)
+		// seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return nil, err
 	}
 
 	if len(tmpls) == 0 {
-		seelog.Debug("models.tmpl.GetTmpls : No Records")
+		// seelog.Debug("models.tmpl.GetTmpls : No Records")
 		return nil, errors.New("models.tmpl.GetTmpls : No Records")
 	}
 
@@ -40,5 +37,4 @@ func GetTmpls(key string) ([]string, error) {
 	}
 
 	return pages, nil
-
 }

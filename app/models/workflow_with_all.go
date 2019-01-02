@@ -1,10 +1,10 @@
 package models
 
 /*
-WorkflowDtlWithParams struct
-workflow_dtl with parameters
+ComponentWithParams struct
+component with parameters
 */
-type WorkflowDtlWithParams struct {
-	WFD SysWorkflowDtl
-	WFP []SysWorkflowParam
+type ComponentWithParams struct {
+	Comp   TbComponent
+	Params []TbParameter
 }

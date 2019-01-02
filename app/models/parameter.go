@@ -8,119 +8,110 @@ import (
 )
 
 /*
-SysWorkflowParam struct map to table sys_workflow_param
+TbParameter struct map to table tb_parameter
 */
-type SysWorkflowParam struct {
-	WfpId      int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
-	WfdId      int    `xorm:"INTEGER NOT NULL"`
-	WfpSeq     int    `xorm:"INTEGER NOT NULL"`
-	WfpName    string `xorm:"VARCHAR(128)"`
-	WfpDefault string `xorm:"VARCHAR(128) NOT NULL"`
-	CreateTime string `xorm:"VARCHAR(15)"`
-	ModifyTime string `xorm:"VARCHAR(15)"`
+type TbParameter struct {
+	ParamId      int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
+	CompId       int    `xorm:"INTEGER NOT NULL"`
+	ParamSeq     int    `xorm:"INTEGER NOT NULL"`
+	ParamName    string `xorm:"VARCHAR(128) NOT NULL"`
+	ParamDefault string `xorm:"VARCHAR(128)"`
+	CreateTime   string `xorm:"VARCHAR(15)"`
+	ModifyTime   string `xorm:"VARCHAR(15)"`
 }
 
 /*
-NewWorkflowParam struct map to table sys_workflow_param
+NewParameter struct map to table tb_parameter without column ParamId
 */
-type NewWorkflowParam struct {
-	WfdId      int    `xorm:"INTEGER NOT NULL"`
-	WfpSeq     int    `xorm:"INTEGER NOT NULL"`
-	WfpName    string `xorm:"VARCHAR(128)"`
-	WfpDefault string `xorm:"VARCHAR(128) NOT NULL"`
-	CreateTime string `xorm:"VARCHAR(15)"`
-	ModifyTime string `xorm:"VARCHAR(15)"`
+type NewParameter struct {
+	CompId       int    `xorm:"INTEGER NOT NULL"`
+	ParamSeq     int    `xorm:"INTEGER NOT NULL"`
+	ParamName    string `xorm:"VARCHAR(128) NOT NULL"`
+	ParamDefault string `xorm:"VARCHAR(128)"`
+	CreateTime   string `xorm:"VARCHAR(15)"`
+	ModifyTime   string `xorm:"VARCHAR(15)"`
 }
 
 /*
 TableName xorm mapper
-NewWorkflowParam struct map to table sys_workflow_param
+NewParameter struct map to table tb_parameter
 */
-func (wfp NewWorkflowParam) TableName() string {
-	return "sys_workflow_param"
+func (param NewParameter) TableName() string {
+	return "tb_parameter"
 }
 
 // Save insert method
-func (wfp NewWorkflowParam) Save() error {
-
-	affected, err := utils.Engine.Insert(wfp)
+func (param NewParameter) Save() error {
+	affected, err := utils.Engine.Insert(param)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Insert Error : %v\n", err)
+		// seelog.Errorf("utils.Engine.Insert Error : %v\n", err)
 		return err
 	}
-	seelog.Debugf("%v insert : %v", affected, wfp)
+	seelog.Debugf("%v insert : %v", affected, param)
 
 	return nil
-
 }
 
 // Update method
-func (wfp SysWorkflowParam) Update() error {
-
-	affected, err := utils.Engine.ID(wfp.WfpId).Update(wfp)
+func (param TbParameter) Update() error {
+	affected, err := utils.Engine.ID(param.ParamId).Update(param)
 	if err != nil {
-		seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
+		// seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
 		return err
 	}
-	seelog.Debugf("%v update : %v", affected, wfp)
+	seelog.Debugf("%v update : %v", affected, param)
 
 	return nil
-
 }
 
 /*
-GetWorkflowParamByWfdID func(wfdid int) ([]SysWorkflowParam, error)
+GetParametersByCompID func(compid int) ([]TbParameter, error)
 */
-func GetWorkflowParamByWfdID(wfdid int) ([]SysWorkflowParam, error) {
+func GetParametersByCompID(compid int) ([]TbParameter, error) {
+	params := make([]TbParameter, 0)
 
-	params := make([]SysWorkflowParam, 0)
-
-	if err := utils.Engine.Where("wfd_id = ?", wfdid).Asc("wfp_seq").Find(&params); err != nil {
-		seelog.Errorf("utils.Engine.Where Error : %v", err)
+	if err := utils.Engine.Where("comp_id = ?", compid).Asc("param_seq").Find(&params); err != nil {
+		// seelog.Errorf("utils.Engine.Where Error : %v", err)
 		return nil, err
 	}
 
 	return params, nil
-
 }
 
 /*
-DelWorkflowParamByID func(wfpid int)
+DelParameterByID func(paramid int) error
 */
-func DelWorkflowParamByID(wfpid int) error {
+func DelParameterByID(paramid int) error {
+	param := new(TbParameter)
+	param.ParamId = paramid
 
-	wfp := new(SysWorkflowParam)
-	wfp.WfpId = wfpid
-
-	affected, err := utils.Engine.Delete(wfp)
+	affected, err := utils.Engine.Delete(param)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Delete Error : %v", err)
+		// seelog.Errorf("utils.Engine.Delete Error : %v", err)
 		return err
 	}
-	seelog.Debugf("%v delete : %v", affected, wfp)
+	seelog.Debugf("%v delete : %v", affected, param)
 
 	return nil
 }
 
 /*
-GetLastWorkflowParamByWfdID func(wfdid int) (SysWorkflowParam, error)
+GetLastParameterByCompID func(compid int) (TbParameter, error)
 */
-func GetLastWorkflowParamByWfdID(wfdid int) (SysWorkflowParam, error) {
+func GetLastParameterByCompID(compid int) (TbParameter, error) {
+	param := new(TbParameter)
 
-	wfp := new(SysWorkflowParam)
-
-	has, err := utils.Engine.Where("wfd_id = ?", wfdid).Desc("wfp_seq").Get(wfp)
+	has, err := utils.Engine.Where("comp_id = ?", compid).Desc("param_seq").Get(param)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Desc.Get Error : %v", err)
-		return SysWorkflowParam{}, err
+		// seelog.Errorf("utils.Engine.Desc.Get Error : %v", err)
+		return TbParameter{}, err
 	}
 
 	if has {
-		seelog.Debugf("Workflow Last Param : %v", wfp)
-		return *wfp, nil
+		// seelog.Debugf("Workflow Last Param : %v", wfp)
+		return *param, nil
 	}
-	seelog.Debugf("This Dtl [%v] Has No Parameters", wfdid)
+	// seelog.Debugf("This Dtl [%v] Has No Parameters", wfdid)
 
-	return SysWorkflowParam{}, errors.New("No Records")
-
+	return TbParameter{}, errors.New("No Records")
 }

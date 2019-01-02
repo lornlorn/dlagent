@@ -8,118 +8,108 @@ import (
 )
 
 /*
-SysWorkflowInf struct map to table sys_workflow_inf
+TbWorkflow struct map to table tb_workflow
 */
-type SysWorkflowInf struct {
-	WfiId      int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
-	WfiName    string `xorm:"VARCHAR(128) NOT NULL"`
-	WfiDesc    string `xorm:"VARCHAR(1024)"`
-	WfiStatus  string `xorm:"VARCHAR(8) NOT NULL"`
+type TbWorkflow struct {
+	WfId       int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
+	WfName     string `xorm:"VARCHAR(128) NOT NULL"`
+	WfDesc     string `xorm:"VARCHAR(1024)"`
+	WfStatus   string `xorm:"VARCHAR(8) NOT NULL"`
 	CreateTime string `xorm:"VARCHAR(15)"`
 	ModifyTime string `xorm:"VARCHAR(15)"`
 }
 
 /*
-NewWorkflowInf struct map to table sys_workflow_inf
+NewWorkflow struct map to table tb_workflow without column WfId
 */
-type NewWorkflowInf struct {
-	WfiName    string `xorm:"VARCHAR(128) NOT NULL"`
-	WfiDesc    string `xorm:"VARCHAR(1024)"`
-	WfiStatus  string `xorm:"VARCHAR(8) NOT NULL"`
+type NewWorkflow struct {
+	WfName     string `xorm:"VARCHAR(128) NOT NULL"`
+	WfDesc     string `xorm:"VARCHAR(1024)"`
+	WfStatus   string `xorm:"VARCHAR(8) NOT NULL"`
 	CreateTime string `xorm:"VARCHAR(15)"`
 	ModifyTime string `xorm:"VARCHAR(15)"`
 }
 
 /*
 TableName xorm mapper
-NewWorkflowInf struct map to table sys_workflow_inf
+NewWorkflow struct map to table tb_workflow
 */
-func (wfi NewWorkflowInf) TableName() string {
-	return "sys_workflow_inf"
+func (wf NewWorkflow) TableName() string {
+	return "tb_workflow"
 }
 
 // Save insert method
-func (wfi NewWorkflowInf) Save() error {
-
-	affected, err := utils.Engine.Insert(wfi)
+func (wf NewWorkflow) Save() error {
+	affected, err := utils.Engine.Insert(wf)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Insert Error : %v", err)
+		// seelog.Errorf("utils.Engine.Insert Error : %v", err)
 		return err
 	}
-	seelog.Debugf("%v insert : %v", affected, wfi)
+	seelog.Debugf("%v insert : %v", affected, wf)
 
 	return nil
-
 }
 
 // Update method
-func (wfi SysWorkflowInf) Update() error {
-
-	affected, err := utils.Engine.ID(wfi.WfiId).Update(wfi)
+func (wf TbWorkflow) Update() error {
+	affected, err := utils.Engine.ID(wf.WfId).Update(wf)
 	if err != nil {
-		seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
+		// seelog.Errorf("utils.Engine.ID.Update Error : %v", err)
 		return err
 	}
-	seelog.Debugf("%v update : %v", affected, wfi)
+	seelog.Debugf("%v update : %v", affected, wf)
 
 	return nil
-
 }
 
 /*
-GetWorkflows func() ([]SysWorkflowInf, error)
+GetWorkflows func() ([]TbWorkflow, error)
 */
-func GetWorkflows() ([]SysWorkflowInf, error) {
-
-	workflows := make([]SysWorkflowInf, 0)
+func GetWorkflows() ([]TbWorkflow, error) {
+	workflows := make([]TbWorkflow, 0)
 
 	if err := utils.Engine.Find(&workflows); err != nil {
-		seelog.Errorf("utils.Engine.Find Error : %v", err)
+		// seelog.Errorf("utils.Engine.Find Error : %v", err)
 		return nil, err
 	}
 
 	return workflows, nil
-
 }
 
 /*
-GetWorkflowByID func(wfiid int) (SysWorkflowInf, error)
+GetWorkflowByID func(wfid int) (TbWorkflow, error)
 */
-func GetWorkflowByID(wfiid int) (SysWorkflowInf, error) {
+func GetWorkflowByID(wfid int) (TbWorkflow, error) {
+	wf := new(TbWorkflow)
+	wf.WfId = wfid
 
-	wfi := new(SysWorkflowInf)
-	wfi.WfiId = wfiid
-
-	has, err := utils.Engine.Get(wfi)
+	has, err := utils.Engine.Get(wf)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Get Error : %v", err)
-		return SysWorkflowInf{}, err
+		// seelog.Errorf("utils.Engine.Get Error : %v", err)
+		return TbWorkflow{}, err
 	}
 
 	if !has {
-		seelog.Debug("Get 0 row")
-		return SysWorkflowInf{}, errors.New("Get 0 row")
+		// seelog.Debug("Get 0 row")
+		return TbWorkflow{}, errors.New("Get 0 row")
 	}
 
-	return *wfi, nil
-
+	return *wf, nil
 }
 
 /*
-DelWorkflowByID func(wfiid int)
+DelWorkflowByID func(wfid int) error
 */
-func DelWorkflowByID(wfiid int) error {
+func DelWorkflowByID(wfid int) error {
+	wf := new(TbWorkflow)
+	wf.WfId = wfid
 
-	wfi := new(SysWorkflowInf)
-	wfi.WfiId = wfiid
-
-	affected, err := utils.Engine.Delete(wfi)
+	affected, err := utils.Engine.Delete(wf)
 	if err != nil {
-		seelog.Errorf("utils.Engine.Delete Error : %v", err)
+		// seelog.Errorf("utils.Engine.Delete Error : %v", err)
 		return err
 	}
-	seelog.Debugf("%v delete : %v", affected, wfi)
+	seelog.Debugf("%v delete : %v", affected, wf)
 
 	return nil
-
 }
