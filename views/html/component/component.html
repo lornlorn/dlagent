@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/base/bulma/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/base/jquery/jquery.datatables-1.10.19.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/component/component.css" />
+    <!-- <script defer src="/static/js/FontAwesome/all.min.js"></script> -->
+    <script src="/static/js/base/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/base/jquery/jquery.dataTables-1.10.19.min.js"></script>
+    <script src="/static/js/component/component.js"></script>
+</head>
+
+<body>
+    <hr class="hr">
+
+    <div id="ctrl">
+        <div class="field is-grouped">
+            <p class="control">
+                <a class="button is-link is-outlined" id="add">
+                    增加
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <hr class="hr">
+
+    <table id="comp" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Command</th>
+                <th>Modify Time</th>
+                <th></th>
+            </tr>
+        </thead>
+        <!--
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Modify Time</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        -->
+    </table>
+
+    {{template "footer" .}}
+</body>
+
+</html>

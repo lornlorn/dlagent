@@ -326,3 +326,29 @@ func (ajax Ajax) RunCMD(reqBody []byte, reqURL url.Values) []byte {
 	return utils.GetAjaxRetWithDataJSON("0000", nil, result)
 
 }
+
+/*
+GetComponents func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) GetComponents(reqBody []byte, reqURL url.Values) []byte {
+	components, err := models.GetComponents()
+	if err != nil {
+		seelog.Errorf("models.GetComponents Error : %v", err)
+		return utils.GetAjaxRetJSON("9999", nil)
+	}
+	seelog.Debugf("models.GetComponents : %v", components)
+	return utils.Convert2JSON(components)
+}
+
+/*
+DelComponentByID func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) DelComponentByID(reqBody []byte, reqURL url.Values) []byte {
+	compid := utils.GetJSONResultFromRequestBody(reqBody, "data.CompId")
+	err := models.DelComponentByID(int(compid.Int()))
+	if err != nil {
+		seelog.Errorf("models.DelComponentByID Error : %v", err)
+		return utils.GetAjaxRetJSON("9999", nil)
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
+}

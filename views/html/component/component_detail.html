@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component with Parameters</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/base/bulma/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/base/jquery/jquery.datatables-1.10.19.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/component/component_dtl.css" />
+    <!-- <script defer src="/static/js/FontAwesome/all.min.js"></script> -->
+    <script src="/static/js/base/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/base/jquery/jquery.dataTables-1.10.19.min.js"></script>
+    <script src="/static/js/component/component_dtl.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#CompStatus').val("{{ .Comp.CompStatus }}");
+        }); 
+    </script>
+</head>
+
+<body>
+    <!-- <div>{{ .WFD }}</div> 
+    <div>{{ .WFD.WfdName }}</div> 
+    <div>{{ .WFP }}</div> -->
+
+    <div id="info">
+        <div class="columns">
+            <div class="column">
+                <div class="columns">
+                    <div class="column is-2">
+                        <div class="field">
+                            <label class="label">Seq</label>
+                            <div class="control">
+                                <input class="input" id="WfdSeq" type="text" value="{{ .WFD.WfdSeq }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Name</label>
+                            <div class="control">
+                                <input class="input" id="WfdName" type="text" value="{{ .WFD.WfdName }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Status</label>
+                                    <div class="control">
+                                        <span class="select">
+                                            <select id="WfdStatus">
+                                                <option>启用</option>
+                                                <option>禁用</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label" style="visibility:hidden">hidden</label>
+                                    <div class="control is-fullwidth">
+                                        <a class="button is-primary" id="update">保存</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Create</label>
+                                    <div class="control">
+                                        <input class="input" id="CreateTime" type="text" disabled value="{{ .WFD.CreateTime }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Modify</label>
+                                    <div class="control">
+                                        <input class="input" id="ModifyTime" type="text" disabled value="{{ .WFD.ModifyTime }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Shell</label>
+                    <div class="control">
+                        <input class="input" id="WfdShell" type="text" value="{{ .WFD.WfdShell }}">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">CMD</label>
+                    <div class="control">
+                        <input class="input" id="WfdCmd" type="text" value="{{ .WFD.WfdCmd }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="hr">
+
+    <div id="ctrl">
+        <div class="field is-grouped">
+            <p class="control">
+                <a class="button is-link is-outlined" id="add">
+                    增加
+                </a>
+            </p>
+            <p class="control">
+                <a class="button is-danger is-outlined" id="del">
+                    删除
+                </a>
+            </p>
+            <p class="control">
+                <a class="button is-primary is-outlined" id="save">
+                    保存
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <hr class="hr">
+
+    <div id="params">
+        <div class="columns">
+            {{range $idx,$obj := .WFP}}
+            <div class="column">
+                <div class="param">
+                    <div class="field">
+                        <label class="label" id="WfpSeq" data-WfpId="{{ $obj.WfpId }}">参数{{ $obj.WfpSeq }}-></label>
+                        <div class="control">
+                            <input class="input" id="WfpName" type="text" value="{{ $obj.WfpName }}" placeholder="参数名">
+                        </div>
+                        <div class="control">
+                            <input class="input" id="WfpDefault" type="text" value="{{ $obj.WfpDefault }}" placeholder="默认值">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{end}}
+        </div>
+    </div>
+    {{template "footer" .}}
+</body>
+
+</html>

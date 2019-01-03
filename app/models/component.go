@@ -63,6 +63,20 @@ func (comp TbComponent) Update() error {
 }
 
 /*
+GetComponents func() ([]TbComponent, error)
+*/
+func GetComponents() ([]TbComponent, error) {
+	components := make([]TbComponent, 0)
+
+	if err := utils.Engine.Find(&components); err != nil {
+		// seelog.Errorf("utils.Engine.Find Error : %v", err)
+		return nil, err
+	}
+
+	return components, nil
+}
+
+/*
 GetComponentByID func(compid int) (TbComponent, error)
 */
 func GetComponentByID(compid int) (TbComponent, error) {
