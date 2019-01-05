@@ -15,43 +15,27 @@ type HTML struct {
 }
 
 /*
-GetWorkflowInfDtl func(reqBody []byte, reqURL url.Values) interface{}
+GetCompWithParams func(reqBody []byte, reqURL url.Values) interface{}
 */
-func (html HTML) GetWorkflowInfDtl(reqBody []byte, reqURL url.Values) interface{} {
-	wfiid, err := strconv.Atoi(reqURL["WfiId"][0])
+func (html HTML) GetCompWithParams(reqBody []byte, reqURL url.Values) interface{} {
+	compid, err := strconv.Atoi(reqURL["CompId"][0])
 	if err != nil {
 		seelog.Errorf("strconv.Atoi Error : %v", err)
 	}
-	wfi, err := models.GetWorkflowByID(wfiid)
+	comp, err := models.GetComponentByID(compid)
 	if err != nil {
-		seelog.Errorf("models.GetWorkflowByID Error : %v", err)
+		seelog.Errorf("models.GetComponentByID Error : %v", err)
 	}
-	seelog.Debugf("models.GetWorkflowByID : %v", wfi)
-	return wfi
-}
-
-/*
-GetWorkflowDtlParam func(reqBody []byte, reqURL url.Values) interface{}
-*/
-func (html HTML) GetWorkflowDtlParam(reqBody []byte, reqURL url.Values) interface{} {
-	wfdid, err := strconv.Atoi(reqURL["WfdId"][0])
+	params, err := models.GetParametersByCompID(compid)
 	if err != nil {
-		seelog.Errorf("strconv.Atoi Error : %v", err)
-	}
-	wfd, err := models.GetWorkflowDtlByID(wfdid)
-	if err != nil {
-		seelog.Errorf("models.GetWorkflowDtlByID Error : %v", err)
-	}
-	wfp, err := models.GetWorkflowParamByWfdID(wfdid)
-	if err != nil {
-		seelog.Errorf("models.GetWorkflowParamByWfdID Error : %v", err)
+		seelog.Errorf("models.GetParametersByCompID Error : %v", err)
 	}
 
-	var dtlAndParam models.WorkflowDtlWithParams
-	dtlAndParam.WFD = wfd
-	dtlAndParam.WFP = wfp
+	var compWithParams models.ComponentWithParams
+	compWithParams.Comp = comp
+	compWithParams.Params = params
 
-	seelog.Debugf("models.WorkflowDtlWithParams : %v", dtlAndParam)
+	seelog.Debugf("models.ComponentWithParams : %v", compWithParams)
 
-	return dtlAndParam
+	return compWithParams
 }

@@ -13,7 +13,6 @@ TbComponent struct map to table tb_component
 type TbComponent struct {
 	CompId     int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
 	CompName   string `xorm:"VARCHAR(128) NOT NULL"`
-	CompStatus string `xorm:"VARCHAR(8) NOT NULL"`
 	CompCmd    string `xorm:"VARCHAR(1024) NOT NULL"`
 	CreateTime string `xorm:"VARCHAR(19)"`
 	ModifyTime string `xorm:"VARCHAR(19)"`
@@ -24,7 +23,6 @@ NewComponent struct map to table tb_component without column CompId
 */
 type NewComponent struct {
 	CompName   string `xorm:"VARCHAR(128) NOT NULL"`
-	CompStatus string `xorm:"VARCHAR(8) NOT NULL"`
 	CompCmd    string `xorm:"VARCHAR(1024) NOT NULL"`
 	CreateTime string `xorm:"VARCHAR(19)"`
 	ModifyTime string `xorm:"VARCHAR(19)"`

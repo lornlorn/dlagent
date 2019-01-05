@@ -9,7 +9,6 @@ $(function () {
         },
         columns: [
             { "data": "CompName", className: 'compname' },
-            { "data": "CompStatus" },
             { "data": "CompCmd" },
             { "data": "ModifyTime" },
             { "data": null, className: 'operation', width: '10%' }
@@ -84,7 +83,7 @@ $(function () {
 
     // 增加
     $('#add').click(function () {
-        var editpage = window.open("/html/component_add");
+        var editpage = window.open("/html/ComponentAdd");
     });
 
 }); 
