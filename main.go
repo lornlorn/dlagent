@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app/blfunc"
+	"app/api"
 	"app/httpsvr"
 	"app/utils"
 	"log"
@@ -46,7 +46,7 @@ func main() {
 
 	// Init Reflect Functions
 	msg = "3 -> Initialize Reflect Function Map"
-	blfunc.InitAPIFuncMap()
+	api.InitAPIFuncMap()
 	seelog.Infof("%v Success !", msg)
 
 	// Init DB
