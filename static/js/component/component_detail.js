@@ -13,19 +13,16 @@ $(function () {
     // 保存
     $('#update').click(function () {
         var params = {};
-        params['from'] = 'workflow_param';
+        params['from'] = 'ComponentDetail';
         params['data'] = {};
-        params['data']['WfdId'] = GetQuery('WfdId');
-        params['data']['WfdSeq'] = $('#WfdSeq').val();
-        params['data']['WfdName'] = $('#WfdName').val();
-        params['data']['WfdStatus'] = $('#WfdStatus').val();
-        params['data']['WfdShell'] = $('#WfdShell').val();
-        params['data']['WfdCmd'] = $('#WfdCmd').val();
+        params['data']['CompId'] = GetQuery('CompId');
+        params['data']['CompName'] = $('#CompName').val();
+        params['data']['CompCmd'] = $('#CompCmd').val();
 
         console.log('REQUEST : ' + JSON.stringify(params));
 
         $.ajax({
-            url: '/ajax/wfdupdate',
+            url: '/ajax/UpdateComponent',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(params),
@@ -80,18 +77,19 @@ $(function () {
     // 更新参数信息
     $('#save').click(function () {
         var params = {};
-        params['from'] = 'workflow_param';
+        params['from'] = 'ComponentDetail';
         params['data'] = {};
         params['data']['paramlist'] = [];
 
         $('#params .param').each(function () {
             var param = {};
-            var wfpid = $(this).children("div.field").children("label#WfpSeq").attr("data-WfpId");
-            var wfpname = $(this).children("div.field").children("div.control").children("input#WfpName").val();
-            var wfpdefault = $(this).children("div.field").children("div.control").children("input#WfpDefault").val();
-            param['WfpId'] = wfpid;
-            param['WfpName'] = wfpname;
-            param['WfpDefault'] = wfpdefault;
+            var paramid = $(this).children("div.field").children("label#ParamSeq").attr("data-ParamId");
+            var paramname = $(this).children("div.field").children("div.control").children("input#ParamName").val();
+            var paramdefault = $(this).children("div.field").children("div.control").children("input#ParamDefault").val();
+            param['ParamId'] = paramid;
+            param['CompId'] = GetQuery('CompId');
+            param['ParamName'] = paramname;
+            param['ParamDefault'] = paramdefault;
             // console.log(param);
             params['data']['paramlist'].push(param);
             // console.log($(this));
@@ -100,7 +98,7 @@ $(function () {
         console.log('REQUEST : ' + JSON.stringify(params));
 
         $.ajax({
-            url: '/ajax/wfpupdate',
+            url: '/ajax/UpdateParameters',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(params),

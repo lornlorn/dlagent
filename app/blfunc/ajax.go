@@ -85,7 +85,7 @@ func (ajax Ajax) GetComponents(reqBody []byte, reqURL url.Values) []byte {
 	components, err := models.GetComponents()
 	if err != nil {
 		seelog.Errorf("models.GetComponents Error : %v", err)
-		return utils.GetAjaxRetJSON("9999", nil)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	seelog.Debugf("models.GetComponents : %v", components)
 	return utils.Convert2JSON(components)
@@ -99,7 +99,7 @@ func (ajax Ajax) DelComponentByID(reqBody []byte, reqURL url.Values) []byte {
 	err := models.DelComponentByID(int(compid.Int()))
 	if err != nil {
 		seelog.Errorf("models.DelComponentByID Error : %v", err)
-		return utils.GetAjaxRetJSON("9999", nil)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
 }
@@ -123,7 +123,7 @@ func (ajax Ajax) NewComponent(reqBody []byte, reqURL url.Values) []byte {
 	err := comp.Save()
 	if err != nil {
 		seelog.Errorf("comp.Save Error : %v", err)
-		return utils.GetAjaxRetJSON("9999", nil)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
 }
@@ -151,7 +151,7 @@ func (ajax Ajax) NewParameter(reqBody []byte, reqURL url.Values) []byte {
 	err := param.Save()
 	if err != nil {
 		seelog.Errorf("param.Save Error : %v", err)
-		return utils.GetAjaxRetJSON("9999", nil)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
 }
@@ -165,13 +165,66 @@ func (ajax Ajax) DelLastParameterByCompID(reqBody []byte, reqURL url.Values) []b
 	lastparam, err := models.GetLastParameterByCompID(int(compid.Int()))
 	if err != nil {
 		seelog.Errorf("models.GetLastParameterByCompID Error : %v", err)
-		return utils.GetAjaxRetJSON("9999", nil)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 
 	err = models.DelParameterByID(lastparam.ParamId)
 	if err != nil {
 		seelog.Errorf("models.DelParameterByID Error : %v", err)
-		return utils.GetAjaxRetJSON("9999", nil)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
+}
+
+/*
+UpdateParameters func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) UpdateParameters(reqBody []byte, reqURL url.Values) []byte {
+	nowTime := time.Now()
+	timeFormat := "2006-01-02 15:04:05" // 时间格式化模板
+
+	params := utils.ReadJSONData2Array(reqBody, "data.paramlist")
+	seelog.Debugf("Parameters : %v", params)
+
+	for i, v := range params {
+		param := models.TbParameter{
+			ParamId:      int(v.Get("ParamId").Int()),
+			CompId:       int(v.Get("CompId").Int()),
+			ParamSeq:     i + 1,
+			ParamName:    v.Get("ParamName").String(),
+			ParamDefault: v.Get("ParamDefault").String(),
+			ModifyTime:   fmt.Sprintf("%v", nowTime.Format(timeFormat)),
+		}
+		err := param.Update()
+		if err != nil {
+			seelog.Errorf("param.Update Error : %v", err)
+			return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
+		}
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
+}
+
+/*
+UpdateComponent func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) UpdateComponent(reqBody []byte, reqURL url.Values) []byte {
+	nowTime := time.Now()
+	timeFormat := "2006-01-02 15:04:05" // 时间格式化模板
+	compid := utils.GetJSONResultFromRequestBody(reqBody, "data.CompId")
+	compname := utils.GetJSONResultFromRequestBody(reqBody, "data.CompName")
+	compcmd := utils.GetJSONResultFromRequestBody(reqBody, "data.CompCmd")
+	var comp models.TbComponent
+	comp = models.TbComponent{
+		CompId:     int(compid.Int()),
+		CompName:   compname.String(),
+		CompCmd:    compcmd.String(),
+		ModifyTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
+	}
+	seelog.Debugf("models.TbComponent : %v", comp)
+	err := comp.Update()
+	if err != nil {
+		seelog.Errorf("comp.Update Error : %v", err)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
 }

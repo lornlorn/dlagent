@@ -35,11 +35,22 @@
 
             </div>
             <div class="column is-two-fifths">
-
-                <div class="field">
-                    <label class="label">CMD</label>
-                    <div class="control">
-                        <input class="input" id="CompCmd" type="text" value="{{ .Comp.CompCmd }}">
+                <div class="columns">
+                    <div class="column is-10">
+                        <div class="field">
+                            <label class="label">CMD</label>
+                            <div class="control">
+                                <input class="input" id="CompCmd" type="text" value="{{ .Comp.CompCmd }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label" style="visibility:hidden">hidden</label>
+                            <div class="control is-fullwidth">
+                                <a class="button is-primary" id="update">保存</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,7 +103,7 @@
             <div class="column">
                 <div class="param">
                     <div class="field">
-                        <label class="label" id="ParamSeq" data-WfpId="{{ $obj.ParamId }}">参数{{ $obj.ParamSeq }}-></label>
+                        <label class="label" id="ParamSeq" data-ParamId="{{ $obj.ParamId }}">参数{{ $obj.ParamSeq }}-></label>
                         <div class="control">
                             <input class="input" id="ParamName" type="text" value="{{ $obj.ParamName }}" placeholder="参数名">
                         </div>
