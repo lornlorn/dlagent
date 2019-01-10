@@ -3,14 +3,14 @@ $(function () {
     // 表格初始化
     $('#table').DataTable({
         ajax: {
-            url: '/ajax/GetComponents',
+            url: '/ajax/GetWorkflows',
             type: 'POST',
             dataSrc: ''
         },
         columns: [
-            { "data": "CompNo" },
-            { "data": "CompName", className: 'compname' },
-            { "data": "CompCmd" },
+            { "data": "WfNo" },
+            { "data": "WfName", className: 'wfname' },
+            { "data": "WfStatus" },
             { "data": "ModifyTime" },
             { "data": null, className: 'operation', width: '10%' }
         ],

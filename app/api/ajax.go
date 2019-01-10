@@ -110,10 +110,12 @@ NewComponent func(reqBody []byte, reqURL url.Values) []byte
 func (ajax Ajax) NewComponent(reqBody []byte, reqURL url.Values) []byte {
 	nowTime := time.Now()
 	timeFormat := "2006-01-02 15:04:05" // 时间格式化模板
+	timeFormat4No := "20060102-150405"
 	compname := utils.GetJSONResultFromRequestBody(reqBody, "data.CompName")
 	compcmd := utils.GetJSONResultFromRequestBody(reqBody, "data.CompCmd")
 	var comp models.NewComponent
 	comp = models.NewComponent{
+		CompNo:     fmt.Sprintf("C-%v", nowTime.Format(timeFormat4No)),
 		CompName:   compname.String(),
 		CompCmd:    compcmd.String(),
 		CreateTime: fmt.Sprintf("%v", nowTime.Format(timeFormat)),
@@ -227,4 +229,17 @@ func (ajax Ajax) UpdateComponent(reqBody []byte, reqURL url.Values) []byte {
 		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
 	}
 	return utils.GetAjaxRetJSON("0000", nil)
+}
+
+/*
+GetWorkflows func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) GetWorkflows(reqBody []byte, reqURL url.Values) []byte {
+	workflows, err := models.GetWorkflows()
+	if err != nil {
+		seelog.Errorf("models.GetWorkflows Error : %v", err)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
+	}
+	seelog.Debugf("models.GetWorkflows : %v", workflows)
+	return utils.Convert2JSON(workflows)
 }

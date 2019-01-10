@@ -12,6 +12,7 @@ TbWorkflow struct map to table tb_workflow
 */
 type TbWorkflow struct {
 	WfId       int    `xorm:"INTEGER NOT NULL UNIQUE PK"`
+	WfNo       string `xorm:"VARCHAR(20) NOT NULL UNIQUE"`
 	WfName     string `xorm:"VARCHAR(128) NOT NULL"`
 	WfDesc     string `xorm:"VARCHAR(1024)"`
 	WfStatus   string `xorm:"VARCHAR(8) NOT NULL"`
@@ -23,6 +24,7 @@ type TbWorkflow struct {
 NewWorkflow struct map to table tb_workflow without column WfId
 */
 type NewWorkflow struct {
+	WfNo       string `xorm:"VARCHAR(20) NOT NULL UNIQUE"`
 	WfName     string `xorm:"VARCHAR(128) NOT NULL"`
 	WfDesc     string `xorm:"VARCHAR(1024)"`
 	WfStatus   string `xorm:"VARCHAR(8) NOT NULL"`
