@@ -52,7 +52,7 @@ $(function () {
             Ajax
         */
         var params = {};
-        params['from'] = 'component';
+        params['from'] = 'Component';
         params['data'] = {};
         params['data']['CompId'] = data.CompId;
 

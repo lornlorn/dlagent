@@ -47,19 +47,19 @@ $(function () {
     // 删除
     $('#table tbody').on('click', 'a.del', function () {
         var data = $('#table').DataTable().row($(this).parents('tr')).data();
-        console.log(data.CompId, data.CompName);
+        console.log(data.WfId, data.WfName);
         /*
             Ajax
         */
         var params = {};
-        params['from'] = 'component';
+        params['from'] = 'Workflow';
         params['data'] = {};
-        params['data']['CompId'] = data.CompId;
+        params['data']['WfId'] = data.WfId;
 
         console.log('REQUEST : ' + JSON.stringify(params));
 
         $.ajax({
-            url: '/ajax/DelComponentByID',
+            url: '/ajax/DelWorkflowByID',
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(params),

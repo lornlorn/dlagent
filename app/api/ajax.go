@@ -243,3 +243,16 @@ func (ajax Ajax) GetWorkflows(reqBody []byte, reqURL url.Values) []byte {
 	seelog.Debugf("models.GetWorkflows : %v", workflows)
 	return utils.Convert2JSON(workflows)
 }
+
+/*
+DelWorkflowByID func(reqBody []byte, reqURL url.Values) []byte
+*/
+func (ajax Ajax) DelWorkflowByID(reqBody []byte, reqURL url.Values) []byte {
+	wfid := utils.GetJSONResultFromRequestBody(reqBody, "data.WfId")
+	err := models.DelWorkflowByID(int(wfid.Int()))
+	if err != nil {
+		seelog.Errorf("models.DelWorkflowByID Error : %v", err)
+		return utils.GetAjaxRetWithDataJSON("9999", nil, err.Error())
+	}
+	return utils.GetAjaxRetJSON("0000", nil)
+}
