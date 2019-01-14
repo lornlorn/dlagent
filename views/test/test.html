@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +9,35 @@
     <script src="/static/js/base/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/static/js/base/wangEditor-3.1.1/release/wangEditor.min.js"></script>
     <script type="text/javascript">
-        var E = window.wangEditor;
-        var editor = new E('#text');
-        editor.create();
-        document.getElementById('btn').addEventListener('click', function () {
-            var json = editor.txt.getJSON()
-            var jsonStr = JSON.stringify(json)
-            console.log(json)
-            console.log(jsonStr)
-            alert(jsonStr)
-        });
+        window.onload = function () {
+            var E = window.wangEditor;
+            var editor = new E('#text');
+            editor.customConfig.uploadImgShowBase64 = true;   // 使用 base64 保存图片
+            // editor.customConfig.zIndex = 500;
+            editor.create();
+            document.getElementById('btn').addEventListener('click', function () {
+                var json = editor.txt.getJSON();
+                var jsonStr = JSON.stringify(json);
+                console.log(json);
+                console.log(jsonStr);
+                var html = editor.txt.html();
+                console.log(html);
+                // editor.txt.html('<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p><img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" style="max-width:100%;"><p><br></p>');
+                // console.log(html);
+                // $('#content').empty();
+                $('#content').html(html);
+            });
+        }
     </script>
 </head>
+
 <body>
-    <input type="button" id="btn" value="提交"/>
+    <input type="button" id="btn" value="提交" />
     <div id="text">
-        <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
-        <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" style="max-width:100%;"/>
+        <!-- <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p> -->
+        <!-- <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" style="max-width:100%;" /> -->
     </div>
+    <div id="content"></div>
 </body>
+
 </html>
