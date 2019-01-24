@@ -68,6 +68,7 @@ $(function () {
             success: function (result) {
                 console.log('RESPONSE : ' + JSON.stringify(result));
                 console.log("请求成功");
+                alert('成功');
             },
             error: function (result) {
                 console.log("请求失败");
